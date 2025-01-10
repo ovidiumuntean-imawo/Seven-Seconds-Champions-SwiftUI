@@ -11,7 +11,7 @@ class Sparks {
     static let shared = Sparks()
     private init() {}
     
-    // Particule globale (small sparks) - dacă vrei să le păstrezi
+    // Global particles (small sparks) - if you want to keep them
     func createSmallSparks(emitterLayerGlobal: inout CAEmitterLayer?,
                            emitterCellGlobal: CAEmitterCell,
                            parentSize: CGSize) {
@@ -23,16 +23,16 @@ class Sparks {
         emitterLayerGlobal = CAEmitterLayer()
         emitterLayerGlobal?.name = "EmitterGlobal"
         
-        // Poziționare deasupra ecranului
+        // Position above the screen
         emitterLayerGlobal?.emitterPosition.x = parentSize.width / 2 - 10
         emitterLayerGlobal?.emitterPosition.y = -50
         
-        // Parametri particule globale
+        // Parameters for global particles
         emitterCellGlobal.color = CGColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         emitterCellGlobal.contents = image
         emitterCellGlobal.name = "cellGlobal"
         
-        emitterCellGlobal.birthRate = 120
+        emitterCellGlobal.birthRate = 80
         emitterCellGlobal.lifetime = 20
         emitterCellGlobal.velocity = 42
         
@@ -48,7 +48,7 @@ class Sparks {
         }
     }
     
-    // Particulele butonului
+    // Button particles
     func createSparks(emitterLayer: inout CAEmitterLayer?,
                       emitterCell: CAEmitterCell,
                       buttonFrame: CGRect) {
@@ -61,15 +61,15 @@ class Sparks {
         emitterLayer?.name = "ButtonEmitter"
         emitterLayer?.emitterShape = .circle
         
-        // Poziția inițială (centrul butonului)
+        // Initial position (center of the button)
         emitterLayer?.emitterPosition = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
         emitterLayer?.emitterSize = CGSize(width: 10, height: 10)
         
         emitterCell.contents = image
         emitterCell.name = "cell"
         
-        // Valorile inspirate direct din codul UIKit:
-        // Lente în standby, dar totuși active
+        // Values inspired directly from UIKit code:
+        // Slow in standby but still active
         emitterCell.birthRate = 20
         emitterCell.lifetime = 16
         emitterCell.velocity = 22
@@ -79,50 +79,17 @@ class Sparks {
         emitterCell.emissionLongitude = .pi / 2.0
         emitterCell.emissionRange = CGFloat.pi / 4.0
         
-        // Culoare inițială albă
+        // Initial color: white
         emitterCell.color = UIColor.white.cgColor
         
         emitterLayer?.emitterCells = [emitterCell]
         
-        // Adăugăm la fereastra principală
+        // Add to the main window
         if let emitterLayer = emitterLayer,
            let window = UIApplication.shared.windows.first {
             window.layer.addSublayer(emitterLayer)
         }
     }
-    
-    /*func updateSparks(emitterLayer: CAEmitterLayer?,
-                      score: Int,
-                      buttonFrame: CGRect,
-                      isGameRunning: Bool) {
-        guard let emitterLayer = emitterLayer else { return }
-
-        emitterLayer.emitterPosition = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
-
-        if isGameRunning {
-            // Menținem aceeași logică pentru culoare și dimensiune,
-            // dar pornim de la o viteză puțin mai mare
-            let newBirthRate = Float(20 + score * 2)
-            let newVelocity = CGFloat(40 + score * 3) // mărit de la 30 la 40 ca bază
-            let hue = CGFloat.random(in: 0.0...0.18)
-            
-            let newColor = UIColor(
-                hue: hue,
-                saturation: 1.0,
-                brightness: 1.0,
-                alpha: 1.0
-            ).cgColor
-
-            emitterLayer.setValue(newBirthRate, forKeyPath: "emitterCells.cell.birthRate")
-            emitterLayer.setValue(newVelocity,  forKeyPath: "emitterCells.cell.velocity")
-            emitterLayer.setValue(newColor,     forKeyPath: "emitterCells.cell.color")
-        } else {
-            // Standby
-            emitterLayer.setValue(20,                   forKeyPath: "emitterCells.cell.birthRate")
-            emitterLayer.setValue(22,                   forKeyPath: "emitterCells.cell.velocity")
-            emitterLayer.setValue(UIColor.white.cgColor,forKeyPath: "emitterCells.cell.color")
-        }
-    }*/
     
     func updateSparks(emitterLayer: CAEmitterLayer?,
                       score: Int,
@@ -133,10 +100,26 @@ class Sparks {
         emitterLayer.emitterPosition = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
 
         if isGameRunning {
-            // Particule colorate când jocul rulează
+            // Colored particles when the game is running
             let newBirthRate = Float(20 + score * 2)
-            let newVelocity = CGFloat(40 + score * 3)
-            let hue = CGFloat.random(in: 0.0...0.18)
+            let newVelocity = CGFloat(40 + score * 5)
+            
+            /*let hue = CGFloat.random(in: 0.0...0.18)
+            let newColor = UIColor(
+                hue: hue,
+                saturation: 1.0,
+                brightness: 1.0,
+                alpha: 1.0
+            ).cgColor*/
+            
+            let randomChance = CGFloat.random(in: 0.0...1.0) // Valoare între 0 și 1
+                
+            let hue: CGFloat
+            if randomChance < 0.7 { // 70% șanse să fie roșu
+                hue = 0.0 // Roșu pur
+            } else {
+                hue = CGFloat.random(in: 0.0...0.18) // Interval roșu-galben pentru restul particulelor
+            }
 
             let newColor = UIColor(
                 hue: hue,
@@ -149,14 +132,14 @@ class Sparks {
             emitterLayer.setValue(newVelocity,  forKeyPath: "emitterCells.cell.velocity")
             emitterLayer.setValue(newColor,     forKeyPath: "emitterCells.cell.color")
         } else {
-            // Standby: Alb și verde într-o singură celulă
+            // Standby: White and green in a single cell
             emitterLayer.setValue(20, forKeyPath: "emitterCells.cell.birthRate")
             emitterLayer.setValue(22, forKeyPath: "emitterCells.cell.velocity")
             
-            // Setăm culoarea de bază albă
+            // Base color set to white
             emitterLayer.setValue(UIColor.white.cgColor, forKeyPath: "emitterCells.cell.color")
             
-            // Variere culoare: Alb -> Verde
+            // Color variation: White -> Green
             emitterLayer.setValue(1.0, forKeyPath: "emitterCells.cell.greenSpeed")
             emitterLayer.setValue(0.5, forKeyPath: "emitterCells.cell.greenRange")
         }

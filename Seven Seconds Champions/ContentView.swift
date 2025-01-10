@@ -11,8 +11,16 @@ import GameKit
 
 // MARK: - ContentView
 struct ContentView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
     var body: some View {
-        GameView()
+        if sizeClass == .compact {
+            // iPhone layout
+            GameView_iPhone()
+        } else {
+            // iPad layout
+            GameView_iPad()
+        }
     }
 }
         
