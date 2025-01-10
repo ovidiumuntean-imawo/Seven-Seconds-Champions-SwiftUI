@@ -263,5 +263,5 @@ struct GameOverView_iPad: View {
 
 #Preview {
     @Previewable @State var previousScore = 0
-    return GameOverView_iPad(score: 10, previousScore: $previousScore)
+    return GameOverView_iPhone(score: 10, previousScore: $previousScore)
 }

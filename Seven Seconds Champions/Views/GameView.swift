@@ -691,5 +691,5 @@ struct GameView_iPad: View {
 }
 
 #Preview {
-    GameView_iPad()
+    GameView_iPhone()
 }
