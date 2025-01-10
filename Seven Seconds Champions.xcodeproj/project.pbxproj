@@ -6,7 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A92512192D315D750025CE37 /* Seven Seconds Champions Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A92512182D315D750025CE37 /* Seven Seconds Champions Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
+		A925121A2D315D750025CE37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A92512172D315D750025CE37;
+			remoteInfo = "Seven Seconds Champions Watch App";
+		};
+		A925122B2D315D760025CE37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A92512172D315D750025CE37;
+			remoteInfo = "Seven Seconds Champions Watch App";
+		};
+		A92512352D315D760025CE37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A92512172D315D750025CE37;
+			remoteInfo = "Seven Seconds Champions Watch App";
+		};
 		A93496502D2E8EA3007C5FD8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
@@ -23,7 +48,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A925123F2D315D760025CE37 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A92512192D315D750025CE37 /* Seven Seconds Champions Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A92512132D315D750025CE37 /* Seven Seconds Champions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds Champions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A92512182D315D750025CE37 /* Seven Seconds Champions Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds Champions Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A925122A2D315D760025CE37 /* Seven Seconds Champions Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds Champions Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A92512342D315D760025CE37 /* Seven Seconds Champions Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds Champions Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A934963B2D2E8EA2007C5FD8 /* Seven Seconds Champions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds Champions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A934964F2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds ChampionsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds ChampionsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +83,21 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A925121C2D315D750025CE37 /* Seven Seconds Champions Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds Champions Watch App";
+			sourceTree = "<group>";
+		};
+		A925122D2D315D760025CE37 /* Seven Seconds Champions Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds Champions Watch AppTests";
+			sourceTree = "<group>";
+		};
+		A92512372D315D760025CE37 /* Seven Seconds Champions Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds Champions Watch AppUITests";
+			sourceTree = "<group>";
+		};
 		A934963D2D2E8EA2007C5FD8 /* Seven Seconds Champions */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -61,6 +119,27 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A92512152D315D750025CE37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A92512272D315D760025CE37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A92512312D315D760025CE37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A93496382D2E8EA2007C5FD8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -91,6 +170,9 @@
 				A934963D2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
 				A93496522D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */,
 				A934965C2D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */,
+				A925121C2D315D750025CE37 /* Seven Seconds Champions Watch App */,
+				A925122D2D315D760025CE37 /* Seven Seconds Champions Watch AppTests */,
+				A92512372D315D760025CE37 /* Seven Seconds Champions Watch AppUITests */,
 				A934963C2D2E8EA2007C5FD8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +183,10 @@
 				A934963B2D2E8EA2007C5FD8 /* Seven Seconds Champions.app */,
 				A934964F2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests.xctest */,
 				A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */,
+				A92512132D315D750025CE37 /* Seven Seconds Champions.app */,
+				A92512182D315D750025CE37 /* Seven Seconds Champions Watch App.app */,
+				A925122A2D315D760025CE37 /* Seven Seconds Champions Watch AppTests.xctest */,
+				A92512342D315D760025CE37 /* Seven Seconds Champions Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +194,93 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A92512122D315D750025CE37 /* Seven Seconds Champions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A92512402D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions" */;
+			buildPhases = (
+				A92512112D315D750025CE37 /* Resources */,
+				A925123F2D315D760025CE37 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A925121B2D315D750025CE37 /* PBXTargetDependency */,
+			);
+			name = "Seven Seconds Champions";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Champions";
+			productReference = A92512132D315D750025CE37 /* Seven Seconds Champions.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		A92512172D315D750025CE37 /* Seven Seconds Champions Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A925123C2D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions Watch App" */;
+			buildPhases = (
+				A92512142D315D750025CE37 /* Sources */,
+				A92512152D315D750025CE37 /* Frameworks */,
+				A92512162D315D750025CE37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A925121C2D315D750025CE37 /* Seven Seconds Champions Watch App */,
+			);
+			name = "Seven Seconds Champions Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Champions Watch App";
+			productReference = A92512182D315D750025CE37 /* Seven Seconds Champions Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A92512292D315D760025CE37 /* Seven Seconds Champions Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A92512432D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions Watch AppTests" */;
+			buildPhases = (
+				A92512262D315D760025CE37 /* Sources */,
+				A92512272D315D760025CE37 /* Frameworks */,
+				A92512282D315D760025CE37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A925122C2D315D760025CE37 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A925122D2D315D760025CE37 /* Seven Seconds Champions Watch AppTests */,
+			);
+			name = "Seven Seconds Champions Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Champions Watch AppTests";
+			productReference = A925122A2D315D760025CE37 /* Seven Seconds Champions Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A92512332D315D760025CE37 /* Seven Seconds Champions Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A92512462D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions Watch AppUITests" */;
+			buildPhases = (
+				A92512302D315D760025CE37 /* Sources */,
+				A92512312D315D760025CE37 /* Frameworks */,
+				A92512322D315D760025CE37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A92512362D315D760025CE37 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A92512372D315D760025CE37 /* Seven Seconds Champions Watch AppUITests */,
+			);
+			name = "Seven Seconds Champions Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Champions Watch AppUITests";
+			productReference = A92512342D315D760025CE37 /* Seven Seconds Champions Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A93496622D2E8EA3007C5FD8 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions" */;
@@ -186,6 +359,20 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					A92512122D315D750025CE37 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					A92512172D315D750025CE37 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					A92512292D315D760025CE37 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A92512172D315D750025CE37;
+					};
+					A92512332D315D760025CE37 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A92512172D315D750025CE37;
+					};
 					A934963A2D2E8EA2007C5FD8 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -216,11 +403,43 @@
 				A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
 				A934964E2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */,
 				A93496582D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */,
+				A92512122D315D750025CE37 /* Seven Seconds Champions */,
+				A92512172D315D750025CE37 /* Seven Seconds Champions Watch App */,
+				A92512292D315D760025CE37 /* Seven Seconds Champions Watch AppTests */,
+				A92512332D315D760025CE37 /* Seven Seconds Champions Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A92512112D315D750025CE37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A92512162D315D750025CE37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A92512282D315D760025CE37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A92512322D315D760025CE37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A93496392D2E8EA2007C5FD8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,6 +464,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A92512142D315D750025CE37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A92512262D315D760025CE37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A92512302D315D760025CE37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A93496372D2E8EA2007C5FD8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,6 +509,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A925121B2D315D750025CE37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A92512172D315D750025CE37 /* Seven Seconds Champions Watch App */;
+			targetProxy = A925121A2D315D750025CE37 /* PBXContainerItemProxy */;
+		};
+		A925122C2D315D760025CE37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A92512172D315D750025CE37 /* Seven Seconds Champions Watch App */;
+			targetProxy = A925122B2D315D760025CE37 /* PBXContainerItemProxy */;
+		};
+		A92512362D315D760025CE37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A92512172D315D750025CE37 /* Seven Seconds Champions Watch App */;
+			targetProxy = A92512352D315D760025CE37 /* PBXContainerItemProxy */;
+		};
 		A93496512D2E8EA3007C5FD8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */;
@@ -282,6 +537,172 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A925123D2D315D760025CE37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Champions Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 83532998Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds Champions";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Champions.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		A925123E2D315D760025CE37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Champions Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 83532998Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds Champions";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Champions.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		A92512412D315D760025CE37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds Champions";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven.watchapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A92512422D315D760025CE37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds Champions";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven.watchapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A92512442D315D760025CE37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Champions-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Champions Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Champions Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		A92512452D315D760025CE37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Champions-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Champions Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Champions Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		A92512472D315D760025CE37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Champions-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Seven Seconds Champions Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		A92512482D315D760025CE37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Champions-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Seven Seconds Champions Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
 		A93496632D2E8EA3007C5FD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -552,6 +973,42 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A925123C2D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A925123D2D315D760025CE37 /* Debug */,
+				A925123E2D315D760025CE37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A92512402D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A92512412D315D760025CE37 /* Debug */,
+				A92512422D315D760025CE37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A92512432D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A92512442D315D760025CE37 /* Debug */,
+				A92512452D315D760025CE37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A92512462D315D760025CE37 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A92512472D315D760025CE37 /* Debug */,
+				A92512482D315D760025CE37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A93496362D2E8EA2007C5FD8 /* Build configuration list for PBXProject "Seven Seconds Champions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
