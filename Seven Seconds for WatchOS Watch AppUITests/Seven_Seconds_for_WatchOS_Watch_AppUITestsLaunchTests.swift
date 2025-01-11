@@ -1,13 +1,13 @@
 //
-//  Seven_Seconds_Champions_Watch_AppUITestsLaunchTests.swift
-//  Seven Seconds Champions Watch AppUITests
+//  Seven_Seconds_for_WatchOS_Watch_AppUITestsLaunchTests.swift
+//  Seven Seconds for WatchOS Watch AppUITests
 //
-//  Created by Ovidiu Muntean on 10.01.2025.
+//  Created by Ovidiu Muntean on 11.01.2025.
 //
 
 import XCTest
 
-final class Seven_Seconds_Champions_Watch_AppUITestsLaunchTests: XCTestCase {
+final class Seven_Seconds_for_WatchOS_Watch_AppUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
