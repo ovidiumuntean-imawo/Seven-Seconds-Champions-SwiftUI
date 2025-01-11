@@ -30,79 +30,54 @@ struct GameOverView_Watch: View {
                     .edgesIgnoringSafeArea(.all)
                     .blur(radius: 10)
                 
-                VStack(spacing: 30) {
+                VStack(spacing: 0) {
                     Text("game over")
-                        .font(.system(size: 64, weight: .light))
+                        .font(.system(size: 36, weight: .light))
                         .foregroundColor(.white)
-                        .padding(.top, 40)
+                        .padding(.top, -36)
+                    
+                    Spacer()
                     
                     Text("YOU SCORED")
-                        .font(.system(size: 28))
+                        .font(.system(size: 14, weight: .light))
                         .foregroundColor(.white)
+                        .padding(.top, 8)
                     
                     Text("\(score)")
-                        .font(.system(size: 72, weight: .heavy))
+                        .font(.system(size: 48, weight: .heavy))
                         .foregroundColor(.white)
-                        .padding(.top, -24)
+                        .padding(.top, -4)
                     
                     Text("HITS")
-                        .font(.system(size: 28, weight: .medium))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white)
-                        .padding(.top, -24)
+                        .padding(.top, -4)
+                    
+                    Spacer()
                     
                     Button(action: {
                         previousScore = score
                         dismiss()
                     }) {
                         Text("Play again!")
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(8)
                     }
-                    .padding(.horizontal, 40)
+                    .padding(.top, 8)
                     
                     Spacer()
                     
-                    Text("How other players are doing?")
+                    /*Text("How other players are doing?")
                         .font(.system(size: 22))
                         .foregroundColor(.white)
                     
                     Button("View high scores") {
                         showLeaderboardFromGameOver = true
                     }
-                    .padding(.horizontal)
-                    .frame(height: 44)
                     .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
                     .sheet(isPresented: $showLeaderboardFromGameOver) {
                         // LeaderboardView()
                     }
                     
-                    Spacer()
-                    
-                    Text("Share your best screenshots!")
-                        .font(.system(size: 18))
-                        .foregroundColor(.white)
-                    
-                    Button("Visit our FB Group") {
-                        if let encodedURLString = "https://facebook.com/groups/sevensecondschampions"
-                                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                               let url = URL(string: encodedURLString) {
-                                // UIApplication.shared.open(url)
-                            } else {
-                                print("Invalid URL")
-                            }
-                    }
-                    .padding(.horizontal)
-                    .frame(height: 44)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-                    
-                    Spacer()
+                    Spacer()*/
                 }
                 .padding()
                 .background(

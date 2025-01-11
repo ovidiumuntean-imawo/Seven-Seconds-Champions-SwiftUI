@@ -53,55 +53,52 @@ struct GameView_Watch: View {
                         VStack(spacing: 0) {
                             HStack {
                                 Text("7")
-                                    .font(.system(size: 96, weight: .heavy))
+                                    .font(.system(size: 32, weight: .heavy))
                                     .foregroundColor(.white)
                                 
                                 Text("seconds")
-                                    .font(.system(size: 64, weight: .light))
+                                    .font(.system(size: 18, weight: .light))
                                     .foregroundColor(.white)
+                                    .padding(.top, 8)
+                                    .padding(.leading, -4)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.bottom, -12)
                             
                             Text("CHAMPIONS")
-                                .font(.system(size: 32, weight: .light))
+                                .font(.system(size: 12, weight: .light))
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.top, -4)
                         }
-                        .padding(.top, -12)
-                        
-                        // Subtitle
-                        Text("Hit that button as fast as you can!")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 24)
+                        .padding(.top, -36)
                         
                         // Timer
                         Text("Time left: \(timeLeft) seconds")
-                            .font(.system(size: 32, weight: .medium))
+                            .font(.system(size: 16, weight: .medium))
                             .foregroundColor(isGameRunning ? Color.orange : (timeLeft <= 3 ? Color.red : Color.white))
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, -12)
                         
                         // Main game section: HStack with scores on the left and button on the right
-                        HStack(spacing: 20) {
+                        HStack(spacing: 0) {
                             // Left: Scores block
-                            VStack(spacing: 10) {
+                            VStack(spacing: 0) {
                                 Text("YOUR SCORE")
-                                    .font(.system(size: 18, weight: .medium))
+                                    .font(.system(size: 12, weight: .light))
                                     .foregroundColor(.white)
                                 
                                 Text("\(currentScore)")
-                                    .font(.system(size: 64, weight: .heavy))
+                                    .font(.system(size: 36, weight: .heavy))
                                     .foregroundColor(.white)
-                                    .padding(.top, -8)
+                                    .padding(.top, -4)
                                 
                                 Text("HITS")
-                                    .font(.system(size: 18, weight: .medium))
+                                    .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(.white)
-                                    .padding(.top, -8)
+                                    .padding(.top, -4)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading) // Left alignment
+                            .padding(.top, -12)
                             
                             // Right: The Big Button
                             ZStack {
@@ -114,7 +111,7 @@ struct GameView_Watch: View {
                                 } label: {
                                     Image(isPressed ? "button_pressed" : "button_normal")
                                         .resizable()
-                                        .frame(width: 171, height: 171)
+                                        .frame(width: 92, height: 92)
                                 }
                                 .buttonStyle(.plain)
                                 .simultaneousGesture(
@@ -123,56 +120,17 @@ struct GameView_Watch: View {
                                             pressed = true
                                         }
                                 )
-                                .background(
-                                    GeometryReader { btnGeo in
-                                        Color.clear
-                                            .onAppear {
-                                                DispatchQueue.main.async {
-                                                    // calculateEmitterPosition(containerGeo: containerGeo, btnGeo: btnGeo)
-                                                }
-                                            }
-                                            .onChange(of: btnGeo.size) { _ in
-                                                DispatchQueue.main.async {
-                                                    // calculateEmitterPosition(containerGeo: containerGeo, btnGeo: btnGeo)
-                                                }
-                                            }
-                                    }
-                                )
                             }
-                            .frame(height: 171)
-                            .padding(.trailing, 24)
+                            .padding(.trailing, 0)
                         }
                         .frame(maxHeight: .infinity) // Ensure vertical alignment
+                        .padding(.top, -8)
                         
                         Text("Previous score: \(previousScore) hits")
-                            .font(.system(size: 26, weight: .medium))
+                            .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Spacer()
-                        
-                        // "How other players are doing?" + "VIEW HIGH SCORES"
-                        Text("How other players are doing?")
-                            .font(.system(size: 22))
-                            .foregroundColor(.white)
-                            .opacity(isGameRunning ? 0 : 1)
-                            .animation(.easeInOut(duration: 0.5), value: isGameRunning)
-                        
-                        Button("View high scores") {
-                            showLeaderboard = true
-                        }
-                        .padding(.horizontal)
-                        .frame(height: 44)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        .opacity(isGameRunning ? 0 : 1)
-                        .animation(.easeInOut(duration: 0.5), value: isGameRunning)
-                        .sheet(isPresented: $showLeaderboard) {
-                            /*LeaderboardView()
-                                .transition(.move(edge: .bottom))
-                                .zIndex(1)*/
-                        }
+                            .padding(.top, -18)
                         
                         Spacer()
                     }
