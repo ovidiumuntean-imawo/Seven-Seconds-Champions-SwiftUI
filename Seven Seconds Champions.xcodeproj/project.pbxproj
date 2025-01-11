@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A9EEC6882D3292FE00679058 /* Seven Seconds for WatchOS Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A9EEC6652D3292FD00679058 /* Seven Seconds for WatchOS Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A9A82B452D329A0A00C9CD5C /* Seven Seconds Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,26 +25,26 @@
 			remoteGlobalIDString = A934963A2D2E8EA2007C5FD8;
 			remoteInfo = "Seven Seconds Champions";
 		};
-		A9EEC6752D3292FE00679058 /* PBXContainerItemProxy */ = {
+		A9A82B322D329A0A00C9CD5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A9EEC6642D3292FD00679058;
-			remoteInfo = "Seven Seconds for WatchOS Watch App";
+			remoteGlobalIDString = A9A82B212D329A0A00C9CD5C;
+			remoteInfo = "Seven Seconds Watch App";
 		};
-		A9EEC67F2D3292FE00679058 /* PBXContainerItemProxy */ = {
+		A9A82B3C2D329A0A00C9CD5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A9EEC6642D3292FD00679058;
-			remoteInfo = "Seven Seconds for WatchOS Watch App";
+			remoteGlobalIDString = A9A82B212D329A0A00C9CD5C;
+			remoteInfo = "Seven Seconds Watch App";
 		};
-		A9EEC6862D3292FE00679058 /* PBXContainerItemProxy */ = {
+		A9A82B432D329A0A00C9CD5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A9EEC6642D3292FD00679058;
-			remoteInfo = "Seven Seconds for WatchOS Watch App";
+			remoteGlobalIDString = A9A82B212D329A0A00C9CD5C;
+			remoteInfo = "Seven Seconds Watch App";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -55,7 +55,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				A9EEC6882D3292FE00679058 /* Seven Seconds for WatchOS Watch App.app in Embed Watch Content */,
+				A9A82B452D329A0A00C9CD5C /* Seven Seconds Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,9 +66,9 @@
 		A934963B2D2E8EA2007C5FD8 /* Seven Seconds Champions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds Champions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A934964F2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds ChampionsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds ChampionsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9EEC6652D3292FD00679058 /* Seven Seconds for WatchOS Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds for WatchOS Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9EEC6742D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds for WatchOS Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9EEC67E2D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds for WatchOS Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A82B312D329A0A00C9CD5C /* Seven Seconds Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A82B3B2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -100,19 +100,19 @@
 			path = "Seven Seconds ChampionsUITests";
 			sourceTree = "<group>";
 		};
-		A9EEC6662D3292FD00679058 /* Seven Seconds for WatchOS Watch App */ = {
+		A9A82B232D329A0A00C9CD5C /* Seven Seconds Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Seven Seconds for WatchOS Watch App";
+			path = "Seven Seconds Watch App";
 			sourceTree = "<group>";
 		};
-		A9EEC6772D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests */ = {
+		A9A82B342D329A0A00C9CD5C /* Seven Seconds Watch AppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Seven Seconds for WatchOS Watch AppTests";
+			path = "Seven Seconds Watch AppTests";
 			sourceTree = "<group>";
 		};
-		A9EEC6812D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests */ = {
+		A9A82B3E2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Seven Seconds for WatchOS Watch AppUITests";
+			path = "Seven Seconds Watch AppUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -139,21 +139,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC6622D3292FD00679058 /* Frameworks */ = {
+		A9A82B1F2D329A0A00C9CD5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC6712D3292FE00679058 /* Frameworks */ = {
+		A9A82B2E2D329A0A00C9CD5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC67B2D3292FE00679058 /* Frameworks */ = {
+		A9A82B382D329A0A00C9CD5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -169,9 +169,9 @@
 				A934963D2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
 				A93496522D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */,
 				A934965C2D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */,
-				A9EEC6662D3292FD00679058 /* Seven Seconds for WatchOS Watch App */,
-				A9EEC6772D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests */,
-				A9EEC6812D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests */,
+				A9A82B232D329A0A00C9CD5C /* Seven Seconds Watch App */,
+				A9A82B342D329A0A00C9CD5C /* Seven Seconds Watch AppTests */,
+				A9A82B3E2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */,
 				A934963C2D2E8EA2007C5FD8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -182,9 +182,9 @@
 				A934963B2D2E8EA2007C5FD8 /* Seven Seconds Champions.app */,
 				A934964F2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests.xctest */,
 				A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */,
-				A9EEC6652D3292FD00679058 /* Seven Seconds for WatchOS Watch App.app */,
-				A9EEC6742D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests.xctest */,
-				A9EEC67E2D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests.xctest */,
+				A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */,
+				A9A82B312D329A0A00C9CD5C /* Seven Seconds Watch AppTests.xctest */,
+				A9A82B3B2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A9EEC6872D3292FE00679058 /* PBXTargetDependency */,
+				A9A82B442D329A0A00C9CD5C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A934963D2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
@@ -262,72 +262,72 @@
 			productReference = A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		A9EEC6642D3292FD00679058 /* Seven Seconds for WatchOS Watch App */ = {
+		A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9EEC6892D3292FE00679058 /* Build configuration list for PBXNativeTarget "Seven Seconds for WatchOS Watch App" */;
+			buildConfigurationList = A9A82B462D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch App" */;
 			buildPhases = (
-				A9EEC6612D3292FD00679058 /* Sources */,
-				A9EEC6622D3292FD00679058 /* Frameworks */,
-				A9EEC6632D3292FD00679058 /* Resources */,
+				A9A82B1E2D329A0A00C9CD5C /* Sources */,
+				A9A82B1F2D329A0A00C9CD5C /* Frameworks */,
+				A9A82B202D329A0A00C9CD5C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A9EEC6662D3292FD00679058 /* Seven Seconds for WatchOS Watch App */,
+				A9A82B232D329A0A00C9CD5C /* Seven Seconds Watch App */,
 			);
-			name = "Seven Seconds for WatchOS Watch App";
+			name = "Seven Seconds Watch App";
 			packageProductDependencies = (
 			);
-			productName = "Seven Seconds for WatchOS Watch App";
-			productReference = A9EEC6652D3292FD00679058 /* Seven Seconds for WatchOS Watch App.app */;
+			productName = "Seven Seconds Watch App";
+			productReference = A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A9EEC6732D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests */ = {
+		A9A82B302D329A0A00C9CD5C /* Seven Seconds Watch AppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9EEC68D2D3292FE00679058 /* Build configuration list for PBXNativeTarget "Seven Seconds for WatchOS Watch AppTests" */;
+			buildConfigurationList = A9A82B492D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppTests" */;
 			buildPhases = (
-				A9EEC6702D3292FE00679058 /* Sources */,
-				A9EEC6712D3292FE00679058 /* Frameworks */,
-				A9EEC6722D3292FE00679058 /* Resources */,
+				A9A82B2D2D329A0A00C9CD5C /* Sources */,
+				A9A82B2E2D329A0A00C9CD5C /* Frameworks */,
+				A9A82B2F2D329A0A00C9CD5C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A9EEC6762D3292FE00679058 /* PBXTargetDependency */,
+				A9A82B332D329A0A00C9CD5C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A9EEC6772D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests */,
+				A9A82B342D329A0A00C9CD5C /* Seven Seconds Watch AppTests */,
 			);
-			name = "Seven Seconds for WatchOS Watch AppTests";
+			name = "Seven Seconds Watch AppTests";
 			packageProductDependencies = (
 			);
-			productName = "Seven Seconds for WatchOS Watch AppTests";
-			productReference = A9EEC6742D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests.xctest */;
+			productName = "Seven Seconds Watch AppTests";
+			productReference = A9A82B312D329A0A00C9CD5C /* Seven Seconds Watch AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A9EEC67D2D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests */ = {
+		A9A82B3A2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9EEC6902D3292FE00679058 /* Build configuration list for PBXNativeTarget "Seven Seconds for WatchOS Watch AppUITests" */;
+			buildConfigurationList = A9A82B4C2D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppUITests" */;
 			buildPhases = (
-				A9EEC67A2D3292FE00679058 /* Sources */,
-				A9EEC67B2D3292FE00679058 /* Frameworks */,
-				A9EEC67C2D3292FE00679058 /* Resources */,
+				A9A82B372D329A0A00C9CD5C /* Sources */,
+				A9A82B382D329A0A00C9CD5C /* Frameworks */,
+				A9A82B392D329A0A00C9CD5C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A9EEC6802D3292FE00679058 /* PBXTargetDependency */,
+				A9A82B3D2D329A0A00C9CD5C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A9EEC6812D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests */,
+				A9A82B3E2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */,
 			);
-			name = "Seven Seconds for WatchOS Watch AppUITests";
+			name = "Seven Seconds Watch AppUITests";
 			packageProductDependencies = (
 			);
-			productName = "Seven Seconds for WatchOS Watch AppUITests";
-			productReference = A9EEC67E2D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests.xctest */;
+			productName = "Seven Seconds Watch AppUITests";
+			productReference = A9A82B3B2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -351,16 +351,16 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = A934963A2D2E8EA2007C5FD8;
 					};
-					A9EEC6642D3292FD00679058 = {
+					A9A82B212D329A0A00C9CD5C = {
 						CreatedOnToolsVersion = 16.2;
 					};
-					A9EEC6732D3292FE00679058 = {
+					A9A82B302D329A0A00C9CD5C = {
 						CreatedOnToolsVersion = 16.2;
-						TestTargetID = A9EEC6642D3292FD00679058;
+						TestTargetID = A9A82B212D329A0A00C9CD5C;
 					};
-					A9EEC67D2D3292FE00679058 = {
+					A9A82B3A2D329A0A00C9CD5C = {
 						CreatedOnToolsVersion = 16.2;
-						TestTargetID = A9EEC6642D3292FD00679058;
+						TestTargetID = A9A82B212D329A0A00C9CD5C;
 					};
 				};
 			};
@@ -381,9 +381,9 @@
 				A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
 				A934964E2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */,
 				A93496582D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */,
-				A9EEC6642D3292FD00679058 /* Seven Seconds for WatchOS Watch App */,
-				A9EEC6732D3292FE00679058 /* Seven Seconds for WatchOS Watch AppTests */,
-				A9EEC67D2D3292FE00679058 /* Seven Seconds for WatchOS Watch AppUITests */,
+				A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */,
+				A9A82B302D329A0A00C9CD5C /* Seven Seconds Watch AppTests */,
+				A9A82B3A2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -410,21 +410,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC6632D3292FD00679058 /* Resources */ = {
+		A9A82B202D329A0A00C9CD5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC6722D3292FE00679058 /* Resources */ = {
+		A9A82B2F2D329A0A00C9CD5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC67C2D3292FE00679058 /* Resources */ = {
+		A9A82B392D329A0A00C9CD5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -455,21 +455,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC6612D3292FD00679058 /* Sources */ = {
+		A9A82B1E2D329A0A00C9CD5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC6702D3292FE00679058 /* Sources */ = {
+		A9A82B2D2D329A0A00C9CD5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9EEC67A2D3292FE00679058 /* Sources */ = {
+		A9A82B372D329A0A00C9CD5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -489,20 +489,20 @@
 			target = A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */;
 			targetProxy = A934965A2D2E8EA3007C5FD8 /* PBXContainerItemProxy */;
 		};
-		A9EEC6762D3292FE00679058 /* PBXTargetDependency */ = {
+		A9A82B332D329A0A00C9CD5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A9EEC6642D3292FD00679058 /* Seven Seconds for WatchOS Watch App */;
-			targetProxy = A9EEC6752D3292FE00679058 /* PBXContainerItemProxy */;
+			target = A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */;
+			targetProxy = A9A82B322D329A0A00C9CD5C /* PBXContainerItemProxy */;
 		};
-		A9EEC6802D3292FE00679058 /* PBXTargetDependency */ = {
+		A9A82B3D2D329A0A00C9CD5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A9EEC6642D3292FD00679058 /* Seven Seconds for WatchOS Watch App */;
-			targetProxy = A9EEC67F2D3292FE00679058 /* PBXContainerItemProxy */;
+			target = A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */;
+			targetProxy = A9A82B3C2D329A0A00C9CD5C /* PBXContainerItemProxy */;
 		};
-		A9EEC6872D3292FE00679058 /* PBXTargetDependency */ = {
+		A9A82B442D329A0A00C9CD5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A9EEC6642D3292FD00679058 /* Seven Seconds for WatchOS Watch App */;
-			targetProxy = A9EEC6862D3292FE00679058 /* PBXContainerItemProxy */;
+			target = A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */;
+			targetProxy = A9A82B432D329A0A00C9CD5C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -774,19 +774,20 @@
 			};
 			name = Release;
 		};
-		A9EEC68A2D3292FE00679058 /* Debug */ = {
+		A9A82B472D329A0A00C9CD5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Watch App/Seven Seconds Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds for WatchOS Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 83532998Y4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds for WatchOS";
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.imawo.seven;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -806,19 +807,20 @@
 			};
 			name = Debug;
 		};
-		A9EEC68B2D3292FE00679058 /* Release */ = {
+		A9A82B482D329A0A00C9CD5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Watch App/Seven Seconds Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds for WatchOS Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 83532998Y4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds for WatchOS";
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.imawo.seven;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -838,7 +840,7 @@
 			};
 			name = Release;
 		};
-		A9EEC68E2D3292FE00679058 /* Debug */ = {
+		A9A82B4A2D329A0A00C9CD5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -847,18 +849,18 @@
 				DEVELOPMENT_TEAM = 83532998Y4;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-for-WatchOS-Watch-AppTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds for WatchOS Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds for WatchOS Watch App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Watch App";
 				WATCHOS_DEPLOYMENT_TARGET = 11.2;
 			};
 			name = Debug;
 		};
-		A9EEC68F2D3292FE00679058 /* Release */ = {
+		A9A82B4B2D329A0A00C9CD5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -867,18 +869,18 @@
 				DEVELOPMENT_TEAM = 83532998Y4;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-for-WatchOS-Watch-AppTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds for WatchOS Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds for WatchOS Watch App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Watch App";
 				WATCHOS_DEPLOYMENT_TARGET = 11.2;
 			};
 			name = Release;
 		};
-		A9EEC6912D3292FE00679058 /* Debug */ = {
+		A9A82B4D2D329A0A00C9CD5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -886,18 +888,18 @@
 				DEVELOPMENT_TEAM = 83532998Y4;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-for-WatchOS-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "Seven Seconds for WatchOS Watch App";
+				TEST_TARGET_NAME = "Seven Seconds Watch App";
 				WATCHOS_DEPLOYMENT_TARGET = 11.2;
 			};
 			name = Debug;
 		};
-		A9EEC6922D3292FE00679058 /* Release */ = {
+		A9A82B4E2D329A0A00C9CD5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -905,13 +907,13 @@
 				DEVELOPMENT_TEAM = 83532998Y4;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-for-WatchOS-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "Seven Seconds for WatchOS Watch App";
+				TEST_TARGET_NAME = "Seven Seconds Watch App";
 				WATCHOS_DEPLOYMENT_TARGET = 11.2;
 			};
 			name = Release;
@@ -955,29 +957,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A9EEC6892D3292FE00679058 /* Build configuration list for PBXNativeTarget "Seven Seconds for WatchOS Watch App" */ = {
+		A9A82B462D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9EEC68A2D3292FE00679058 /* Debug */,
-				A9EEC68B2D3292FE00679058 /* Release */,
+				A9A82B472D329A0A00C9CD5C /* Debug */,
+				A9A82B482D329A0A00C9CD5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A9EEC68D2D3292FE00679058 /* Build configuration list for PBXNativeTarget "Seven Seconds for WatchOS Watch AppTests" */ = {
+		A9A82B492D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9EEC68E2D3292FE00679058 /* Debug */,
-				A9EEC68F2D3292FE00679058 /* Release */,
+				A9A82B4A2D329A0A00C9CD5C /* Debug */,
+				A9A82B4B2D329A0A00C9CD5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A9EEC6902D3292FE00679058 /* Build configuration list for PBXNativeTarget "Seven Seconds for WatchOS Watch AppUITests" */ = {
+		A9A82B4C2D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9EEC6912D3292FE00679058 /* Debug */,
-				A9EEC6922D3292FE00679058 /* Release */,
+				A9A82B4D2D329A0A00C9CD5C /* Debug */,
+				A9A82B4E2D329A0A00C9CD5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Seven Seconds Champions Watch App.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
 		<key>Seven Seconds Champions WatchApp Watch App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,14 +12,14 @@
 		<key>Seven Seconds Champions.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>Seven Seconds ChampionsTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
-		<key>Seven Seconds for WatchOS Watch App.xcscheme_^#shared#^_</key>
+		<key>Seven Seconds Watch App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
@@ -48,6 +43,21 @@
 			<true/>
 		</dict>
 		<key>A93496582D2E8EA3007C5FD8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9A82B212D329A0A00C9CD5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9A82B302D329A0A00C9CD5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9A82B3A2D329A0A00C9CD5C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

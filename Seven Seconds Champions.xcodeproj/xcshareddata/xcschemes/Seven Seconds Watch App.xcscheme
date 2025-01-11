@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A934963A2D2E8EA2007C5FD8"
-               BuildableName = "Seven Seconds Champions.app"
-               BlueprintName = "Seven Seconds Champions"
+               BlueprintIdentifier = "A9A82B212D329A0A00C9CD5C"
+               BuildableName = "Seven Seconds Watch App.app"
+               BlueprintName = "Seven Seconds Watch App"
                ReferencedContainer = "container:Seven Seconds Champions.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +29,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A9A82B212D329A0A00C9CD5C"
-               BuildableName = "Seven Seconds Watch App.app"
-               BlueprintName = "Seven Seconds Watch App"
+               BlueprintIdentifier = "A934963A2D2E8EA2007C5FD8"
+               BuildableName = "Seven Seconds Champions.app"
+               BlueprintName = "Seven Seconds Champions"
                ReferencedContainer = "container:Seven Seconds Champions.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,9 +49,20 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A93496582D2E8EA3007C5FD8"
-               BuildableName = "Seven Seconds ChampionsUITests.xctest"
-               BlueprintName = "Seven Seconds ChampionsUITests"
+               BlueprintIdentifier = "A9A82B3A2D329A0A00C9CD5C"
+               BuildableName = "Seven Seconds Watch AppUITests.xctest"
+               BlueprintName = "Seven Seconds Watch AppUITests"
+               ReferencedContainer = "container:Seven Seconds Champions.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A9A82B302D329A0A00C9CD5C"
+               BuildableName = "Seven Seconds Watch AppTests.xctest"
+               BlueprintName = "Seven Seconds Watch AppTests"
                ReferencedContainer = "container:Seven Seconds Champions.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -71,9 +82,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A934963A2D2E8EA2007C5FD8"
-            BuildableName = "Seven Seconds Champions.app"
-            BlueprintName = "Seven Seconds Champions"
+            BlueprintIdentifier = "A9A82B212D329A0A00C9CD5C"
+            BuildableName = "Seven Seconds Watch App.app"
+            BlueprintName = "Seven Seconds Watch App"
             ReferencedContainer = "container:Seven Seconds Champions.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -88,9 +99,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A934963A2D2E8EA2007C5FD8"
-            BuildableName = "Seven Seconds Champions.app"
-            BlueprintName = "Seven Seconds Champions"
+            BlueprintIdentifier = "A9A82B212D329A0A00C9CD5C"
+            BuildableName = "Seven Seconds Watch App.app"
+            BlueprintName = "Seven Seconds Watch App"
             ReferencedContainer = "container:Seven Seconds Champions.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
