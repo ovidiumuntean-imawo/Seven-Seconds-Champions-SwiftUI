@@ -44,7 +44,7 @@ struct GameOverView_Watch: View {
                         .padding(.top, 8)
                     
                     Text("\(score)")
-                        .font(.system(size: 48, weight: .heavy))
+                        .font(.system(size: 36, weight: .heavy))
                         .foregroundColor(.white)
                         .padding(.top, -4)
                     
