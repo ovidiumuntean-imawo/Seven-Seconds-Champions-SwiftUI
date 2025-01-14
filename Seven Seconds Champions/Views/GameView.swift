@@ -53,6 +53,9 @@ struct GameView_iPhone: View {
     @State private var showAuthErrorAlert = false
     @State private var authErrorMessage: String = ""
     
+    @State private var scale: CGFloat = 1.0
+    @State private var rotation: Double = 0
+    
     // Audio
     private var buttonBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "button", fileType: "wav")
     private var explodeBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "explode", fileType: "wav")
@@ -62,15 +65,10 @@ struct GameView_iPhone: View {
             GeometryReader { containerGeo in
                 ZStack {
                     // Background
-                    Image("background")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: containerGeo.size.width,
-                               height: containerGeo.size.height)
-                        .edgesIgnoringSafeArea(.all)
+                    RotatingBackground()
                     
-                    VisualEffectBlur(style: .dark)
-                        .edgesIgnoringSafeArea(.all)
+                    /*VisualEffectBlur(style: .dark)
+                        .edgesIgnoringSafeArea(.all)*/
                     
                     VStack(spacing: 20) {
                         // Title
@@ -126,22 +124,25 @@ struct GameView_iPhone: View {
                                     .padding(.top, -8)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading) // Left alignment
+                            .padding(.top, -16)
                             
                             // Right: The Big Button
                             ZStack {
                                 Button {
-                                    if !isGameRunning {
-                                        startGame()
+                                    if !isGameOver {
+                                        if !isGameRunning {
+                                            startGame()
+                                        }
+                                        currentScore += 1
+                                        buttonBeep?.play()
+                                        
+                                        Sparks.shared.updateSparks(
+                                            emitterLayer: emitterLayer,
+                                            score: currentScore,
+                                            buttonFrame: buttonFrame,
+                                            isGameRunning: true
+                                        )
                                     }
-                                    currentScore += 1
-                                    buttonBeep?.play()
-                                    
-                                    Sparks.shared.updateSparks(
-                                        emitterLayer: emitterLayer,
-                                        score: currentScore,
-                                        buttonFrame: buttonFrame,
-                                        isGameRunning: true
-                                    )
                                 } label: {
                                     Image(isPressed ? "button_pressed" : "button_normal")
                                         .resizable()
@@ -169,13 +170,19 @@ struct GameView_iPhone: View {
                                             }
                                     }
                                 )
+                                /*.scaleEffect(scale)
+                                .onAppear {
+                                    withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                                        scale = 1.04
+                                    }
+                                }*/
+                                .padding(.top, 16)
                             }
-                            .frame(height: 171)
                             .padding(.trailing, 24)
                         }
-                        .frame(maxHeight: .infinity) // Ensure vertical alignment
-                        
-                        Text("Previous score: \(previousScore) hits")
+                        .padding(.bottom, 8)
+                    
+                        Text("Last score: \(previousScore) hits")
                             .font(.system(size: 26, weight: .medium))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -337,6 +344,7 @@ struct GameView_iPhone: View {
     private func resetUI() {
         timeLeft = 7
         currentScore = 0
+        isGameOver = false
         
         if let emitterLayer = emitterLayer {
             Sparks.shared.updateSparks(
@@ -349,7 +357,7 @@ struct GameView_iPhone: View {
     }
 }
 
-// MARK: - GameView_iPhone
+// MARK: - GameView_iPad
 struct GameView_iPad: View {
     // Game states
     @State private var timeLeft: Int = 7
@@ -392,6 +400,9 @@ struct GameView_iPad: View {
     @State private var showAuthErrorAlert = false
     @State private var authErrorMessage: String = ""
     
+    @State private var scale: CGFloat = 1.0
+    @State private var rotation: Double = 0
+    
     // Audio
     private var buttonBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "button", fileType: "wav")
     private var explodeBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "explode", fileType: "wav")
@@ -401,15 +412,10 @@ struct GameView_iPad: View {
             GeometryReader { containerGeo in
                 ZStack {
                     // Background
-                    Image("background")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: containerGeo.size.width,
-                               height: containerGeo.size.height)
-                        .edgesIgnoringSafeArea(.all)
+                    RotatingBackground()
                     
-                    VisualEffectBlur(style: .dark)
-                        .edgesIgnoringSafeArea(.all)
+                    /*VisualEffectBlur(style: .dark)
+                        .edgesIgnoringSafeArea(.all)*/
                     
                     VStack(spacing: 20) {
                         // Title
@@ -463,22 +469,25 @@ struct GameView_iPad: View {
                                     .foregroundColor(.white)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading) // Left alignment
+                            .padding(.top, -16)
                             
                             // Right: The Big Button
                             ZStack {
                                 Button {
-                                    if !isGameRunning {
-                                        startGame()
+                                    if !isGameOver {
+                                        if !isGameRunning {
+                                            startGame()
+                                        }
+                                        currentScore += 1
+                                        buttonBeep?.play()
+                                        
+                                        Sparks.shared.updateSparks(
+                                            emitterLayer: emitterLayer,
+                                            score: currentScore,
+                                            buttonFrame: buttonFrame,
+                                            isGameRunning: true
+                                        )
                                     }
-                                    currentScore += 1
-                                    buttonBeep?.play()
-                                    
-                                    Sparks.shared.updateSparks(
-                                        emitterLayer: emitterLayer,
-                                        score: currentScore,
-                                        buttonFrame: buttonFrame,
-                                        isGameRunning: true
-                                    )
                                 } label: {
                                     Image(isPressed ? "button_pressed" : "button_normal")
                                         .resizable()
@@ -506,13 +515,18 @@ struct GameView_iPad: View {
                                             }
                                     }
                                 )
+                                /*.scaleEffect(scale)
+                                .onAppear {
+                                    withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                                        scale = 1.04
+                                    }
+                                }*/
+                                .padding(.top, 16)
                             }
-                            .frame(height: 280)
                             .padding(.trailing, 48)
                         }
-                        .frame(maxHeight: .infinity) // Ensure vertical alignment
                         
-                        Text("Previous score: \(previousScore) hits")
+                        Text("Last score: \(previousScore) hits")
                             .font(.system(size: 36, weight: .medium))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -678,6 +692,7 @@ struct GameView_iPad: View {
     private func resetUI() {
         timeLeft = 7
         currentScore = 0
+        isGameOver = false
         
         if let emitterLayer = emitterLayer {
             Sparks.shared.updateSparks(
@@ -692,4 +707,5 @@ struct GameView_iPad: View {
 
 #Preview {
     GameView_iPhone()
+    /// GameView_iPad()
 }

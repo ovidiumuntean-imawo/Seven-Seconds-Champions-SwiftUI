@@ -17,18 +17,13 @@ struct GameOverView_Watch: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var showLeaderboardFromGameOver = false
+    @State private var rotation: Double = 0
     
     var body: some View {
         GeometryReader { containerGeo in
             ZStack {
                 // Background
-                Image("background")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: containerGeo.size.width,
-                           height: containerGeo.size.height)
-                    .edgesIgnoringSafeArea(.all)
-                    .blur(radius: 10)
+                RotatingBackground()
                 
                 VStack(spacing: 0) {
                     Text("game over")

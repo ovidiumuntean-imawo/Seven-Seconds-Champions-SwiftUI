@@ -31,6 +31,9 @@ struct GameView_Watch: View {
     @State private var showAuthErrorAlert = false
     @State private var authErrorMessage: String = ""
     
+    @State private var scale: CGFloat = 1.0
+    @State private var rotation: Double = 0
+    
     // Audio
     private var buttonBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "button", fileType: "wav")
     private var explodeBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "explode", fileType: "wav")
@@ -40,13 +43,7 @@ struct GameView_Watch: View {
             GeometryReader { containerGeo in
                 ZStack {
                     // Background
-                    Image("background")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: containerGeo.size.width,
-                               height: containerGeo.size.height)
-                        .edgesIgnoringSafeArea(.all)
-                        .blur(radius: 10)
+                    RotatingBackground()
                     
                     VStack(spacing: 20) {
                         // Title
@@ -103,11 +100,13 @@ struct GameView_Watch: View {
                             // Right: The Big Button
                             ZStack {
                                 Button {
-                                    if !isGameRunning {
-                                        startGame()
+                                    if !isGameOver {
+                                        if !isGameRunning {
+                                            startGame()
+                                        }
+                                        currentScore += 1
+                                        buttonBeep?.play()
                                     }
-                                    currentScore += 1
-                                    buttonBeep?.play()
                                 } label: {
                                     Image(isPressed ? "button_pressed" : "button_normal")
                                         .resizable()
@@ -120,13 +119,19 @@ struct GameView_Watch: View {
                                             pressed = true
                                         }
                                 )
+                                /*.scaleEffect(scale)
+                                .onAppear {
+                                    withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                                        scale = 1.04
+                                    }
+                                }*/
                             }
                             .padding(.trailing, 0)
                         }
                         .frame(maxHeight: .infinity) // Ensure vertical alignment
                         .padding(.top, -8)
                         
-                        Text("Previous score: \(previousScore) hits")
+                        Text("Last score: \(previousScore) hits")
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -192,6 +197,7 @@ struct GameView_Watch: View {
     private func resetUI() {
         timeLeft = 7
         currentScore = 0
+        isGameOver = false
     }
 }
 

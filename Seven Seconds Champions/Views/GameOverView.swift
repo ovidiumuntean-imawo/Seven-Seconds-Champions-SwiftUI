@@ -25,16 +25,13 @@ struct GameOverView_iPhone: View {
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
+    @State private var rotation: Double = 0
+    
     var body: some View {
         GeometryReader { containerGeo in
             ZStack {
                 // Background
-                Image("background")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: containerGeo.size.width,
-                           height: containerGeo.size.height)
-                    .edgesIgnoringSafeArea(.all)
+                RotatingBackground()
                 
                 VisualEffectBlur(style: .dark)
                     .edgesIgnoringSafeArea(.all)
@@ -149,16 +146,13 @@ struct GameOverView_iPad: View {
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
+    @State private var rotation: Double = 0
+    
     var body: some View {
         GeometryReader { containerGeo in
             ZStack {
                 // Background
-                Image("background")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: containerGeo.size.width,
-                           height: containerGeo.size.height)
-                    .edgesIgnoringSafeArea(.all)
+                RotatingBackground()
                 
                 VisualEffectBlur(style: .dark)
                     .edgesIgnoringSafeArea(.all)
