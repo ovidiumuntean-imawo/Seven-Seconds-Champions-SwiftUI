@@ -469,7 +469,7 @@ struct GameView_iPad: View {
                                     .foregroundColor(.white)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading) // Left alignment
-                            .padding(.top, -16)
+                            .padding(.top, -48)
                             
                             // Right: The Big Button
                             ZStack {
@@ -521,9 +521,9 @@ struct GameView_iPad: View {
                                         scale = 1.04
                                     }
                                 }*/
-                                .padding(.top, 16)
+                                .padding(.top, 48)
                             }
-                            .padding(.trailing, 48)
+                            .padding(.trailing, 72)
                         }
                         
                         Text("Last score: \(previousScore) hits")
@@ -707,5 +707,5 @@ struct GameView_iPad: View {
 
 #Preview {
     GameView_iPhone()
-    /// GameView_iPad()
+    // GameView_iPad()
 }
