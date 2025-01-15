@@ -92,56 +92,28 @@ class Sparks {
     }
     
     func updateSparks(emitterLayer: CAEmitterLayer?,
-                      score: Int,
-                      buttonFrame: CGRect,
-                      isGameRunning: Bool) {
-        guard let emitterLayer = emitterLayer else { return }
+                         gameManager: GameManager,
+                         buttonFrame: CGRect) {
+           guard let emitterLayer = emitterLayer else { return }
 
-        emitterLayer.emitterPosition = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
+           emitterLayer.emitterPosition = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
 
-        if isGameRunning {
-            // Colored particles when the game is running
-            let newBirthRate = Float(20 + score * 2)
-            let newVelocity = CGFloat(40 + score * 5)
-            
-            /*let hue = CGFloat.random(in: 0.0...0.18)
-            let newColor = UIColor(
-                hue: hue,
-                saturation: 1.0,
-                brightness: 1.0,
-                alpha: 1.0
-            ).cgColor*/
-            
-            let randomChance = CGFloat.random(in: 0.0...1.0) // Valoare între 0 și 1
-                
-            let hue: CGFloat
-            if randomChance < 0.7 { // 70% șanse să fie roșu
-                hue = 0.0 // Roșu pur
-            } else {
-                hue = CGFloat.random(in: 0.0...0.18) // Interval roșu-galben pentru restul particulelor
-            }
+           if gameManager.isGameRunning {
+               // Particles during the game
+               let newBirthRate = Float(20 + gameManager.currentScore * 2)
+               let newVelocity = CGFloat(40 + gameManager.currentScore * 5)
 
-            let newColor = UIColor(
-                hue: hue,
-                saturation: 1.0,
-                brightness: 1.0,
-                alpha: 1.0
-            ).cgColor
+               let randomHue = CGFloat.random(in: 0.0...0.18)
+               let newColor = UIColor(hue: randomHue, saturation: 1.0, brightness: 1.0, alpha: 1.0).cgColor
 
-            emitterLayer.setValue(newBirthRate, forKeyPath: "emitterCells.cell.birthRate")
-            emitterLayer.setValue(newVelocity,  forKeyPath: "emitterCells.cell.velocity")
-            emitterLayer.setValue(newColor,     forKeyPath: "emitterCells.cell.color")
-        } else {
-            // Standby: White and green in a single cell
-            emitterLayer.setValue(20, forKeyPath: "emitterCells.cell.birthRate")
-            emitterLayer.setValue(22, forKeyPath: "emitterCells.cell.velocity")
-            
-            // Base color set to white
-            emitterLayer.setValue(UIColor.white.cgColor, forKeyPath: "emitterCells.cell.color")
-            
-            // Color variation: White -> Green
-            emitterLayer.setValue(1.0, forKeyPath: "emitterCells.cell.greenSpeed")
-            emitterLayer.setValue(0.5, forKeyPath: "emitterCells.cell.greenRange")
-        }
-    }
+               emitterLayer.setValue(newBirthRate, forKeyPath: "emitterCells.cell.birthRate")
+               emitterLayer.setValue(newVelocity, forKeyPath: "emitterCells.cell.velocity")
+               emitterLayer.setValue(newColor, forKeyPath: "emitterCells.cell.color")
+           } else {
+               // Standby mode
+               emitterLayer.setValue(20, forKeyPath: "emitterCells.cell.birthRate")
+               emitterLayer.setValue(22, forKeyPath: "emitterCells.cell.velocity")
+               emitterLayer.setValue(UIColor.white.cgColor, forKeyPath: "emitterCells.cell.color")
+           }
+       }
 }

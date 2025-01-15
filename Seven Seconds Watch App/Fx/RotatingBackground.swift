@@ -25,7 +25,7 @@ struct RotatingBackground: View {
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2) // Centers the image on the screen
                 .onAppear {
                     withAnimation(
-                        Animation.linear(duration: 18)
+                        Animation.linear(duration: 12)
                             .repeatForever(autoreverses: false)
                     ) {
                         rotation += 360

@@ -1,3 +1,12 @@
+//
+//  SparksHelper.swift
+//  Seven Seconds Champions
+//
+//  Created by Ovidiu Muntean on 15.01.2025.
+//
+
+import SwiftUI
+
 struct SparksHelper {
     static func calculateEmitterPosition(
         containerGeo: GeometryProxy,

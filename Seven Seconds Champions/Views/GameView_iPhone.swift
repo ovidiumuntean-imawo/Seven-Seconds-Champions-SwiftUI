@@ -5,19 +5,13 @@
 //  Created by Ovidiu Muntean on 15.01.2025.
 //
 
-
 import SwiftUI
 import AVFoundation
 import GameKit
 
 // MARK: - GameView_iPhone
 struct GameView_iPhone: View {
-    // Game states
-    @State private var timeLeft: Int = 7
-    @State private var currentScore: Int = 0
-    @State private var previousScore: Int = 0
-    @State private var isGameOver: Bool = false
-    @State private var isGameRunning: Bool = false
+    @StateObject private var gameManager = GameManager()
     
     // Particles
     @State private var emitterLayerGlobal: CAEmitterLayer?
@@ -30,13 +24,12 @@ struct GameView_iPhone: View {
     @State private var buttonFrame: CGRect = .zero {
         didSet {
             // If not running, keep sparks in standby
-            if buttonFrame != .zero, !isGameRunning {
+            if buttonFrame != .zero, !gameManager.isGameRunning {
                 Sparks.shared.updateSparks(
-                    emitterLayer: emitterLayer,
-                    score: currentScore,
-                    buttonFrame: buttonFrame,
-                    isGameRunning: false
-                )
+                                    emitterLayer: emitterLayer,
+                                    gameManager: gameManager,
+                                    buttonFrame: buttonFrame
+                                )
             }
         }
     }
@@ -56,19 +49,12 @@ struct GameView_iPhone: View {
     @State private var scale: CGFloat = 1.0
     @State private var rotation: Double = 0
     
-    // Audio
-    private var buttonBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "button", fileType: "wav")
-    private var explodeBeep: AVAudioPlayer? = AudioPlayerFactory.createAudioPlayer(fileName: "explode", fileType: "wav")
-    
     var body: some View {
         NavigationStack {
             GeometryReader { containerGeo in
                 ZStack {
                     // Background
                     RotatingBackground()
-                    
-                    /*VisualEffectBlur(style: .dark)
-                        .edgesIgnoringSafeArea(.all)*/
                     
                     VStack(spacing: 20) {
                         // Title
@@ -100,9 +86,14 @@ struct GameView_iPhone: View {
                             .padding(.top, 24)
 
                         // Timer
-                        Text("Time left: \(timeLeft) seconds")
+                        Text("Time left: \(gameManager.timeLeft) seconds")
                             .font(.system(size: 32, weight: .medium))
-                            .foregroundColor(isGameRunning ? Color.orange : (timeLeft <= 3 ? Color.red : Color.white))
+                            .foregroundColor(
+                                gameManager.timeLeft > 5 ? Color.white : // Default color
+                                gameManager.timeLeft > 3 ? Color.yellow : // Warning color
+                                gameManager.timeLeft > 2 ? Color.orange : // High attention
+                                Color.red // Critical attention
+                            )
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         // Main game section: HStack with scores on the left and button on the right
@@ -113,7 +104,7 @@ struct GameView_iPhone: View {
                                     .font(.system(size: 18, weight: .medium))
                                     .foregroundColor(.white)
                                 
-                                Text("\(currentScore)")
+                                Text("\(gameManager.currentScore)")
                                     .font(.system(size: 64, weight: .heavy))
                                     .foregroundColor(.white)
                                     .padding(.top, -8)
@@ -129,19 +120,19 @@ struct GameView_iPhone: View {
                             // Right: The Big Button
                             ZStack {
                                 Button {
-                                    if !isGameOver {
-                                        if !isGameRunning {
-                                            startGame()
+                                    if !gameManager.isGameOver {
+                                        if !gameManager.isGameRunning {
+                                            gameManager.startGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                                        } else {
+                                            gameManager.currentScore += 1
+                                            gameManager.buttonPressed()
+                                            
+                                            Sparks.shared.updateSparks(
+                                                emitterLayer: emitterLayer,
+                                                gameManager: gameManager,
+                                                buttonFrame: buttonFrame
+                                            )
                                         }
-                                        currentScore += 1
-                                        buttonBeep?.play()
-                                        
-                                        Sparks.shared.updateSparks(
-                                            emitterLayer: emitterLayer,
-                                            score: currentScore,
-                                            buttonFrame: buttonFrame,
-                                            isGameRunning: true
-                                        )
                                     }
                                 } label: {
                                     Image(isPressed ? "button_pressed" : "button_normal")
@@ -160,12 +151,26 @@ struct GameView_iPhone: View {
                                         Color.clear
                                             .onAppear {
                                                 DispatchQueue.main.async {
-                                                    calculateEmitterPosition(containerGeo: containerGeo, btnGeo: btnGeo)
+                                                    SparksHelper.calculateEmitterPosition(
+                                                                        containerGeo: containerGeo,
+                                                                        btnGeo: btnGeo,
+                                                                        buttonFrame: &buttonFrame,
+                                                                        emitterLayer: &emitterLayer,
+                                                                        emitterCell: emitterCell,
+                                                                        gameManager: gameManager
+                                                                    )
                                                 }
                                             }
                                             .onChange(of: btnGeo.size) { _ in
                                                 DispatchQueue.main.async {
-                                                    calculateEmitterPosition(containerGeo: containerGeo, btnGeo: btnGeo)
+                                                    SparksHelper.calculateEmitterPosition(
+                                                                        containerGeo: containerGeo,
+                                                                        btnGeo: btnGeo,
+                                                                        buttonFrame: &buttonFrame,
+                                                                        emitterLayer: &emitterLayer,
+                                                                        emitterCell: emitterCell,
+                                                                        gameManager: gameManager
+                                                                    )
                                                 }
                                             }
                                     }
@@ -182,7 +187,7 @@ struct GameView_iPhone: View {
                         }
                         .padding(.bottom, 8)
                     
-                        Text("Last score: \(previousScore) hits")
+                        Text("Last score: \(gameManager.previousScore) hits")
                             .font(.system(size: 26, weight: .medium))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -193,8 +198,8 @@ struct GameView_iPhone: View {
                         Text("How other players are doing?")
                             .font(.system(size: 22))
                             .foregroundColor(.white)
-                            .opacity(isGameRunning ? 0 : 1)
-                            .animation(.easeInOut(duration: 0.5), value: isGameRunning)
+                            .opacity(gameManager.isGameRunning ? 0 : 1)
+                            .animation(.easeInOut(duration: 0.5), value: gameManager.isGameRunning)
                         
                         Button("View high scores") {
                             showLeaderboard = true
@@ -204,8 +209,8 @@ struct GameView_iPhone: View {
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(8)
-                        .opacity(isGameRunning ? 0 : 1)
-                        .animation(.easeInOut(duration: 0.5), value: isGameRunning)
+                        .opacity(gameManager.isGameRunning ? 0 : 1)
+                        .animation(.easeInOut(duration: 0.5), value: gameManager.isGameRunning)
                         .sheet(isPresented: $showLeaderboard) {
                             LeaderboardView()
                                 .transition(.move(edge: .bottom))
@@ -242,123 +247,18 @@ struct GameView_iPhone: View {
                     )
                 }
             }
-            .fullScreenCover(isPresented: $isGameOver) {
-                GameOverView_iPhone(score: currentScore, previousScore: $previousScore)
+            .fullScreenCover(isPresented: $gameManager.isGameOver) {
+                GameOverView_iPhone(score: gameManager.currentScore, previousScore: $gameManager.previousScore)
                     .onDisappear {
-                        resetUI()
+                        gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
                     }
             }
         }
     }
-    
-    // MARK: - Combine containerGeo + btnGeo
-    private func calculateEmitterPosition(containerGeo: GeometryProxy, btnGeo: GeometryProxy) {
-        // Full container rect if needed
-        let containerRect = containerGeo.frame(in: .global)
-        let buttonRect = btnGeo.frame(in: .global)
-        
-        // If the buttonRect is correct, this is enough
-        guard buttonRect.width > 0, buttonRect.height > 0 else { return }
-        
-        // bottom-center = (minX + width/2, minY + height)
-        let buttonWidth  = buttonRect.width
-        let buttonHeight = buttonRect.height
-        
-        let bottomCenterX = buttonRect.minX + (buttonWidth / 2)
-        let bottomCenterY = buttonRect.minY + buttonHeight
-        
-        // If the bounding box is still off, add offset
-        // let finalX = bottomCenterX + 10
-        let finalX = bottomCenterX
-        let finalY = bottomCenterY
-    
-        let newFrame = CGRect(x: finalX, y: finalY, width: 0, height: 0)
-        
-        buttonFrame = newFrame
-        
-        if emitterLayer == nil {
-            Sparks.shared.createSparks(
-                emitterLayer: &emitterLayer,
-                emitterCell: emitterCell,
-                buttonFrame: newFrame
-            )
-            Sparks.shared.updateSparks(
-                emitterLayer: emitterLayer,
-                score: currentScore,
-                buttonFrame: newFrame,
-                isGameRunning: false
-            )
-        } else {
-            Sparks.shared.updateSparks(
-                emitterLayer: emitterLayer,
-                score: currentScore,
-                buttonFrame: newFrame,
-                isGameRunning: isGameRunning
-            )
-        }
-    }
-    
-    // MARK: - Game logic
-    private func startGame() {
-        isGameRunning = true
-        currentScore = 0
-        timeLeft = 7
-        
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            if timeLeft > 0 {
-                timeLeft -= 1
-            } else {
-                timer.invalidate()
-                endGame()
-            }
-        }
-        
-        if let emitterLayer = emitterLayer {
-            Sparks.shared.updateSparks(
-                emitterLayer: emitterLayer,
-                score: currentScore,
-                buttonFrame: buttonFrame,
-                isGameRunning: true
-            )
-        }
-    }
-    
-    private func endGame() {
-        isGameRunning = false
-        explodeBeep?.play()
-        isGameOver = true
-        
-        // Submit score to Game Center
-        GameCenterManager.shared.submitScore(with: currentScore)
-        
-        if let emitterLayer = emitterLayer {
-            Sparks.shared.updateSparks(
-                emitterLayer: emitterLayer,
-                score: currentScore,
-                buttonFrame: buttonFrame,
-                isGameRunning: false
-            )
-        }
-    }
-    
-    private func resetUI() {
-        timeLeft = 7
-        currentScore = 0
-        isGameOver = false
-        
-        if let emitterLayer = emitterLayer {
-            Sparks.shared.updateSparks(
-                emitterLayer: emitterLayer,
-                score: 0,
-                buttonFrame: buttonFrame,
-                isGameRunning: false
-            )
-        }
-    }
 }
+
 
 #Preview {
     GameView_iPhone()
-    // GameView_iPad()
 }
 

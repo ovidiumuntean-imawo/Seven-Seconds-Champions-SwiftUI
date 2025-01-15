@@ -17,6 +17,9 @@ struct GameOverView_Watch: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var showLeaderboardFromGameOver = false
+    
+    @State private var scale: CGFloat = 3.0
+    @State private var scaleScore: CGFloat = 0
     @State private var rotation: Double = 0
     
     var body: some View {
@@ -25,11 +28,22 @@ struct GameOverView_Watch: View {
                 // Background
                 RotatingBackground()
                 
+                GeometryReader { geo in
+                    ParticlesView(particleCount: 50, particleSize: 3)
+                        .frame(width: geo.size.width * 2, height: geo.size.height)
+                }
+                
                 VStack(spacing: 0) {
                     Text("game over")
                         .font(.system(size: 36, weight: .light))
                         .foregroundColor(.white)
                         .padding(.top, -36)
+                        .scaleEffect(scale)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                scale = 1.0
+                            }
+                        }
                     
                     Spacer()
                     
@@ -42,6 +56,12 @@ struct GameOverView_Watch: View {
                         .font(.system(size: 36, weight: .heavy))
                         .foregroundColor(.white)
                         .padding(.top, -4)
+                        .scaleEffect(scaleScore)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                scaleScore = 1.0
+                            }
+                        }
                     
                     Text("HITS")
                         .font(.system(size: 14, weight: .medium))

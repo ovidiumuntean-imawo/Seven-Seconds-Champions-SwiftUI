@@ -44,6 +44,11 @@ struct GameOverView_iPad: View {
                         .foregroundColor(.white)
                         .padding(.top, 40)
                         .scaleEffect(scale)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                scale = 1.0
+                            }
+                        }
                         /*.onAppear {
                             withAnimation(.easeInOut(duration: 1), {
                                 scale = 1.6
@@ -54,11 +59,6 @@ struct GameOverView_iPad: View {
                                 }
                             }
                         }*/
-                        .onAppear {
-                            withAnimation(.easeInOut(duration: 1)) {
-                                scale = 1.0
-                            }
-                        }
                     
                     Text("YOU SCORED")
                         .font(.system(size: 36))

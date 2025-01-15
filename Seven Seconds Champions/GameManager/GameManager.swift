@@ -1,3 +1,14 @@
+//
+//  GameManager.swift
+//  Seven Seconds Champions
+//
+//  Created by Ovidiu Muntean on 15.01.2025.
+//
+
+import SwiftUI
+import AVFoundation
+import GameKit
+
 class GameManager: ObservableObject {
     @Published var timeLeft: Int = 7
     @Published var currentScore: Int = 0
@@ -23,17 +34,16 @@ class GameManager: ObservableObject {
         timeLeft = 7
 
         sparks.updateSparks(
-            emitterLayer: emitterLayer,
-            score: currentScore,
-            buttonFrame: buttonFrame,
-            isGameRunning: true
-        )
+                    emitterLayer: emitterLayer,
+                    gameManager: self,
+                    buttonFrame: buttonFrame
+                )
 
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             if self.timeLeft > 0 {
                 self.timeLeft -= 1
-                self.timerBeep?.play() // Sunet pentru fiecare secundă
+                self.timerBeep?.play()
             } else {
                 self.timer?.invalidate()
                 self.endGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
@@ -44,20 +54,19 @@ class GameManager: ObservableObject {
     func endGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect) {
         isGameRunning = false
         isGameOver = true
-        explodeBeep?.play() // Sunet la finalul jocului
+        explodeBeep?.play()
 
         GameCenterManager.shared.submitScore(with: currentScore)
-
+        
         sparks.updateSparks(
-            emitterLayer: emitterLayer,
-            score: currentScore,
-            buttonFrame: buttonFrame,
-            isGameRunning: false
-        )
+                    emitterLayer: emitterLayer,
+                    gameManager: self,
+                    buttonFrame: buttonFrame
+                )
     }
 
     func buttonPressed() {
-        buttonBeep?.play() // Sunet la apăsarea butonului
+        buttonBeep?.play()
     }
 
     func resetGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect) {
@@ -67,10 +76,9 @@ class GameManager: ObservableObject {
         currentScore = 0
 
         sparks.updateSparks(
-            emitterLayer: emitterLayer,
-            score: 0,
-            buttonFrame: buttonFrame,
-            isGameRunning: false
-        )
+                    emitterLayer: emitterLayer,
+                    gameManager: self,
+                    buttonFrame: buttonFrame
+                )
     }
 }

@@ -11,15 +11,18 @@ import GameKit
 
 class AudioPlayerFactory {
     static func createAudioPlayer(fileName: String, fileType: String) -> AVAudioPlayer? {
-        if let audioURL = Bundle.main.url(forResource: fileName, withExtension: fileType) {
-            do {
-                let audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
-                audioPlayer.prepareToPlay()
-                return audioPlayer
-            } catch {
-                print("Error creating audio player: \(error.localizedDescription)")
-            }
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: fileType) else {
+            print("Failed to locate \(fileName).\(fileType)")
+            return nil
         }
-        return nil
+        do {
+            let player = try AVAudioPlayer(contentsOf: url)
+            player.prepareToPlay()
+            return player
+        } catch {
+            print("Failed to initialize AVAudioPlayer: \(error.localizedDescription)")
+            return nil
+        }
     }
 }
+
