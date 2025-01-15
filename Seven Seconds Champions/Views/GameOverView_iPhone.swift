@@ -25,6 +25,8 @@ struct GameOverView_iPhone: View {
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
+    @State private var scale: CGFloat = 3.0
+    @State private var scaleScore: CGFloat = 0
     @State private var rotation: Double = 0
     
     var body: some View {
@@ -33,14 +35,20 @@ struct GameOverView_iPhone: View {
                 // Background
                 RotatingBackground()
                 
-                VisualEffectBlur(style: .dark)
-                    .edgesIgnoringSafeArea(.all)
+                /*VisualEffectBlur(style: .dark)
+                    .edgesIgnoringSafeArea(.all)*/
                 
                 VStack(spacing: 30) {
                     Text("game over")
                         .font(.system(size: 64, weight: .light))
                         .foregroundColor(.white)
                         .padding(.top, 40)
+                        .scaleEffect(scale)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                scale = 1.0
+                            }
+                        }
                     
                     Text("YOU SCORED")
                         .font(.system(size: 28))
@@ -50,6 +58,12 @@ struct GameOverView_iPhone: View {
                         .font(.system(size: 72, weight: .heavy))
                         .foregroundColor(.white)
                         .padding(.top, -24)
+                        .scaleEffect(scaleScore)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                scaleScore = 1.0
+                            }
+                        }
                     
                     Text("HITS")
                         .font(.system(size: 28, weight: .medium))
@@ -129,4 +143,9 @@ struct GameOverView_iPhone: View {
             }
         }
     }
+}
+
+#Preview {
+    @Previewable @State var previousScore = 0
+    return GameOverView_iPhone(score: 10, previousScore: $previousScore)
 }

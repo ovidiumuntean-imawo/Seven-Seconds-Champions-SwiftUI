@@ -25,6 +25,8 @@ struct GameOverView_iPad: View {
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
+    @State private var scale: CGFloat = 3.0
+    @State private var scaleScore: CGFloat = 0
     @State private var rotation: Double = 0
     
     var body: some View {
@@ -33,14 +35,30 @@ struct GameOverView_iPad: View {
                 // Background
                 RotatingBackground()
                 
-                VisualEffectBlur(style: .dark)
-                    .edgesIgnoringSafeArea(.all)
+                /*VisualEffectBlur(style: .dark)
+                    .edgesIgnoringSafeArea(.all)*/
                 
                 VStack(spacing: 40) {
                     Text("game over")
                         .font(.system(size: 128, weight: .light))
                         .foregroundColor(.white)
                         .padding(.top, 40)
+                        .scaleEffect(scale)
+                        /*.onAppear {
+                            withAnimation(.easeInOut(duration: 1), {
+                                scale = 1.6
+                            })
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation(.easeInOut(duration: 1)) {
+                                    scale = 1.0
+                                }
+                            }
+                        }*/
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                scale = 1.0
+                            }
+                        }
                     
                     Text("YOU SCORED")
                         .font(.system(size: 36))
@@ -50,6 +68,12 @@ struct GameOverView_iPad: View {
                         .font(.system(size: 128, weight: .heavy))
                         .foregroundColor(.white)
                         .padding(.top, -24)
+                        .scaleEffect(scaleScore)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1)) {
+                                scaleScore = 1.0
+                            }
+                        }
                     
                     Text("HITS")
                         .font(.system(size: 36, weight: .medium))
@@ -136,5 +160,5 @@ struct GameOverView_iPad: View {
 
 #Preview {
     @Previewable @State var previousScore = 0
-    return GameOverView_iPhone(score: 10, previousScore: $previousScore)
+    return GameOverView_iPad(score: 10, previousScore: $previousScore)
 }

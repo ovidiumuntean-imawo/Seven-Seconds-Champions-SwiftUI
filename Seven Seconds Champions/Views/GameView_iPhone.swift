@@ -356,3 +356,9 @@ struct GameView_iPhone: View {
         }
     }
 }
+
+#Preview {
+    GameView_iPhone()
+    // GameView_iPad()
+}
+
