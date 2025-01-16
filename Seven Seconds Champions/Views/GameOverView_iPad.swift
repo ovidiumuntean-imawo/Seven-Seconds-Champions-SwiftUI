@@ -172,15 +172,14 @@ struct GameOverView_iPad: View {
                 isPresented: $showAchievementAlert,
                 presenting: achievementMessage
             ) { message in
-                // Butoanele din alertă
                 Button("Back to game", role: .cancel) {}
                 Button("Show My Achievements") {
-                    if let rootVC = UIApplication.getRootViewController() {
+                    if let rootVC = UIApplication.shared.windows.first?.rootViewController {
                         GameCenterManager.shared.showAchievements(from: rootVC)
                     }
                 }
                 Button("View High Scores") {
-                    if let rootVC = UIApplication.getRootViewController() {
+                    if let rootVC = UIApplication.shared.windows.first?.rootViewController {
                         GameCenterManager.shared.showLeaderboard(from: rootVC)
                     }
                 }
@@ -188,6 +187,7 @@ struct GameOverView_iPad: View {
                 Text("\n\(message)\n")
                     .multilineTextAlignment(.center)
                     .padding()
+
             }
         }
     }

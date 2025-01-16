@@ -70,12 +70,21 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
             presentGameCenterUnavailableAlert(from: viewController)
             return
         }
-        
+
+        if viewController.presentedViewController != nil {
+            viewController.dismiss(animated: true) {
+                self.presentLeaderboard(from: viewController)
+            }
+        } else {
+            presentLeaderboard(from: viewController)
+        }
+    }
+    
+    private func presentLeaderboard(from viewController: UIViewController) {
         let gcViewController = GKGameCenterViewController()
         gcViewController.gameCenterDelegate = self
         gcViewController.viewState = .leaderboards
         gcViewController.leaderboardIdentifier = leaderboardID
-        
         viewController.present(gcViewController, animated: true)
     }
     
@@ -104,11 +113,20 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
             presentGameCenterUnavailableAlert(from: viewController)
             return
         }
-        
+
+        if viewController.presentedViewController != nil {
+            viewController.dismiss(animated: true) {
+                self.presentAchievements(from: viewController)
+            }
+        } else {
+            presentAchievements(from: viewController)
+        }
+    }
+
+    private func presentAchievements(from viewController: UIViewController) {
         let gcViewController = GKGameCenterViewController()
         gcViewController.gameCenterDelegate = self
         gcViewController.viewState = .achievements
-        
         viewController.present(gcViewController, animated: true)
     }
     
