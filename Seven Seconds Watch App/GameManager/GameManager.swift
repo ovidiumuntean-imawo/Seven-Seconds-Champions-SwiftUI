@@ -50,7 +50,11 @@ class GameManager: ObservableObject {
         isGameOver = true
         explodeBeep?.play()
 
-        GameCenterManager.shared.submitScore(with: currentScore)
+        if currentScore < 125 {
+            GameCenterManager.shared.submitScore(with: currentScore)
+        }
+        
+        AchievementManager.shared.handleAchievements(for: currentScore)
     }
 
     func buttonPressed() {

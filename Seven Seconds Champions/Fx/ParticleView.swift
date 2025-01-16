@@ -1,10 +1,17 @@
+//
+//  ParticleView.swift
+//  Seven Seconds Champions
+//
+//  Created by Ovidiu Muntean on 16.01.2025.
+//
+
 import SwiftUI
 import UIKit
 
 struct ParticleView: UIViewRepresentable {
     @Binding var isActive: Bool
     
-    private var emitterCellGlobal = CAEmitterCell()
+    var emitterCellGlobal = CAEmitterCell()
     
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: .zero)

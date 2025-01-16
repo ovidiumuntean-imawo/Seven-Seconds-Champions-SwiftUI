@@ -22,11 +22,14 @@ struct GameOverView_Watch: View {
     @State private var scaleScore: CGFloat = 0
     @State private var rotation: Double = 0
     
+    @State private var isAnimationActive: Bool = true
+    
     var body: some View {
         GeometryReader { containerGeo in
             ZStack {
                 // Background
-                RotatingBackground()
+                RotatingBackground(isAnimating: isAnimationActive)
+                    .ignoresSafeArea()
                 
                 GeometryReader { geo in
                     ParticlesView(particleCount: 50, particleSize: 3)
@@ -72,7 +75,11 @@ struct GameOverView_Watch: View {
                     
                     Button(action: {
                         previousScore = score
-                        dismiss()
+                        isAnimationActive = false
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            dismiss()
+                        }
                     }) {
                         Text("Play again!")
                     }

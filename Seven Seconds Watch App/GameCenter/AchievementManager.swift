@@ -46,30 +46,5 @@ class AchievementManager {
         if !achievementID.isEmpty {
             GameCenterManager.shared.reportAchievement(achievementID: achievementID, percentComplete: 100)
         }
-
-        if !achievementMessage.isEmpty {
-            DispatchQueue.main.async {
-                self.showAchievementAlert(message: achievementMessage)
-            }
-        }
-    }
-
-    private func showAchievementAlert(message: String) {
-        let alert = UIAlertController(title: "Achievement Unlocked!", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        alert.addAction(UIAlertAction(title: "Show Achievements", style: .default) { _ in
-            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                GameCenterManager.shared.showAchievements(from: rootVC)
-            }
-        })
-        alert.addAction(UIAlertAction(title: "Show Leaderboard", style: .default) { _ in
-            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                GameCenterManager.shared.showLeaderboard(from: rootVC)
-            }
-        })
-        
-        if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-            rootVC.present(alert, animated: true)
-        }
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Ovidiu Muntean on 15.01.2025.
 //
 
-
 import SwiftUI
 import AVFoundation
 import GameKit
@@ -16,12 +15,13 @@ struct GameOverView_iPhone: View {
     @Binding var previousScore: Int
     @Environment(\.dismiss) private var dismiss
     
+    var achievementMessage: String?
+    
     @State private var showLeaderboardFromGameOver = false
+    @State private var showAchievementAlert = false
     
     // Particles
-    @State private var emitterLayerGlobal: CAEmitterLayer?
-    @State private var emitterCellGlobal = CAEmitterCell()
-    
+    @State private var areParticlesActive: Bool = false
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
@@ -29,14 +29,17 @@ struct GameOverView_iPhone: View {
     @State private var scaleScore: CGFloat = 0
     @State private var rotation: Double = 0
     
+    @State private var isAnimationActive: Bool = true
+    
     var body: some View {
         GeometryReader { containerGeo in
             ZStack {
                 // Background
-                RotatingBackground()
+                RotatingBackground(isAnimating: isAnimationActive)
+                    .ignoresSafeArea()
                 
-                /*VisualEffectBlur(style: .dark)
-                    .edgesIgnoringSafeArea(.all)*/
+                ParticleView(isActive: $areParticlesActive)
+                    .ignoresSafeArea()
                 
                 VStack(spacing: 30) {
                     Text("game over")
@@ -72,7 +75,11 @@ struct GameOverView_iPhone: View {
                     
                     Button(action: {
                         previousScore = score
-                        dismiss()
+                        isAnimationActive = false
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            dismiss()
+                        }
                     }) {
                         Text("Play again!")
                             .frame(maxWidth: .infinity)
@@ -109,12 +116,12 @@ struct GameOverView_iPhone: View {
                     
                     Button("Visit our FB Group") {
                         if let encodedURLString = "https://facebook.com/groups/sevensecondschampions"
-                                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                               let url = URL(string: encodedURLString) {
-                                UIApplication.shared.open(url)
-                            } else {
-                                print("Invalid URL")
-                            }
+                            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                           let url = URL(string: encodedURLString) {
+                            UIApplication.shared.open(url)
+                        } else {
+                            print("Invalid URL")
+                        }
                     }
                     .padding(.horizontal)
                     .frame(height: 44)
@@ -135,11 +142,38 @@ struct GameOverView_iPhone: View {
             }
             .onAppear {
                 // Create small background sparks
-                Sparks.shared.createSmallSparks(
-                    emitterLayerGlobal: &emitterLayerGlobal,
-                    emitterCellGlobal: emitterCellGlobal,
-                    parentSize: containerGeo.size
-                )
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                    areParticlesActive = true
+                }
+                
+                if let achievementMessage = achievementMessage {
+                    showAchievementAlert = true
+                }
+            }
+            .onDisappear {
+                areParticlesActive = false
+            }
+            .alert(
+                "Achievement Unlocked!",
+                isPresented: $showAchievementAlert,
+                presenting: achievementMessage
+            ) { message in
+                Button("Back to game", role: .cancel) {}
+                Button("Show My Achievements") {
+                    if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                        GameCenterManager.shared.showAchievements(from: rootVC)
+                    }
+                }
+                Button("View High Scores") {
+                    if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                        GameCenterManager.shared.showLeaderboard(from: rootVC)
+                    }
+                }
+            } message: { message in
+                Text("\n\(message)\n")
+                    .multilineTextAlignment(.center)
+                    .padding()
+
             }
         }
     }

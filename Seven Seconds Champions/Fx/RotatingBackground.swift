@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RotatingBackground: View {
+    var isAnimating: Bool = true // Control pentru animație
     @State private var rotation: Double = 0
 
     var body: some View {
@@ -24,15 +25,28 @@ struct RotatingBackground: View {
                 .blur(radius: 18)
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2) // Centers the image on the screen
                 .onAppear {
-                    withAnimation(
-                        Animation.linear(duration: 72)
-                            .repeatForever(autoreverses: false)
-                    ) {
-                        rotation += 360
+                    if isAnimating {
+                        startAnimation()
+                    }
+                }
+                .onChange(of: isAnimating) { newValue in
+                    if newValue {
+                        startAnimation()
+                    } else {
+                        rotation = rotation.truncatingRemainder(dividingBy: 360) // Freeze at the current rotation
                     }
                 }
                 .zIndex(-1) // Ensures the background stays behind other views
         }
         .ignoresSafeArea() // Ignores safe area insets to cover the entire screen
+    }
+
+    private func startAnimation() {
+        withAnimation(
+            Animation.linear(duration: 72)
+                .repeatForever(autoreverses: false)
+        ) {
+            rotation += 360
+        }
     }
 }

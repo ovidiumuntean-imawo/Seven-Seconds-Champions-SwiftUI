@@ -11,43 +11,6 @@ class Sparks {
     static let shared = Sparks()
     private init() {}
     
-    // Global particles (small sparks) - if you want to keep them
-    func createSmallSparks(emitterLayerGlobal: inout CAEmitterLayer?,
-                           emitterCellGlobal: CAEmitterCell,
-                           parentSize: CGSize) {
-        guard let image = UIImage(named: "spark.png")?.cgImage else {
-            print("Failed loading spark image.")
-            return
-        }
-        
-        emitterLayerGlobal = CAEmitterLayer()
-        emitterLayerGlobal?.name = "EmitterGlobal"
-        
-        // Position above the screen
-        emitterLayerGlobal?.emitterPosition.x = parentSize.width / 2 - 10
-        emitterLayerGlobal?.emitterPosition.y = -50
-        
-        // Parameters for global particles
-        emitterCellGlobal.color = CGColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-        emitterCellGlobal.contents = image
-        emitterCellGlobal.name = "cellGlobal"
-        
-        emitterCellGlobal.birthRate = 80
-        emitterCellGlobal.lifetime = 20
-        emitterCellGlobal.velocity = 42
-        
-        emitterCellGlobal.scale = 0.05
-        emitterCellGlobal.scaleRange = 0.1
-        emitterCellGlobal.emissionRange = CGFloat.pi * 2.0
-        
-        emitterLayerGlobal?.emitterCells = [emitterCellGlobal]
-        
-        if let emitterLayerGlobal = emitterLayerGlobal,
-           let window = UIApplication.shared.windows.first {
-            window.layer.addSublayer(emitterLayerGlobal)
-        }
-    }
-    
     // Button particles
     func createSparks(emitterLayer: inout CAEmitterLayer?,
                       emitterCell: CAEmitterCell,
@@ -93,27 +56,27 @@ class Sparks {
     
     func updateSparks(emitterLayer: CAEmitterLayer?,
                          gameManager: GameManager,
-                         buttonFrame: CGRect) {
-           guard let emitterLayer = emitterLayer else { return }
-
-           emitterLayer.emitterPosition = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
-
-           if gameManager.isGameRunning {
-               // Particles during the game
-               let newBirthRate = Float(20 + gameManager.currentScore * 2)
-               let newVelocity = CGFloat(40 + gameManager.currentScore * 5)
-
-               let randomHue = CGFloat.random(in: 0.0...0.18)
-               let newColor = UIColor(hue: randomHue, saturation: 1.0, brightness: 1.0, alpha: 1.0).cgColor
-
-               emitterLayer.setValue(newBirthRate, forKeyPath: "emitterCells.cell.birthRate")
-               emitterLayer.setValue(newVelocity, forKeyPath: "emitterCells.cell.velocity")
-               emitterLayer.setValue(newColor, forKeyPath: "emitterCells.cell.color")
-           } else {
-               // Standby mode
-               emitterLayer.setValue(20, forKeyPath: "emitterCells.cell.birthRate")
-               emitterLayer.setValue(22, forKeyPath: "emitterCells.cell.velocity")
-               emitterLayer.setValue(UIColor.white.cgColor, forKeyPath: "emitterCells.cell.color")
-           }
-       }
+                      buttonFrame: CGRect) {
+        guard let emitterLayer = emitterLayer else { return }
+        
+        emitterLayer.emitterPosition = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
+        
+        if gameManager.isGameRunning {
+            // Particles during the game
+            let newBirthRate = Float(20 + gameManager.currentScore * 2)
+            let newVelocity = CGFloat(40 + gameManager.currentScore * 5)
+            
+            let randomHue = CGFloat.random(in: 0.0...0.18)
+            let newColor = UIColor(hue: randomHue, saturation: 1.0, brightness: 1.0, alpha: 1.0).cgColor
+            
+            emitterLayer.setValue(newBirthRate, forKeyPath: "emitterCells.cell.birthRate")
+            emitterLayer.setValue(newVelocity, forKeyPath: "emitterCells.cell.velocity")
+            emitterLayer.setValue(newColor, forKeyPath: "emitterCells.cell.color")
+        } else {
+            // Standby mode
+            emitterLayer.setValue(20, forKeyPath: "emitterCells.cell.birthRate")
+            emitterLayer.setValue(22, forKeyPath: "emitterCells.cell.velocity")
+            emitterLayer.setValue(UIColor.white.cgColor, forKeyPath: "emitterCells.cell.color")
+        }
+    }
 }

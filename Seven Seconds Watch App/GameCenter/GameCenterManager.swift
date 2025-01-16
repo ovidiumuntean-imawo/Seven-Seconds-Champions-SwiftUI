@@ -14,6 +14,7 @@ class GameCenterManager {
     static let shared = GameCenterManager()
     private init() {}
 
+    // MARK: - Authentication
     // Authenticate the local player silently on watchOS
     func authenticateLocalPlayer() {
         let localPlayer = GKLocalPlayer.local
@@ -40,20 +41,39 @@ class GameCenterManager {
         }
     }
 
-    // Submit a score to the leaderboard
+    // MARK: - Leaderboard
     func submitScore(with value: Int) {
         guard isGameCenterEnabled else {
-            print("Game Center is not enabled")
+            print("Game Center is not enabled.")
             return
         }
-        
         let score = GKScore(leaderboardIdentifier: leaderboardID)
         score.value = Int64(value)
         GKScore.report([score]) { error in
             if let error = error {
-                print("Error reporting score: \(error.localizedDescription)")
+                print("Error reporting score:", error.localizedDescription)
             } else {
-                print("Score submitted successfully")
+                print("Score submitted successfully.")
+            }
+        }
+    }
+    
+    // MARK: - Achievements
+    func reportAchievement(achievementID: String, percentComplete: Double) {
+        guard GKLocalPlayer.local.isAuthenticated else {
+            print("Player is not authenticated.")
+            return
+        }
+        
+        let achievement = GKAchievement(identifier: achievementID)
+        achievement.percentComplete = percentComplete
+        achievement.showsCompletionBanner = true
+        
+        GKAchievement.report([achievement]) { error in
+            if let error = error {
+                print("Error reporting achievement:", error.localizedDescription)
+            } else {
+                print("Achievement \(achievementID) reported successfully.")
             }
         }
     }

@@ -15,9 +15,7 @@ struct GameView_iPad: View {
     @StateObject private var gameManager = GameManager()
     
     // Particles
-    @State private var emitterLayerGlobal: CAEmitterLayer?
-    @State private var emitterCellGlobal = CAEmitterCell()
-    
+    @State private var areParticlesActive: Bool = false
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
@@ -56,6 +54,9 @@ struct GameView_iPad: View {
                 ZStack {
                     // Background
                     RotatingBackground()
+                    
+                    ParticleView(isActive: $areParticlesActive)
+                                    .ignoresSafeArea()
                     
                     VStack(spacing: 20) {
                         // Title
@@ -242,15 +243,20 @@ struct GameView_iPad: View {
                     }
                     
                     // Create small background sparks
-                    Sparks.shared.createSmallSparks(
-                        emitterLayerGlobal: &emitterLayerGlobal,
-                        emitterCellGlobal: emitterCellGlobal,
-                        parentSize: containerGeo.size
-                    )
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                        areParticlesActive = true
+                    }
+                }
+                .onDisappear {
+                    areParticlesActive = false
                 }
             }
             .fullScreenCover(isPresented: $gameManager.isGameOver) {
-                GameOverView_iPad(score: gameManager.currentScore, previousScore: $gameManager.previousScore)
+                GameOverView_iPad(
+                    score: gameManager.currentScore,
+                    previousScore: $gameManager.previousScore,
+                    achievementMessage: gameManager.achievementMessage
+                )
                     .onDisappear {
                         gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
                     }

@@ -15,6 +15,7 @@ class GameManager: ObservableObject {
     @Published var previousScore: Int = 0
     @Published var isGameRunning: Bool = false
     @Published var isGameOver: Bool = false
+    @Published var achievementMessage: String? = nil
 
     private var timer: Timer?
     private let timerBeep: AVAudioPlayer?
@@ -55,14 +56,18 @@ class GameManager: ObservableObject {
         isGameRunning = false
         isGameOver = true
         explodeBeep?.play()
-
-        GameCenterManager.shared.submitScore(with: currentScore)
+        
+        if currentScore < 125 {
+            GameCenterManager.shared.submitScore(with: currentScore)
+        }
+        
+        achievementMessage = AchievementManager.shared.handleAchievements(for: currentScore)
         
         sparks.updateSparks(
-                    emitterLayer: emitterLayer,
-                    gameManager: self,
-                    buttonFrame: buttonFrame
-                )
+            emitterLayer: emitterLayer,
+            gameManager: self,
+            buttonFrame: buttonFrame
+        )
     }
 
     func buttonPressed() {
@@ -76,9 +81,9 @@ class GameManager: ObservableObject {
         currentScore = 0
 
         sparks.updateSparks(
-                    emitterLayer: emitterLayer,
-                    gameManager: self,
-                    buttonFrame: buttonFrame
-                )
+            emitterLayer: emitterLayer,
+            gameManager: self,
+            buttonFrame: buttonFrame
+        )
     }
 }
