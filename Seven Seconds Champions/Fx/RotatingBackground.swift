@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RotatingBackground: View {
-    var isAnimating: Bool = true // Control pentru animație
+    var isAnimating: Bool
     @State private var rotation: Double = 0
 
     var body: some View {

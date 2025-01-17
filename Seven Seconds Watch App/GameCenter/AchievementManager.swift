@@ -14,35 +14,35 @@ class AchievementManager {
 
     func handleAchievements(for score: Int) {
         var achievementID = ""
-        var achievementMessage = ""
+        var achievementMessage: String? = nil
 
         switch score {
-        case 0..<10:
-            achievementMessage = "Every pro starts somewhere – your journey just began! 🌟"
-        case 10..<25:
-            achievementMessage = "You’re warming up – greatness is just a few clicks away! ⚡"
-        case 25..<45:
+        case 0..<25:
+            achievementMessage = "Every pro starts somewhere. \nYour journey just began! 🌟 \n\nDon’t stop now – the button’s getting nervous!"
+        case 25..<35:
+            achievementMessage = "You’re warming up. \nGreatness is just a few clicks away! ⚡\n\nKeep at it – the leaderboard is calling your name!"
+        case 35..<50:
             achievementID = "seven.seconds.dedicated.player"
-            achievementMessage = "Dedicated player alert! You’re officially in the game now! 🎯"
-        case 45..<70:
+            achievementMessage = "Dedicated player alert. \nYou’re officially in the game now! 🎯\n\nNow go smash that button like it owes you money!"
+        case 50..<70:
             achievementID = "seven.seconds.super.player"
-            achievementMessage = "Super player unlocked! You’re crushing it – what’s next? 💥"
+            achievementMessage = "Super player unlocked. \nYou’re crushing it – what’s next? 💥\n\nKeep going – the button might file a restraining order!"
         case 70..<90:
             achievementID = "seven.seconds.master"
-            achievementMessage = "Master status achieved! That’s some serious button-smashing talent! 👑"
+            achievementMessage = "Master status achieved. \nThat’s some serious button-smashing talent! 👑\n\nPush harder – you’re one click away from greatness!"
         case 90..<110:
             achievementID = "seven.seconds.super.hero"
-            achievementMessage = "Legends play like this! Superhero reflexes detected. Leaderboard domination in progress! 🏆"
+            achievementMessage = "Legends play like this. \nLeaderboard domination in progress! 🏆\n\nKeep smashing – you’re the hero this button deserves!"
         case 110..<125:
             achievementID = "seven.seconds.god"
-            achievementMessage = "Did you just bend time? The button fears you now. Respect!"
+            achievementMessage = "Did you just bend time? \nThe button fears you now. Respect!\n\nThe gods are watching – don’t let them down!"
         case 125...1000:
             achievementID = "seven.seconds.cheater"
-            achievementMessage = "Are your fingers okay? If this is cheating, you’re the Picasso of it. 🎨"
+            achievementMessage = "Are your fingers okay? \nIf this is cheating, you’re the Picasso of it. 🎨\n\nJust make sure your button doesn’t explode! 😅"
         default:
             break
         }
-
+        
         if !achievementID.isEmpty {
             GameCenterManager.shared.reportAchievement(achievementID: achievementID, percentComplete: 100)
         }

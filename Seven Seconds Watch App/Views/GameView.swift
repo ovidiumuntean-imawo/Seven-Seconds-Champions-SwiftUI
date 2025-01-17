@@ -28,13 +28,16 @@ struct GameView_Watch: View {
     
     @State private var scale: CGFloat = 1.0
     @State private var rotation: Double = 0
+    
+    @State private var isAnimationActive: Bool = false
 
     var body: some View {
         NavigationStack {
             GeometryReader { containerGeo in
                 ZStack {
                     // Background
-                    RotatingBackground()
+                    RotatingBackground(isAnimating: isAnimationActive)
+                        .ignoresSafeArea()
                     
                     GeometryReader { geo in
                         ParticlesView(particleCount: 50, particleSize: 3)
@@ -149,10 +152,16 @@ struct GameView_Watch: View {
                 }
             }
             .fullScreenCover(isPresented: $gameManager.isGameOver) {
-                GameOverView_Watch(score: gameManager.currentScore, previousScore: $gameManager.previousScore)
-                    .onDisappear {
-                        gameManager.resetGame()
-                    }
+                GameOverView_Watch(
+                    score: gameManager.currentScore,
+                    previousScore: $gameManager.previousScore
+                )
+                .onAppear {
+                    isAnimationActive = false
+                }
+                .onDisappear {
+                    gameManager.resetGame()
+                }
             }
         }
     }

@@ -64,8 +64,25 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
             }
         }
     }
-
+    
     func showLeaderboard(from viewController: UIViewController) {
+        guard GKLocalPlayer.local.isAuthenticated else {
+            presentGameCenterUnavailableAlert(from: viewController)
+            return
+        }
+
+        if viewController.presentedViewController != nil {
+            viewController.dismiss(animated: true) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.presentLeaderboard(from: viewController)
+                }
+            }
+        } else {
+            presentLeaderboard(from: viewController)
+        }
+    }
+
+    /*func showLeaderboard(from viewController: UIViewController) {
         guard GKLocalPlayer.local.isAuthenticated else {
             presentGameCenterUnavailableAlert(from: viewController)
             return
@@ -78,7 +95,7 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
         } else {
             presentLeaderboard(from: viewController)
         }
-    }
+    }*/
     
     private func presentLeaderboard(from viewController: UIViewController) {
         let gcViewController = GKGameCenterViewController()
@@ -131,15 +148,36 @@ class GameCenterManager: NSObject, GKGameCenterControllerDelegate {
     }
     
     // MARK: - Alerts
-    private func presentGameCenterUnavailableAlert(from viewController: UIViewController) {
+    /*private func presentGameCenterUnavailableAlert(from viewController: UIViewController) {
         let alert = UIAlertController(
-            title: "Error",
-            message: "Game Center is not available. Please sign in to Game Center.",
+            title: "Game Center is not available",
+            message: "Please sign in to Game Center to view High-Scores!",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        viewController.present(alert, animated: true)
+    }*/
+    
+    private func presentGameCenterUnavailableAlert(from viewController: UIViewController) {
+        if viewController.presentedViewController != nil {
+            viewController.dismiss(animated: true) {
+                self.presentAlert(from: viewController)
+            }
+        } else {
+            presentAlert(from: viewController)
+        }
+    }
+
+    private func presentAlert(from viewController: UIViewController) {
+        let alert = UIAlertController(
+            title: "Game Center is not available",
+            message: "Please sign in to Game Center to view High-Scores!",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         viewController.present(alert, animated: true)
     }
+
 
     // MARK: - GKGameCenterControllerDelegate
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {

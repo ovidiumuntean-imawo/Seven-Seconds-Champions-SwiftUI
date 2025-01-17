@@ -47,12 +47,15 @@ struct GameView_iPhone: View {
     @State private var scale: CGFloat = 1.0
     @State private var rotation: Double = 0
     
+    @State private var isAnimationActive: Bool = false
+    
     var body: some View {
         NavigationStack {
             GeometryReader { containerGeo in
                 ZStack {
                     // Background
-                    RotatingBackground()
+                    RotatingBackground(isAnimating: isAnimationActive)
+                        .ignoresSafeArea()
                     
                     ParticleView(isActive: $areParticlesActive)
                                     .ignoresSafeArea()
@@ -204,6 +207,10 @@ struct GameView_iPhone: View {
                         
                         Button("View high scores") {
                             showLeaderboard = true
+                            
+                            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                                GameCenterManager.shared.showLeaderboard(from: rootVC)
+                            }
                         }
                         .padding(.horizontal)
                         .frame(height: 44)
@@ -212,11 +219,6 @@ struct GameView_iPhone: View {
                         .cornerRadius(8)
                         .opacity(gameManager.isGameRunning ? 0 : 1)
                         .animation(.easeInOut(duration: 0.5), value: gameManager.isGameRunning)
-                        .sheet(isPresented: $showLeaderboard) {
-                            LeaderboardView()
-                                .transition(.move(edge: .bottom))
-                                .zIndex(1)
-                        }
                         
                         Spacer()
                     }
@@ -255,9 +257,12 @@ struct GameView_iPhone: View {
                     previousScore: $gameManager.previousScore,
                     achievementMessage: gameManager.achievementMessage
                 )
-                    .onDisappear {
-                        gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
-                    }
+                .onAppear {
+                    isAnimationActive = false
+                }
+                .onDisappear {
+                    gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                }
             }
         }
     }

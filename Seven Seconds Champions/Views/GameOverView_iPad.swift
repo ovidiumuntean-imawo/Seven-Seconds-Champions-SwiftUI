@@ -17,8 +17,6 @@ struct GameOverView_iPad: View {
     @Environment(\.dismiss) private var dismiss
     
     var achievementMessage: String?
-    
-    @State private var showLeaderboardFromGameOver = false
     @State private var showAchievementAlert = false
     
     // Particles
@@ -30,7 +28,7 @@ struct GameOverView_iPad: View {
     @State private var scaleScore: CGFloat = 0
     @State private var rotation: Double = 0
     
-    @State private var isAnimationActive: Bool = true
+    @State private var isAnimationActive: Bool = false
     
     var body: some View {
         GeometryReader { containerGeo in
@@ -109,7 +107,12 @@ struct GameOverView_iPad: View {
                         .foregroundColor(.white)
                     
                     Button("View high scores") {
-                        showLeaderboardFromGameOver = true
+                        previousScore = score
+                        isAnimationActive = false
+                        
+                        if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                            GameCenterManager.shared.showLeaderboard(from: rootVC)
+                        }
                     }
                     .font(.system(size: 24, weight: .medium))
                     .padding(.horizontal)
@@ -117,9 +120,6 @@ struct GameOverView_iPad: View {
                     .background(Color.red)
                     .foregroundColor(.white)
                     .cornerRadius(12)
-                    .sheet(isPresented: $showLeaderboardFromGameOver) {
-                        LeaderboardView()
-                    }
                     
                     Spacer()
                     
@@ -146,13 +146,6 @@ struct GameOverView_iPad: View {
                     Spacer()
                 }
                 .padding()
-                .background(
-                    Image("backgroundGameOver")
-                        .resizable()
-                        .scaledToFill()
-                        .blur(radius: 4)
-                        .edgesIgnoringSafeArea(.all)
-                )
             }
             .onAppear {
                 // Create small background sparks
@@ -172,13 +165,21 @@ struct GameOverView_iPad: View {
                 isPresented: $showAchievementAlert,
                 presenting: achievementMessage
             ) { message in
-                Button("Back to game", role: .cancel) {}
+                Button("Back to game", role: .cancel) {
+                    previousScore = score
+                }
                 Button("Show My Achievements") {
+                    previousScore = score
+                    isAnimationActive = false
+                    
                     if let rootVC = UIApplication.shared.windows.first?.rootViewController {
                         GameCenterManager.shared.showAchievements(from: rootVC)
                     }
                 }
                 Button("View High Scores") {
+                    previousScore = score
+                    isAnimationActive = false
+                    
                     if let rootVC = UIApplication.shared.windows.first?.rootViewController {
                         GameCenterManager.shared.showLeaderboard(from: rootVC)
                     }

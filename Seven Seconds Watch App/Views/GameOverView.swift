@@ -22,7 +22,7 @@ struct GameOverView_Watch: View {
     @State private var scaleScore: CGFloat = 0
     @State private var rotation: Double = 0
     
-    @State private var isAnimationActive: Bool = true
+    @State private var isAnimationActive: Bool = false
     
     var body: some View {
         GeometryReader { containerGeo in
@@ -86,29 +86,8 @@ struct GameOverView_Watch: View {
                     .padding(.top, 8)
                     
                     Spacer()
-                    
-                    /*Text("How other players are doing?")
-                        .font(.system(size: 22))
-                        .foregroundColor(.white)
-                    
-                    Button("View high scores") {
-                        showLeaderboardFromGameOver = true
-                    }
-                    .background(Color.red)
-                    .sheet(isPresented: $showLeaderboardFromGameOver) {
-                        // LeaderboardView()
-                    }
-                    
-                    Spacer()*/
                 }
                 .padding()
-                .background(
-                    Image("backgroundGameOver")
-                        .resizable()
-                        .scaledToFill()
-                        .blur(radius: 4)
-                        .edgesIgnoringSafeArea(.all)
-                )
             }
             .onAppear {
                 
