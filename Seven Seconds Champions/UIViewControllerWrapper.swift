@@ -8,9 +8,6 @@
 import UIKit
 import SwiftUI
 
-import UIKit
-import SwiftUI
-
 // MARK: - UIViewControllerWrapper to present UIKit view controllers
 struct UIViewControllerWrapper: UIViewControllerRepresentable {
     var viewController: UIViewController

@@ -10,6 +10,7 @@ import AVFoundation
 import GameKit
 
 class GameManager: ObservableObject {
+    @Published var hits: Int = 0
     @Published var timeLeft: Int = 7
     @Published var currentScore: Int = 0
     @Published var previousScore: Int = 0

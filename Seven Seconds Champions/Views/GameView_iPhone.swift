@@ -142,6 +142,7 @@ struct GameView_iPhone: View {
                                     Image(isPressed ? "button_pressed" : "button_normal")
                                         .resizable()
                                         .frame(width: 171, height: 171)
+
                                 }
                                 .buttonStyle(.plain)
                                 .simultaneousGesture(

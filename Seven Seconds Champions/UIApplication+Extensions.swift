@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIApplication {
     static func getRootViewController() -> UIViewController? {
@@ -16,3 +17,4 @@ extension UIApplication {
         return window.rootViewController
     }
 }
+
