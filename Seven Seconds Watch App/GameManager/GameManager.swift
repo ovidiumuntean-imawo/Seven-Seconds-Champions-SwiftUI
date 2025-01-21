@@ -50,7 +50,7 @@ class GameManager: ObservableObject {
         isGameOver = true
         explodeBeep?.play()
 
-        if currentScore < 125 {
+        if currentScore < 145 {
             GameCenterManager.shared.submitScore(with: currentScore)
         }
         

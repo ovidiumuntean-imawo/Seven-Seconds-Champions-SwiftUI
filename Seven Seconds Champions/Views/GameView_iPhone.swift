@@ -48,6 +48,11 @@ struct GameView_iPhone: View {
     @State private var rotation: Double = 0
     
     @State private var isAnimationActive: Bool = false
+    @State private var currentImage: String = "button_normal"
+    
+    @State private var offsetX: CGFloat = 0.0
+    @State private var offsetY: CGFloat = 0.0
+    @State private var rotationEffect: Double = 0.0
     
     var body: some View {
         NavigationStack {
@@ -139,10 +144,14 @@ struct GameView_iPhone: View {
                                         }
                                     }
                                 } label: {
-                                    Image(isPressed ? "button_pressed" : "button_normal")
+                                    Image(ButtonImage.shared.getButtonImage(for: gameManager.timeLeft, isPressed: isPressed))
                                         .resizable()
                                         .frame(width: 171, height: 171)
-
+                                        .rotationEffect(.degrees(rotationEffect))
+                                            .offset(x: offsetX, y: offsetY)
+                                            .onChange(of: gameManager.timeLeft) { newTimeLeft in
+                                                handleImageChange(timeLeft: newTimeLeft)
+                                            }
                                 }
                                 .buttonStyle(.plain)
                                 .simultaneousGesture(
@@ -263,6 +272,37 @@ struct GameView_iPhone: View {
                 }
                 .onDisappear {
                     gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                }
+            }
+        }
+    }
+    
+    private func handleImageChange(timeLeft: Int) {
+        let newImage = ButtonImage.shared.getButtonImage(for: timeLeft, isPressed: isPressed)
+        if newImage != currentImage {
+            // Actualizăm imaginea la noua stare
+            currentImage = newImage
+
+            // Aplicăm vibrația
+            withAnimation(.easeInOut(duration: 0.02)) {
+                rotationEffect = Double.random(in: -7...7) // Rotire subtilă
+                offsetX = CGFloat.random(in: -3...3)      // Deplasare mică pe X
+                offsetY = CGFloat.random(in: -3...3)      // Deplasare mică pe Y
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                withAnimation(.easeInOut(duration: 0.05)) {
+                    rotationEffect = Double.random(in: -8...8) // Rotire mai intensă
+                    offsetX = CGFloat.random(in: -5...5)
+                    offsetY = CGFloat.random(in: -5...5)
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.easeInOut(duration: 0.05)) {
+                    rotationEffect = 0.0
+                    offsetX = 0.0
+                    offsetY = 0.0
                 }
             }
         }

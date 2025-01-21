@@ -1,3 +1,11 @@
+//
+//  ButtonImage.swift
+//  Seven Seconds Champions
+//
+//  Created by Ovidiu Muntean on 21.01.2025.
+//
+
+
 class ButtonImage {
     
     static let shared = ButtonImage()

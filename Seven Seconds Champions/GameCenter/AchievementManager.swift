@@ -33,10 +33,10 @@ class AchievementManager {
         case 90..<110:
             achievementID = "seven.seconds.super.hero"
             achievementMessage = "Legends play like this. \nLeaderboard domination in progress! 🏆\n\nKeep smashing – you’re the hero this button deserves!"
-        case 110..<125:
+        case 110..<145:
             achievementID = "seven.seconds.god"
             achievementMessage = "Did you just bend time? \nThe button fears you now. Respect!\n\nThe gods are watching – don’t let them down!"
-        case 125...1000:
+        case 145...1000:
             achievementID = "seven.seconds.cheater"
             achievementMessage = "Are your fingers okay? \nIf this is cheating, you’re the Picasso of it. 🎨\n\nJust make sure your button doesn’t explode! 😅"
         default:

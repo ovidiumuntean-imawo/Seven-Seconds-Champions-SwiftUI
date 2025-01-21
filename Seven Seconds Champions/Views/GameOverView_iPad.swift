@@ -153,7 +153,7 @@ struct GameOverView_iPad: View {
                     areParticlesActive = true
                 }
                 
-                if let achievementMessage = achievementMessage {
+                if let achievementMessage = achievementMessage, score >= 35 {
                     showAchievementAlert = true
                 }
             }
