@@ -1,0 +1,990 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A9A82B452D329A0A00C9CD5C /* Seven Seconds Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A93496502D2E8EA3007C5FD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A934963A2D2E8EA2007C5FD8;
+			remoteInfo = "Seven Seconds Champions";
+		};
+		A934965A2D2E8EA3007C5FD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A934963A2D2E8EA2007C5FD8;
+			remoteInfo = "Seven Seconds Champions";
+		};
+		A9A82B322D329A0A00C9CD5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9A82B212D329A0A00C9CD5C;
+			remoteInfo = "Seven Seconds Watch App";
+		};
+		A9A82B3C2D329A0A00C9CD5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9A82B212D329A0A00C9CD5C;
+			remoteInfo = "Seven Seconds Watch App";
+		};
+		A9A82B432D329A0A00C9CD5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A93496332D2E8EA2007C5FD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9A82B212D329A0A00C9CD5C;
+			remoteInfo = "Seven Seconds Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A9EEC68C2D3292FE00679058 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A9A82B452D329A0A00C9CD5C /* Seven Seconds Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A934963B2D2E8EA2007C5FD8 /* Seven Seconds Champions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds Champions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A934964F2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds ChampionsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds ChampionsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Seconds Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A82B312D329A0A00C9CD5C /* Seven Seconds Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A82B3B2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Seven Seconds Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A93496612D2E8EA3007C5FD8 /* Exceptions for "Seven Seconds Champions" folder in "Seven Seconds Champions" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A934963D2D2E8EA2007C5FD8 /* Seven Seconds Champions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A93496612D2E8EA3007C5FD8 /* Exceptions for "Seven Seconds Champions" folder in "Seven Seconds Champions" target */,
+			);
+			path = "Seven Seconds Champions";
+			sourceTree = "<group>";
+		};
+		A93496522D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds ChampionsTests";
+			sourceTree = "<group>";
+		};
+		A934965C2D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds ChampionsUITests";
+			sourceTree = "<group>";
+		};
+		A9A82B232D329A0A00C9CD5C /* Seven Seconds Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds Watch App";
+			sourceTree = "<group>";
+		};
+		A9A82B342D329A0A00C9CD5C /* Seven Seconds Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds Watch AppTests";
+			sourceTree = "<group>";
+		};
+		A9A82B3E2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Seven Seconds Watch AppUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A93496382D2E8EA2007C5FD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A934964C2D2E8EA3007C5FD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A93496562D2E8EA3007C5FD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B1F2D329A0A00C9CD5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B2E2D329A0A00C9CD5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B382D329A0A00C9CD5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A93496322D2E8EA2007C5FD8 = {
+			isa = PBXGroup;
+			children = (
+				A934963D2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
+				A93496522D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */,
+				A934965C2D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */,
+				A9A82B232D329A0A00C9CD5C /* Seven Seconds Watch App */,
+				A9A82B342D329A0A00C9CD5C /* Seven Seconds Watch AppTests */,
+				A9A82B3E2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */,
+				A934963C2D2E8EA2007C5FD8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A934963C2D2E8EA2007C5FD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A934963B2D2E8EA2007C5FD8 /* Seven Seconds Champions.app */,
+				A934964F2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests.xctest */,
+				A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */,
+				A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */,
+				A9A82B312D329A0A00C9CD5C /* Seven Seconds Watch AppTests.xctest */,
+				A9A82B3B2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A93496622D2E8EA3007C5FD8 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions" */;
+			buildPhases = (
+				A93496372D2E8EA2007C5FD8 /* Sources */,
+				A93496382D2E8EA2007C5FD8 /* Frameworks */,
+				A93496392D2E8EA2007C5FD8 /* Resources */,
+				A9EEC68C2D3292FE00679058 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9A82B442D329A0A00C9CD5C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A934963D2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
+			);
+			name = "Seven Seconds Champions";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Champions";
+			productReference = A934963B2D2E8EA2007C5FD8 /* Seven Seconds Champions.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A934964E2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A93496672D2E8EA3007C5FD8 /* Build configuration list for PBXNativeTarget "Seven Seconds ChampionsTests" */;
+			buildPhases = (
+				A934964B2D2E8EA3007C5FD8 /* Sources */,
+				A934964C2D2E8EA3007C5FD8 /* Frameworks */,
+				A934964D2D2E8EA3007C5FD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A93496512D2E8EA3007C5FD8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A93496522D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */,
+			);
+			name = "Seven Seconds ChampionsTests";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds ChampionsTests";
+			productReference = A934964F2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A93496582D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A934966A2D2E8EA3007C5FD8 /* Build configuration list for PBXNativeTarget "Seven Seconds ChampionsUITests" */;
+			buildPhases = (
+				A93496552D2E8EA3007C5FD8 /* Sources */,
+				A93496562D2E8EA3007C5FD8 /* Frameworks */,
+				A93496572D2E8EA3007C5FD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A934965B2D2E8EA3007C5FD8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A934965C2D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */,
+			);
+			name = "Seven Seconds ChampionsUITests";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds ChampionsUITests";
+			productReference = A93496592D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9A82B462D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch App" */;
+			buildPhases = (
+				A9A82B1E2D329A0A00C9CD5C /* Sources */,
+				A9A82B1F2D329A0A00C9CD5C /* Frameworks */,
+				A9A82B202D329A0A00C9CD5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A9A82B232D329A0A00C9CD5C /* Seven Seconds Watch App */,
+			);
+			name = "Seven Seconds Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Watch App";
+			productReference = A9A82B222D329A0A00C9CD5C /* Seven Seconds Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A9A82B302D329A0A00C9CD5C /* Seven Seconds Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9A82B492D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppTests" */;
+			buildPhases = (
+				A9A82B2D2D329A0A00C9CD5C /* Sources */,
+				A9A82B2E2D329A0A00C9CD5C /* Frameworks */,
+				A9A82B2F2D329A0A00C9CD5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9A82B332D329A0A00C9CD5C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9A82B342D329A0A00C9CD5C /* Seven Seconds Watch AppTests */,
+			);
+			name = "Seven Seconds Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Watch AppTests";
+			productReference = A9A82B312D329A0A00C9CD5C /* Seven Seconds Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9A82B3A2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9A82B4C2D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppUITests" */;
+			buildPhases = (
+				A9A82B372D329A0A00C9CD5C /* Sources */,
+				A9A82B382D329A0A00C9CD5C /* Frameworks */,
+				A9A82B392D329A0A00C9CD5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9A82B3D2D329A0A00C9CD5C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9A82B3E2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */,
+			);
+			name = "Seven Seconds Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "Seven Seconds Watch AppUITests";
+			productReference = A9A82B3B2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A93496332D2E8EA2007C5FD8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					A934963A2D2E8EA2007C5FD8 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					A934964E2D2E8EA3007C5FD8 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A934963A2D2E8EA2007C5FD8;
+					};
+					A93496582D2E8EA3007C5FD8 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A934963A2D2E8EA2007C5FD8;
+					};
+					A9A82B212D329A0A00C9CD5C = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					A9A82B302D329A0A00C9CD5C = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A9A82B212D329A0A00C9CD5C;
+					};
+					A9A82B3A2D329A0A00C9CD5C = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A9A82B212D329A0A00C9CD5C;
+					};
+				};
+			};
+			buildConfigurationList = A93496362D2E8EA2007C5FD8 /* Build configuration list for PBXProject "Seven Seconds Champions" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A93496322D2E8EA2007C5FD8;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A934963C2D2E8EA2007C5FD8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */,
+				A934964E2D2E8EA3007C5FD8 /* Seven Seconds ChampionsTests */,
+				A93496582D2E8EA3007C5FD8 /* Seven Seconds ChampionsUITests */,
+				A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */,
+				A9A82B302D329A0A00C9CD5C /* Seven Seconds Watch AppTests */,
+				A9A82B3A2D329A0A00C9CD5C /* Seven Seconds Watch AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A93496392D2E8EA2007C5FD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A934964D2D2E8EA3007C5FD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A93496572D2E8EA3007C5FD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B202D329A0A00C9CD5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B2F2D329A0A00C9CD5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B392D329A0A00C9CD5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A93496372D2E8EA2007C5FD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A934964B2D2E8EA3007C5FD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A93496552D2E8EA3007C5FD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B1E2D329A0A00C9CD5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B2D2D329A0A00C9CD5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A82B372D329A0A00C9CD5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A93496512D2E8EA3007C5FD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */;
+			targetProxy = A93496502D2E8EA3007C5FD8 /* PBXContainerItemProxy */;
+		};
+		A934965B2D2E8EA3007C5FD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A934963A2D2E8EA2007C5FD8 /* Seven Seconds Champions */;
+			targetProxy = A934965A2D2E8EA3007C5FD8 /* PBXContainerItemProxy */;
+		};
+		A9A82B332D329A0A00C9CD5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */;
+			targetProxy = A9A82B322D329A0A00C9CD5C /* PBXContainerItemProxy */;
+		};
+		A9A82B3D2D329A0A00C9CD5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */;
+			targetProxy = A9A82B3C2D329A0A00C9CD5C /* PBXContainerItemProxy */;
+		};
+		A9A82B442D329A0A00C9CD5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9A82B212D329A0A00C9CD5C /* Seven Seconds Watch App */;
+			targetProxy = A9A82B432D329A0A00C9CD5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A93496632D2E8EA3007C5FD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Champions/Seven_Seconds_Champions.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 107;
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Champions/Preview Content\"";
+				DEVELOPMENT_TEAM = 83532998Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Seven Seconds Champions/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 10.07;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A93496642D2E8EA3007C5FD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Champions/Seven_Seconds_Champions.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 107;
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Champions/Preview Content\"";
+				DEVELOPMENT_TEAM = 83532998Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Seven Seconds Champions/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 10.07;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A93496652D2E8EA3007C5FD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A93496662D2E8EA3007C5FD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A93496682D2E8EA3007C5FD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.Seven-Seconds-ChampionsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Champions.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Champions";
+			};
+			name = Debug;
+		};
+		A93496692D2E8EA3007C5FD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.Seven-Seconds-ChampionsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Champions.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Champions";
+			};
+			name = Release;
+		};
+		A934966B2D2E8EA3007C5FD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.Seven-Seconds-ChampionsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Seven Seconds Champions";
+			};
+			name = Debug;
+		};
+		A934966C2D2E8EA3007C5FD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.Seven-Seconds-ChampionsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Seven Seconds Champions";
+			};
+			name = Release;
+		};
+		A9A82B472D329A0A00C9CD5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Watch App/Seven Seconds Watch App.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 83532998Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.imawo.seven;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.07;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.6;
+			};
+			name = Debug;
+		};
+		A9A82B482D329A0A00C9CD5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Watch App/Seven Seconds Watch App.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 83532998Y4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Seven Seconds";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.imawo.seven;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.07;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.6;
+			};
+			name = Release;
+		};
+		A9A82B4A2D329A0A00C9CD5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		A9A82B4B2D329A0A00C9CD5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seven Seconds Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seven Seconds Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		A9A82B4D2D329A0A00C9CD5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Seven Seconds Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		A9A82B4E2D329A0A00C9CD5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 83532998Y4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imawo.seven.watchapp.Seven-Seconds-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Seven Seconds Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A93496362D2E8EA2007C5FD8 /* Build configuration list for PBXProject "Seven Seconds Champions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A93496652D2E8EA3007C5FD8 /* Debug */,
+				A93496662D2E8EA3007C5FD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A93496622D2E8EA3007C5FD8 /* Build configuration list for PBXNativeTarget "Seven Seconds Champions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A93496632D2E8EA3007C5FD8 /* Debug */,
+				A93496642D2E8EA3007C5FD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A93496672D2E8EA3007C5FD8 /* Build configuration list for PBXNativeTarget "Seven Seconds ChampionsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A93496682D2E8EA3007C5FD8 /* Debug */,
+				A93496692D2E8EA3007C5FD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A934966A2D2E8EA3007C5FD8 /* Build configuration list for PBXNativeTarget "Seven Seconds ChampionsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A934966B2D2E8EA3007C5FD8 /* Debug */,
+				A934966C2D2E8EA3007C5FD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9A82B462D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9A82B472D329A0A00C9CD5C /* Debug */,
+				A9A82B482D329A0A00C9CD5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9A82B492D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9A82B4A2D329A0A00C9CD5C /* Debug */,
+				A9A82B4B2D329A0A00C9CD5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9A82B4C2D329A0A00C9CD5C /* Build configuration list for PBXNativeTarget "Seven Seconds Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9A82B4D2D329A0A00C9CD5C /* Debug */,
+				A9A82B4E2D329A0A00C9CD5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A93496332D2E8EA2007C5FD8 /* Project object */;
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Seven Seconds Champions WatchApp Watch App.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Seven Seconds Champions.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>Seven Seconds ChampionsTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Seven Seconds Watch App.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Seven Seconds: Champions Watch App.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>A934963A2D2E8EA2007C5FD8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A934964E2D2E8EA3007C5FD8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A93496582D2E8EA3007C5FD8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9A82B212D329A0A00C9CD5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9A82B302D329A0A00C9CD5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9A82B3A2D329A0A00C9CD5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9EEC6642D3292FD00679058</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9EEC6732D3292FE00679058</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9EEC67D2D3292FE00679058</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
