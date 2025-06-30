@@ -515,7 +515,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Champions/Seven_Seconds_Champions.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Champions/Preview Content\"";
 				DEVELOPMENT_TEAM = 83532998Y4;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +532,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10.07;
+				MARKETING_VERSION = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -553,7 +553,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Champions/Seven_Seconds_Champions.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Champions/Preview Content\"";
 				DEVELOPMENT_TEAM = 83532998Y4;
 				ENABLE_PREVIEWS = YES;
@@ -570,7 +570,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10.07;
+				MARKETING_VERSION = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -782,7 +782,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Watch App/Seven Seconds Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 83532998Y4;
 				ENABLE_PREVIEWS = YES;
@@ -795,7 +795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.07;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -815,7 +815,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Seven Seconds Watch App/Seven Seconds Watch App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Seven Seconds Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = 83532998Y4;
 				ENABLE_PREVIEWS = YES;
@@ -828,7 +828,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.07;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imawo.seven.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
