@@ -188,12 +188,12 @@ struct GameView_iPad: View {
                                             }
                                     }
                                 )
-                                /*.scaleEffect(scale)
+                                .scaleEffect(scale)
                                 .onAppear {
                                     withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
                                         scale = 1.04
                                     }
-                                }*/
+                                }
                                 .padding(.top, 48)
                             }
                             .padding(.trailing, 72)

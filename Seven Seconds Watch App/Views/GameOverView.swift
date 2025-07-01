@@ -53,10 +53,10 @@ struct GameOverView_Watch: View {
                     Text("YOU SCORED")
                         .font(.system(size: 14, weight: .light))
                         .foregroundColor(.white)
-                        .padding(.top, 8)
+                        .padding(.top, 4)
                     
                     Text("\(score)")
-                        .font(.system(size: 36, weight: .heavy))
+                        .font(.system(size: 48, weight: .heavy))
                         .foregroundColor(.white)
                         .padding(.top, -4)
                         .scaleEffect(scaleScore)

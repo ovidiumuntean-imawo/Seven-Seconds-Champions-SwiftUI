@@ -54,11 +54,11 @@ struct GameView_Watch: View {
                         VStack(spacing: 0) {
                             HStack {
                                 Text("7")
-                                    .font(.system(size: 32, weight: .heavy))
+                                    .font(.system(size: 36, weight: .heavy))
                                     .foregroundColor(.white)
                                 
                                 Text("seconds")
-                                    .font(.system(size: 18, weight: .light))
+                                    .font(.system(size: 24, weight: .light))
                                     .foregroundColor(.white)
                                     .padding(.top, 8)
                                     .padding(.leading, -4)
@@ -71,11 +71,11 @@ struct GameView_Watch: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.top, -4)
                         }
-                        .padding(.top, -36)
+                        .padding(.top, -32)
                         
                         // Timer
                         Text("Time left: \(gameManager.timeLeft) seconds")
-                            .font(.system(size: 16, weight: .medium))
+                            .font(.system(size: 18, weight: .medium))
                             .foregroundColor(
                                 gameManager.timeLeft > 5 ? Color.white : // Default color
                                 gameManager.timeLeft > 3 ? Color.yellow : // Warning color
@@ -94,7 +94,7 @@ struct GameView_Watch: View {
                                     .foregroundColor(.white)
                                 
                                 Text("\(gameManager.currentScore)")
-                                    .font(.system(size: 36, weight: .heavy))
+                                    .font(.system(size: 48, weight: .heavy))
                                     .foregroundColor(.white)
                                     .padding(.top, -4)
                                 
@@ -134,12 +134,12 @@ struct GameView_Watch: View {
                                             pressed = true
                                         }
                                 )
-                                /*.scaleEffect(scale)
+                                .scaleEffect(scale)
                                 .onAppear {
                                     withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-                                        scale = 1.04
+                                        scale = 1.02
                                     }
-                                }*/
+                                }
                             }
                             .padding(.trailing, 0)
                         }
@@ -150,7 +150,7 @@ struct GameView_Watch: View {
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, -18)
+                            .padding(.top, -24)
                         
                         Spacer()
                     }
