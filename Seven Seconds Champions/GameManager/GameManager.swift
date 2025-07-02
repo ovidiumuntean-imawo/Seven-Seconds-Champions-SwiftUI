@@ -20,12 +20,14 @@ class GameManager: ObservableObject {
 
     private var timer: Timer?
     private let timerBeep: AVAudioPlayer?
+    private let iceCracking: AVAudioPlayer?
     private let explodeBeep: AVAudioPlayer?
     private let buttonBeep: AVAudioPlayer?
     private var sparks = Sparks.shared
 
     init() {
         self.timerBeep = AudioPlayerFactory.createAudioPlayer(fileName: "timer", fileType: "wav")
+        self.iceCracking = AudioPlayerFactory.createAudioPlayer(fileName: "ice-cracking", fileType: "mp3")
         self.explodeBeep = AudioPlayerFactory.createAudioPlayer(fileName: "explode", fileType: "wav")
         self.buttonBeep = AudioPlayerFactory.createAudioPlayer(fileName: "button", fileType: "wav")
     }
@@ -34,6 +36,8 @@ class GameManager: ObservableObject {
         isGameRunning = true
         currentScore = 0
         timeLeft = 7
+        
+        iceCracking?.play()
 
         sparks.updateSparks(
                     emitterLayer: emitterLayer,
@@ -43,12 +47,23 @@ class GameManager: ObservableObject {
 
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
+            
+            // Verificăm dacă mai avem timp rămas
             if self.timeLeft > 0 {
+                // Scădem o secundă la fiecare apel
                 self.timeLeft -= 1
-                self.timerBeep?.play()
-            } else {
-                self.timer?.invalidate()
-                self.endGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                
+                // Acum verificăm valoarea NOUĂ a lui timeLeft
+                if self.timeLeft == 5 || self.timeLeft == 2 {
+                    // Dacă am ajuns la 6 sau 3 secunde, punem sunetul de damage
+                } else if self.timeLeft > 0 {
+                    // Pentru orice altă valoare mai mare ca 0, punem beep-ul normal
+                    self.timerBeep?.play()
+                } else {
+                    // Dacă timeLeft a ajuns la 0, invalidăm timer-ul și terminăm jocul
+                    self.timer?.invalidate()
+                    self.endGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                }
             }
         }
     }
@@ -56,6 +71,7 @@ class GameManager: ObservableObject {
     func endGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect) {
         isGameRunning = false
         isGameOver = true
+    
         explodeBeep?.play()
         
         if currentScore < 145 {
@@ -72,7 +88,7 @@ class GameManager: ObservableObject {
     }
 
     func buttonPressed() {
-        buttonBeep?.play()
+        // buttonBeep?.play()
     }
 
     func resetGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect) {

@@ -134,12 +134,12 @@ struct GameView_Watch: View {
                                             pressed = true
                                         }
                                 )
-                                .scaleEffect(scale)
+                                /*.scaleEffect(scale)
                                 .onAppear {
                                     withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
                                         scale = 1.02
                                     }
-                                }
+                                }*/
                             }
                             .padding(.trailing, 0)
                         }

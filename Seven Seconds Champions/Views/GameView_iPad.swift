@@ -145,7 +145,7 @@ struct GameView_iPad: View {
                                 } label: {
                                     Image(ButtonImage.shared.getButtonImage(for: gameManager.timeLeft, isPressed: isPressed))
                                         .resizable()
-                                        .frame(width: 280, height: 280)
+                                        .frame(width: 320, height: 320)
                                         .rotationEffect(.degrees(rotationEffect))
                                             .offset(x: offsetX, y: offsetY)
                                             .onChange(of: gameManager.timeLeft) { newTimeLeft in
@@ -188,12 +188,12 @@ struct GameView_iPad: View {
                                             }
                                     }
                                 )
-                                .scaleEffect(scale)
+                                /*.scaleEffect(scale)
                                 .onAppear {
                                     withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
                                         scale = 1.04
                                     }
-                                }
+                                }*/
                                 .padding(.top, 48)
                             }
                             .padding(.trailing, 72)
