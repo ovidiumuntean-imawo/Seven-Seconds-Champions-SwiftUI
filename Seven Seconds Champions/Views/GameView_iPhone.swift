@@ -11,6 +11,7 @@ import GameKit
 
 // MARK: - GameView_iPhone
 struct GameView_iPhone: View {
+    @EnvironmentObject var appState: AppState
     @StateObject private var gameManager = GameManager()
     
     // Particles
@@ -66,26 +67,38 @@ struct GameView_iPhone: View {
                                     .ignoresSafeArea()
                     
                     VStack(spacing: 20) {
-                        // Title
-                        VStack(spacing: 0) {
-                            HStack {
-                                Text("7")
-                                    .font(.system(size: 96, weight: .heavy))
-                                    .foregroundColor(.white)
-                                
-                                Text("seconds")
-                                    .font(.system(size: 64, weight: .light))
+                        if let scoreToBeat = appState.challengeScoreToBeat {
+                            VStack {
+                                Text("PROVOCARE ACCEPTATĂ!")
+                                    .font(.system(size: 24, weight: .bold))
+                                    .foregroundColor(.yellow)
+                                Text("Bate scorul: \(scoreToBeat)")
+                                    .font(.system(size: 48, weight: .heavy))
                                     .foregroundColor(.white)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.bottom, -12)
-                            
-                            Text("CHAMPIONS")
-                                .font(.system(size: 32, weight: .light))
-                                .foregroundColor(.white)
+                            .padding(.bottom)
+                        } else {
+                            // Title
+                            VStack(spacing: 0) {
+                                HStack {
+                                    Text("7")
+                                        .font(.system(size: 96, weight: .heavy))
+                                        .foregroundColor(.white)
+                                    
+                                    Text("seconds")
+                                        .font(.system(size: 64, weight: .light))
+                                        .foregroundColor(.white)
+                                }
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.bottom, -12)
+                                
+                                Text("CHAMPIONS")
+                                    .font(.system(size: 32, weight: .light))
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .padding(.top, -12)
                         }
-                        .padding(.top, -12)
                         
                         // Subtitle
                         Text("Hit that button as fast as you can!")
@@ -118,7 +131,7 @@ struct GameView_iPhone: View {
                                     .foregroundColor(.white)
                                     .padding(.top, -8)
                                 
-                                Text("HITS")
+                                Text("TAPS")
                                     .font(.system(size: 18, weight: .medium))
                                     .foregroundColor(.white)
                                     .padding(.top, -8)
@@ -189,19 +202,13 @@ struct GameView_iPhone: View {
                                             }
                                     }
                                 )
-                                /*.scaleEffect(scale)
-                                .onAppear {
-                                    withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-                                        scale = 1.04
-                                    }
-                                }*/
                                 .padding(.top, 16)
                             }
                             .padding(.trailing, 24)
                         }
                         .padding(.bottom, 8)
                     
-                        Text("Last score: \(gameManager.previousScore) hits")
+                        Text("Last score: \(gameManager.previousScore) taps")
                             .font(.system(size: 26, weight: .medium))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -263,10 +270,9 @@ struct GameView_iPhone: View {
             }
             .fullScreenCover(isPresented: $gameManager.isGameOver) {
                 GameOverView_iPhone(
-                    score: gameManager.currentScore,
-                    previousScore: $gameManager.previousScore,
-                    achievementMessage: gameManager.achievementMessage
-                )
+                        gameManager: gameManager,
+                        previousScore: $gameManager.previousScore
+                    )
                 .onAppear {
                     isAnimationActive = false
                 }
@@ -274,6 +280,9 @@ struct GameView_iPhone: View {
                     gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
                 }
             }
+        }
+        .onDisappear {
+            appState.challengeScoreToBeat = nil
         }
     }
     

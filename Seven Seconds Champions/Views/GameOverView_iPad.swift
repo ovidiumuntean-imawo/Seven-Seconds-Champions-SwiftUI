@@ -9,15 +9,18 @@
 import SwiftUI
 import AVFoundation
 import GameKit
+import StoreKit
 
 // MARK: - GameOverView_iPad
 struct GameOverView_iPad: View {
-    var score: Int
+    @ObservedObject var gameManager: GameManager
+    
     @Binding var previousScore: Int
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.requestReview) var requestReview
     
-    var achievementMessage: String?
     @State private var showAchievementAlert = false
+    @State private var showNewHighScoreAlert = false
     
     // Particles
     @State private var areParticlesActive: Bool = false
@@ -29,6 +32,10 @@ struct GameOverView_iPad: View {
     @State private var rotation: Double = 0
     
     @State private var isAnimationActive: Bool = false
+    
+    private var challengeText: String {
+        "I challenge you to 7 Seconds! I scored \(gameManager.currentScore) taps. Can you beat that? sevenseconds://challenge?score=\(gameManager.currentScore)"
+    }
     
     var body: some View {
         GeometryReader { containerGeo in
@@ -66,7 +73,7 @@ struct GameOverView_iPad: View {
                         .font(.system(size: 36))
                         .foregroundColor(.white)
                     
-                    Text("\(score)")
+                    Text("\(gameManager.currentScore)")
                         .font(.system(size: 128, weight: .heavy))
                         .foregroundColor(.white)
                         .padding(.top, -24)
@@ -77,20 +84,20 @@ struct GameOverView_iPad: View {
                             }
                         }
                     
-                    Text("HITS")
+                    Text("TAPS")
                         .font(.system(size: 36, weight: .medium))
                         .foregroundColor(.white)
                         .padding(.top, -24)
                     
                     Button(action: {
-                        previousScore = score
+                        previousScore = gameManager.currentScore
                         isAnimationActive = false
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             dismiss()
                         }
                     }) {
-                        Text("Play again!")
+                        Text("Play again")
                             .font(.system(size: 24, weight: .medium))
                             .frame(width: 320)
                             .foregroundColor(.white)
@@ -98,32 +105,48 @@ struct GameOverView_iPad: View {
                             .background(Color.green)
                             .cornerRadius(12)
                     }
-                    .padding(.horizontal, 40)
+                    .padding(.horizontal, 32)
+                    
+                    ShareLink(item: challengeText) {
+                        Label("Challenge Your Friends!", systemImage: "gamecontroller.fill")
+                            .font(.system(size: 24, weight: .medium))
+                            .frame(width: 320)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.purple)
+                            .cornerRadius(12)
+                    }
+                    .padding(.horizontal, 32)
                     
                     Spacer()
                     
                     Text("How other players are doing?")
-                        .font(.system(size: 36))
+                        .font(.system(size: 48))
                         .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
                     
-                    Button("View high scores") {
-                        previousScore = score
+                    Button(action: {
+                        previousScore = gameManager.currentScore
                         isAnimationActive = false
                         
                         if let rootVC = UIApplication.shared.windows.first?.rootViewController {
                             GameCenterManager.shared.showLeaderboard(from: rootVC)
                         }
+                    }) {
+                        Text("View high scores")
+                            .font(.system(size: 24, weight: .medium))
+                            .frame(width: 320)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(12)
                     }
-                    .font(.system(size: 24, weight: .medium))
-                    .padding(.horizontal)
-                    .frame(height: 54)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+                    .padding(.horizontal, 32)
                     
                     Spacer()
                     
-                    Text("Share your best screenshots!")
+                    /*Text("Share your best screenshots!")
                         .font(.system(size: 32))
                         .foregroundColor(.white)
                     
@@ -143,7 +166,7 @@ struct GameOverView_iPad: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
                     
-                    Spacer()
+                    Spacer()*/
                 }
                 .padding()
             }
@@ -153,23 +176,38 @@ struct GameOverView_iPad: View {
                     areParticlesActive = true
                 }
                 
-                if let achievementMessage = achievementMessage, score >= 35 {
-                    showAchievementAlert = true
+                if gameManager.isNewHighScore {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        showNewHighScoreAlert = true
+                    }
+                } else if let achievement = gameManager.achievementMessage, gameManager.currentScore >= 35 {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        showAchievementAlert = true
+                    }
                 }
             }
             .onDisappear {
                 areParticlesActive = false
             }
+            .alert(isPresented: $showNewHighScoreAlert) {
+                Alert(
+                    title: Text("PHENOMENAL! 🚀"),
+                    message: Text("Congrats, you’ve just set a new record: \(gameManager.currentScore) taps! \n\nYou're a legend — part human, part lightning! ⚡️"),
+                    dismissButton: .default(Text("Thanks!"), action: {
+                        requestReview()
+                    })
+                )
+            }
             .alert(
                 "Achievement Unlocked!",
                 isPresented: $showAchievementAlert,
-                presenting: achievementMessage
+                presenting: gameManager.achievementMessage
             ) { message in
                 Button("Back to game", role: .cancel) {
-                    previousScore = score
+                    previousScore = gameManager.currentScore
                 }
                 Button("Show My Achievements") {
-                    previousScore = score
+                    previousScore = gameManager.currentScore
                     isAnimationActive = false
                     
                     if let rootVC = UIApplication.shared.windows.first?.rootViewController {
@@ -177,7 +215,7 @@ struct GameOverView_iPad: View {
                     }
                 }
                 Button("View High Scores") {
-                    previousScore = score
+                    previousScore = gameManager.currentScore
                     isAnimationActive = false
                     
                     if let rootVC = UIApplication.shared.windows.first?.rootViewController {
@@ -195,6 +233,12 @@ struct GameOverView_iPad: View {
 }
 
 #Preview {
-    @Previewable @State var previousScore = 0
-    return GameOverView_iPad(score: 10, previousScore: $previousScore)
+    let mockGameManager = GameManager()
+    mockGameManager.currentScore = 100
+    mockGameManager.achievementMessage = "Ai deblocat realizarea 'Maestru Zen'!"
+
+    return GameOverView_iPad(
+        gameManager: mockGameManager,
+        previousScore: .constant(80)
+    )
 }

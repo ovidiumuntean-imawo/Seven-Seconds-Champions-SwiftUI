@@ -17,6 +17,9 @@ class GameManager: ObservableObject {
     @Published var isGameRunning: Bool = false
     @Published var isGameOver: Bool = false
     @Published var achievementMessage: String? = nil
+    @Published var isNewHighScore: Bool = false
+    
+    private var highScore: Int = UserDefaults.standard.integer(forKey: "highScore")
 
     private var timer: Timer?
     private let timerBeep: AVAudioPlayer?
@@ -33,6 +36,7 @@ class GameManager: ObservableObject {
     }
 
     func startGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect) {
+        isNewHighScore = false
         isGameRunning = true
         currentScore = 0
         timeLeft = 7
@@ -73,6 +77,13 @@ class GameManager: ObservableObject {
         isGameOver = true
     
         explodeBeep?.play()
+        
+        if currentScore > highScore {
+            highScore = currentScore
+            UserDefaults.standard.set(highScore, forKey: "highScore")
+            isNewHighScore = true
+            print("NEW HIGH SCORE UNLOCKED: \(highScore)! 🔥 You're rewriting history!")
+        }
         
         if currentScore < 145 {
             GameCenterManager.shared.submitScore(with: currentScore)
