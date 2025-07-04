@@ -68,15 +68,22 @@ struct GameView_iPhone: View {
                     
                     VStack(spacing: 20) {
                         if let scoreToBeat = appState.challengeScoreToBeat {
-                            VStack {
-                                Text("PROVOCARE ACCEPTATĂ!")
-                                    .font(.system(size: 24, weight: .bold))
-                                    .foregroundColor(.yellow)
-                                Text("Bate scorul: \(scoreToBeat)")
-                                    .font(.system(size: 48, weight: .heavy))
+                            VStack(spacing: 0) {
+                                Text("Challenge")
+                                    .font(.system(size: 64, weight: .heavy))
                                     .foregroundColor(.white)
+                                
+                                Text("ACCEPTED")
+                                    .font(.system(size: 48, weight: .thin))
+                                    .foregroundColor(.white)
+                                
+                                Text("Beat the score: \(scoreToBeat) taps!")
+                                    .font(.system(size: 32, weight: .regular))
+                                    .foregroundColor(.yellow)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding(.top, 12)
                             }
-                            .padding(.bottom)
+                            .padding(.top, -12)
                         } else {
                             // Title
                             VStack(spacing: 0) {
@@ -96,16 +103,18 @@ struct GameView_iPhone: View {
                                     .font(.system(size: 32, weight: .light))
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                // Subtitle
+                                Text("Hit that button as fast as you can!")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.top, 24)
                             }
                             .padding(.top, -12)
                         }
                         
-                        // Subtitle
-                        Text("Hit that button as fast as you can!")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 24)
+                        Spacer()
 
                         // Timer
                         Text("Time left: \(gameManager.timeLeft) seconds")
@@ -144,7 +153,11 @@ struct GameView_iPhone: View {
                                 Button {
                                     if !gameManager.isGameOver {
                                         if !gameManager.isGameRunning {
-                                            gameManager.startGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                                            gameManager.startGame(
+                                                emitterLayer: emitterLayer,
+                                                buttonFrame: buttonFrame,
+                                                challengeTarget: appState.challengeScoreToBeat
+                                            )
                                         } else {
                                             gameManager.currentScore += 1
                                             gameManager.buttonPressed()
@@ -270,9 +283,10 @@ struct GameView_iPhone: View {
             }
             .fullScreenCover(isPresented: $gameManager.isGameOver) {
                 GameOverView_iPhone(
-                        gameManager: gameManager,
-                        previousScore: $gameManager.previousScore
-                    )
+                    gameManager: gameManager,
+                    previousScore: $gameManager.previousScore
+                )
+                .environmentObject(appState)
                 .onAppear {
                     isAnimationActive = false
                 }
@@ -318,8 +332,15 @@ struct GameView_iPhone: View {
     }
 }
 
-
-#Preview {
+#Preview("Stare Normala") {
     GameView_iPhone()
+        .environmentObject(AppState())
 }
 
+#Preview("Stare de Provocare") {
+    let testAppState = AppState()
+    testAppState.challengeScoreToBeat = 53
+    
+    return GameView_iPhone()
+        .environmentObject(testAppState)
+}

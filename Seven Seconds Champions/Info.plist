@@ -6,9 +6,13 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>sevenseconds</string>
+			<string>com.imawo.seven</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sevenseconds</string>
+			</array>
 		</dict>
 	</array>
 	<key>UIBackgroundModes</key>

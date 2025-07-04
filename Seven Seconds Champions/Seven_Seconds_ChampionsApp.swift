@@ -23,9 +23,10 @@ struct Seven_Seconds_ChampionsApp: App {
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
                     if let scoreItem = components?.queryItems?.first(where: { $0.name == "score" }) {
                         if let scoreValue = scoreItem.value, let score = Int(scoreValue) {
-                            print("PROVOCARE PRIMITĂ! Scorul de bătut este: \(score)")
-                            // Setăm scorul de bătut în starea aplicației
+                            // Setăm scorul de batut
                             appState.challengeScoreToBeat = score
+                            // Tragem semnalul de alarmă, generând un ID unic pentru eveniment
+                            appState.newChallengeReceived = UUID()
                         }
                     }
                 }

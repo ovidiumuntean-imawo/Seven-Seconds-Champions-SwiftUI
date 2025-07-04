@@ -1,4 +1,4 @@
-//
+    //
 //  GameManager.swift
 //  Seven Seconds Champions
 //
@@ -8,6 +8,10 @@
 import SwiftUI
 import AVFoundation
 import GameKit
+
+enum ChallengeOutcome {
+    case win, loss
+}
 
 class GameManager: ObservableObject {
     @Published var hits: Int = 0
@@ -27,6 +31,9 @@ class GameManager: ObservableObject {
     private let explodeBeep: AVAudioPlayer?
     private let buttonBeep: AVAudioPlayer?
     private var sparks = Sparks.shared
+    
+    @Published var challengeTarget: Int? = nil
+    @Published var challengeOutcome: ChallengeOutcome? = nil
 
     init() {
         self.timerBeep = AudioPlayerFactory.createAudioPlayer(fileName: "timer", fileType: "wav")
@@ -35,11 +42,14 @@ class GameManager: ObservableObject {
         self.buttonBeep = AudioPlayerFactory.createAudioPlayer(fileName: "button", fileType: "wav")
     }
 
-    func startGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect) {
+    func startGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect, challengeTarget: Int? = nil) {
         isNewHighScore = false
         isGameRunning = true
         currentScore = 0
         timeLeft = 7
+        
+        self.challengeTarget = challengeTarget
+        self.challengeOutcome = nil
         
         iceCracking?.play()
 
@@ -74,9 +84,19 @@ class GameManager: ObservableObject {
 
     func endGame(emitterLayer: CAEmitterLayer?, buttonFrame: CGRect) {
         isGameRunning = false
-        isGameOver = true
     
         explodeBeep?.play()
+        
+        // Verificăm dacă a fost o provocare și setăm rezultatul
+        if let target = self.challengeTarget {
+            if currentScore > target {
+                self.challengeOutcome = .win
+            } else {
+                self.challengeOutcome = .loss
+            }
+        } else {
+            self.challengeOutcome = nil
+        }
         
         if currentScore > highScore {
             highScore = currentScore
@@ -84,6 +104,8 @@ class GameManager: ObservableObject {
             isNewHighScore = true
             print("NEW HIGH SCORE UNLOCKED: \(highScore)! 🔥 You're rewriting history!")
         }
+        
+        isGameOver = true
         
         if currentScore < 145 {
             GameCenterManager.shared.submitScore(with: currentScore)
@@ -107,6 +129,9 @@ class GameManager: ObservableObject {
         isGameOver = false
         timeLeft = 7
         currentScore = 0
+        
+        self.challengeTarget = nil
+        self.challengeOutcome = nil
 
         sparks.updateSparks(
             emitterLayer: emitterLayer,
