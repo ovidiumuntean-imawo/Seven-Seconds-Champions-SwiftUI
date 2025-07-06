@@ -63,8 +63,11 @@ struct NormalGameOverView_iPad: View {
     @State private var isAnimationActive: Bool = false
     
     private var challengeText: String {
-        let gameURL = "sevenseconds://challenge?score=\(gameManager.currentScore)"
-        return "I challenge you to 7 Seconds! I scored \(gameManager.currentScore) taps. Can you beat that? \(gameURL)"
+        let redirectPageURL = "https://ovidiumuntean-imawo.github.io/7seconds-challenge-redirect/redirect.html"
+        
+        let finalURL = "\(redirectPageURL)?score=\(gameManager.currentScore)"
+        
+        return "I challenge you to 7 Seconds! I scored \(gameManager.currentScore) taps. Can you beat that? \(finalURL)"
     }
     
     var body: some View {
