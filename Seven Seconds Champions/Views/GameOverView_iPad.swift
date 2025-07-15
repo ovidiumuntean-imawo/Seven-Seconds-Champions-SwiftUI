@@ -141,7 +141,7 @@ struct NormalGameOverView_iPad: View {
                 
                 ShareLink(item: challengeText) {
                     Label("Challenge Your Friends!", systemImage: "gamecontroller.fill")
-                        .font(.system(size: 24, weight: .medium))
+                        .font(.system(size: 24, weight: .bold))
                         .frame(width: 320)
                         .foregroundColor(.white)
                         .padding()
@@ -209,7 +209,7 @@ struct NormalGameOverView_iPad: View {
                 })
             )
         }
-        .alert(
+        /*.alert(
             "Achievement Unlocked!",
             isPresented: $showAchievementAlert,
             presenting: gameManager.achievementMessage
@@ -238,7 +238,7 @@ struct NormalGameOverView_iPad: View {
                 .multilineTextAlignment(.center)
                 .padding()
 
-        }
+        }*/
     }
 }
 
