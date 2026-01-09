@@ -14,13 +14,16 @@ struct ContentView: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     
     var body: some View {
-        if sizeClass == .compact {
-            // iPhone layout
-            GameView_iPhone()
-        } else {
-            // iPad layout
-            GameView_iPad()
+        Group {
+            if sizeClass == .compact {
+                // iPhone layout
+                GameView_iPhone()
+            } else {
+                // iPad layout
+                GameView_iPad()
+            }
         }
+        .fontDesign(.rounded)
     }
 }
         

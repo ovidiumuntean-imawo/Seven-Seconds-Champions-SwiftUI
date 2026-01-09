@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        GameView_Watch()
+        Group {
+            GameView_Watch()
+        }
+        .fontDesign(.rounded)
     }
 }
 

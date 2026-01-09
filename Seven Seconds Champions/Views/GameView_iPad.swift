@@ -20,6 +20,10 @@ struct GameView_iPad: View {
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
+    @State private var buttonScale: CGFloat = 1.0      // Pentru elasticitate
+    @State private var floatingPoints: [FloatingPoint] = [] // Lista cu "+1"
+    @State private var screenShakeOffset: CGFloat = 0.0 // Tremuratul ecranului
+    
     // We'll store just the bottom-center of the big button in absolute screen coords.
     @State private var buttonFrame: CGRect = .zero {
         didSet {
@@ -161,6 +165,12 @@ struct GameView_iPad: View {
                                             gameManager.currentScore += 1
                                             gameManager.buttonPressed()
                                             
+                                            GameTapEffects.trigger(
+                                                buttonScale: $buttonScale,
+                                                screenShakeOffset: $screenShakeOffset,
+                                                floatingPoints: $floatingPoints
+                                            )
+                                            
                                             Sparks.shared.updateSparks(
                                                 emitterLayer: emitterLayer,
                                                 gameManager: gameManager,
@@ -172,11 +182,37 @@ struct GameView_iPad: View {
                                     Image(ButtonImage.shared.getButtonImage(for: gameManager.timeLeft, isPressed: isPressed))
                                         .resizable()
                                         .frame(width: 320, height: 320)
+                                        .scaleEffect(buttonScale)
                                         .rotationEffect(.degrees(rotationEffect))
-                                            .offset(x: offsetX, y: offsetY)
-                                            .onChange(of: gameManager.timeLeft) { newTimeLeft in
-                                                handleImageChange(timeLeft: newTimeLeft)
+                                        .offset(x: offsetX, y: offsetY)
+                                        .onChange(of: gameManager.timeLeft) { newTimeLeft in
+                                            handleImageChange(timeLeft: newTimeLeft)
+                                        }
+                                        .overlay(
+                                            ZStack {
+                                                // FLOATING POINTS (+1)
+                                                ForEach(floatingPoints) { point in
+                                                    Text("+1")
+                                                        .font(.system(size: 32, weight: .black, design: .rounded))
+                                                        .foregroundColor(.white)
+                                                    // Umbra face textul lizibil pe orice fundal
+                                                        .shadow(color: .black.opacity(0.8), radius: 2, x: 2, y: 2)
+                                                        .scaleEffect(point.scale)
+                                                        .opacity(point.opacity)
+                                                        .offset(x: point.x, y: point.y)
+                                                        .onAppear {
+                                                            // Animația pentru "+1": Zboară în sus și dispare
+                                                            if let index = floatingPoints.firstIndex(where: { $0.id == point.id }) {
+                                                                withAnimation(.easeOut(duration: 1.0)) {
+                                                                    floatingPoints[index].y = -320 // Se duce mult în sus
+                                                                    floatingPoints[index].opacity = 0 // Dispare
+                                                                    floatingPoints[index].scale = 1.5 // Se mărește
+                                                                }
+                                                            }
+                                                        }
+                                                }
                                             }
+                                        )
                                 }
                                 .buttonStyle(.plain)
                                 .simultaneousGesture(
@@ -297,6 +333,7 @@ struct GameView_iPad: View {
                 }
             }
         }
+        .fontDesign(.rounded)
         .onDisappear {
             appState.challengeScoreToBeat = nil
         }
@@ -346,3 +383,4 @@ struct GameView_iPad: View {
     return GameView_iPad()
         .environmentObject(testAppState)
 }
+

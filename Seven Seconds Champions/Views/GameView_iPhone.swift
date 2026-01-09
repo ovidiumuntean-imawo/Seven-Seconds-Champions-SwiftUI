@@ -9,6 +9,26 @@ import SwiftUI
 import AVFoundation
 import GameKit
 
+// Structură pentru efectul de "+1" care zboară
+struct FloatingPoint: Identifiable {
+    let id = UUID()
+    var x: CGFloat
+    var y: CGFloat
+    var opacity: Double = 1.0
+    var scale: CGFloat = 0.5
+}
+
+struct BurstParticle: Identifiable {
+    let id = UUID()
+    var x: CGFloat = 0
+    var y: CGFloat = 0
+    var color: Color
+    var scale: CGFloat = 1.0
+    var opacity: Double = 1.0
+    var angle: Double   // Direcția în care zboară
+    var speed: CGFloat  // Cât de departe zboară
+}
+
 // MARK: - GameView_iPhone
 struct GameView_iPhone: View {
     @EnvironmentObject var appState: AppState
@@ -19,16 +39,20 @@ struct GameView_iPhone: View {
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
+    @State private var buttonScale: CGFloat = 1.0      // Pentru elasticitate
+    @State private var floatingPoints: [FloatingPoint] = [] // Lista cu "+1"
+    @State private var screenShakeOffset: CGFloat = 0.0 // Tremuratul ecranului
+    
     // We'll store just the bottom-center of the big button in absolute screen coords.
     @State private var buttonFrame: CGRect = .zero {
         didSet {
             // If not running, keep sparks in standby
             if buttonFrame != .zero, !gameManager.isGameRunning {
                 Sparks.shared.updateSparks(
-                                    emitterLayer: emitterLayer,
-                                    gameManager: gameManager,
-                                    buttonFrame: buttonFrame
-                                )
+                    emitterLayer: emitterLayer,
+                    gameManager: gameManager,
+                    buttonFrame: buttonFrame
+                )
             }
         }
     }
@@ -64,7 +88,7 @@ struct GameView_iPhone: View {
                         .ignoresSafeArea()
                     
                     ParticleView(isActive: $areParticlesActive)
-                                    .ignoresSafeArea()
+                        .ignoresSafeArea()
                     
                     VStack(spacing: 20) {
                         if let scoreToBeat = appState.challengeScoreToBeat {
@@ -115,7 +139,7 @@ struct GameView_iPhone: View {
                         }
                         
                         Spacer()
-
+                        
                         // Timer
                         Text("Time left: \(gameManager.timeLeft) seconds")
                             .font(.system(size: 32, weight: .medium))
@@ -162,6 +186,12 @@ struct GameView_iPhone: View {
                                             gameManager.currentScore += 1
                                             gameManager.buttonPressed()
                                             
+                                            GameTapEffects.trigger(
+                                                buttonScale: $buttonScale,
+                                                screenShakeOffset: $screenShakeOffset,
+                                                floatingPoints: $floatingPoints
+                                            )
+                                            
                                             Sparks.shared.updateSparks(
                                                 emitterLayer: emitterLayer,
                                                 gameManager: gameManager,
@@ -173,11 +203,37 @@ struct GameView_iPhone: View {
                                     Image(ButtonImage.shared.getButtonImage(for: gameManager.timeLeft, isPressed: isPressed))
                                         .resizable()
                                         .frame(width: 180, height: 180)
+                                        .scaleEffect(buttonScale)
                                         .rotationEffect(.degrees(rotationEffect))
-                                            .offset(x: offsetX, y: offsetY)
-                                            .onChange(of: gameManager.timeLeft) { newTimeLeft in
-                                                handleImageChange(timeLeft: newTimeLeft)
+                                        .offset(x: offsetX, y: offsetY)
+                                        .onChange(of: gameManager.timeLeft) { newTimeLeft in
+                                            handleImageChange(timeLeft: newTimeLeft)
+                                        }
+                                        .overlay(
+                                            ZStack {
+                                                // FLOATING POINTS (+1)
+                                                ForEach(floatingPoints) { point in
+                                                    Text("+1")
+                                                        .font(.system(size: 32, weight: .black, design: .rounded))
+                                                        .foregroundColor(.white)
+                                                    // Umbra face textul lizibil pe orice fundal
+                                                        .shadow(color: .black.opacity(0.8), radius: 2, x: 2, y: 2)
+                                                        .scaleEffect(point.scale)
+                                                        .opacity(point.opacity)
+                                                        .offset(x: point.x, y: point.y)
+                                                        .onAppear {
+                                                            // Animația pentru "+1": Zboară în sus și dispare
+                                                            if let index = floatingPoints.firstIndex(where: { $0.id == point.id }) {
+                                                                withAnimation(.easeOut(duration: 0.8)) {
+                                                                    floatingPoints[index].y = -120 // Se duce mult în sus
+                                                                    floatingPoints[index].opacity = 0 // Dispare
+                                                                    floatingPoints[index].scale = 1.5 // Se mărește
+                                                                }
+                                                            }
+                                                        }
+                                                }
                                             }
+                                        )
                                 }
                                 .buttonStyle(.plain)
                                 .simultaneousGesture(
@@ -192,25 +248,25 @@ struct GameView_iPhone: View {
                                             .onAppear {
                                                 DispatchQueue.main.async {
                                                     SparksHelper.calculateEmitterPosition(
-                                                                        containerGeo: containerGeo,
-                                                                        btnGeo: btnGeo,
-                                                                        buttonFrame: &buttonFrame,
-                                                                        emitterLayer: &emitterLayer,
-                                                                        emitterCell: emitterCell,
-                                                                        gameManager: gameManager
-                                                                    )
+                                                        containerGeo: containerGeo,
+                                                        btnGeo: btnGeo,
+                                                        buttonFrame: &buttonFrame,
+                                                        emitterLayer: &emitterLayer,
+                                                        emitterCell: emitterCell,
+                                                        gameManager: gameManager
+                                                    )
                                                 }
                                             }
                                             .onChange(of: btnGeo.size) { _ in
                                                 DispatchQueue.main.async {
                                                     SparksHelper.calculateEmitterPosition(
-                                                                        containerGeo: containerGeo,
-                                                                        btnGeo: btnGeo,
-                                                                        buttonFrame: &buttonFrame,
-                                                                        emitterLayer: &emitterLayer,
-                                                                        emitterCell: emitterCell,
-                                                                        gameManager: gameManager
-                                                                    )
+                                                        containerGeo: containerGeo,
+                                                        btnGeo: btnGeo,
+                                                        buttonFrame: &buttonFrame,
+                                                        emitterLayer: &emitterLayer,
+                                                        emitterCell: emitterCell,
+                                                        gameManager: gameManager
+                                                    )
                                                 }
                                             }
                                     }
@@ -220,12 +276,12 @@ struct GameView_iPhone: View {
                             .padding(.trailing, 24)
                         }
                         .padding(.bottom, 8)
-                    
+                        
                         Text("Last score: \(gameManager.previousScore) taps")
                             .font(.system(size: 26, weight: .medium))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
-
+                        
                         Spacer()
                         
                         // "How other players are doing?" + "VIEW HIGH SCORES"
@@ -253,6 +309,7 @@ struct GameView_iPhone: View {
                         Spacer()
                     }
                     .padding()
+                    .offset(x: screenShakeOffset)
                 }
                 .onAppear {
                     // Authenticate Game Center
@@ -295,6 +352,7 @@ struct GameView_iPhone: View {
                 }
             }
         }
+        .fontDesign(.rounded)
         .onDisappear {
             appState.challengeScoreToBeat = nil
         }
@@ -305,7 +363,7 @@ struct GameView_iPhone: View {
         if newImage != currentImage {
             // Actualizăm imaginea la noua stare
             currentImage = newImage
-
+            
             // Aplicăm vibrația
             withAnimation(.easeInOut(duration: 0.02)) {
                 rotationEffect = Double.random(in: -7...7) // Rotire subtilă

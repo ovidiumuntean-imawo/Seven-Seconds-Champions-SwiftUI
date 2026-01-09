@@ -29,6 +29,7 @@ struct GameOverView_iPhone: View {
                 NormalGameOverView(gameManager: gameManager, previousScore: $previousScore)
             }
         }
+        .fontDesign(.rounded)
         .onAppear {
             appState.challengeScoreToBeat = nil
         }
@@ -168,6 +169,7 @@ struct NormalGameOverView: View {
             }
             .padding()
         }
+        .fontDesign(.rounded)
         .onAppear {
             // Create small background sparks
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
@@ -279,6 +281,7 @@ struct ChallengeResultView: View {
             }
             .padding()
         }
+        .fontDesign(.rounded)
     }
 }
 
@@ -310,3 +313,4 @@ struct ChallengeResultView: View {
     
     return NormalGameOverView(gameManager: manager, previousScore: .constant(85))
 }
+

@@ -5,7 +5,6 @@
 //  Created by Ovidiu Muntean on 09.01.2025.
 //
 
-
 import SwiftUI
 import AVFoundation
 import GameKit
@@ -30,6 +29,7 @@ struct GameOverView_iPad: View {
                 NormalGameOverView_iPad(gameManager: gameManager, previousScore: $previousScore)
             }
         }
+        .fontDesign(.rounded)
         .onAppear {
             appState.challengeScoreToBeat = nil
         }
@@ -181,6 +181,7 @@ struct NormalGameOverView_iPad: View {
             }
             .padding()
         }
+        .fontDesign(.rounded)
         .onAppear {
             // Create small background sparks
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
@@ -293,6 +294,7 @@ struct ChallengeResultView_iPad: View {
             }
             .padding()
         }
+        .fontDesign(.rounded)
     }
 }
 
