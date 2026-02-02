@@ -7,46 +7,59 @@
 
 import SwiftUI
 
+struct NormalBackground: View {
+    var body: some View {
+        GeometryReader { geometry in
+            Image("background_cosmic")
+                .resizable()
+                .scaledToFill() // Umple ecranul păstrând proporțiile corecte (nu turtește)
+                .frame(width: geometry.size.width, height: geometry.size.height) // Se forțează exact pe dimensiunea ecranului
+                .clipped() // Taie orice surplus care iese din ecran
+        }
+        .ignoresSafeArea() // Acoperă tot, inclusiv zona ceasului și bara de jos
+    }
+}
+
 struct RotatingBackground: View {
     var isAnimating: Bool
-    @State private var rotation: Double = 0
+    // Două variabile pentru mișcare pe X și Y
+    @State private var moveX: CGFloat = -20
+    @State private var moveY: CGFloat = -20
 
     var body: some View {
         GeometryReader { geometry in
-            let screenSize = max(geometry.size.width, geometry.size.height)
-            let imageSize = screenSize * sqrt(2) // Ensures the image is large enough to cover corners during rotation
-
-            Image("background")
+            Image("background_cosmic")
                 .resizable()
                 .scaledToFill()
-                .frame(width: imageSize, height: imageSize) // Enlarges the image to cover the screen
-                .clipped()
-                .rotationEffect(.degrees(rotation)) // Applies the rotation effect
-                .blur(radius: 18)
-                .position(x: geometry.size.width / 2, y: geometry.size.height / 2) // Centers the image on the screen
+                // O facem doar puțin mai mare decât ecranul (10%) ca să aibă loc să se miște
+                .frame(width: geometry.size.width * 1.1, height: geometry.size.height * 1.1)
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                .offset(x: moveX, y: moveY) // Aici e mișcarea
                 .onAppear {
                     if isAnimating {
-                        startAnimation()
+                        startFloating()
                     }
                 }
                 .onChange(of: isAnimating) { newValue in
-                    if newValue {
-                        startAnimation()
-                    } else {
-                        rotation = rotation.truncatingRemainder(dividingBy: 360) // Freeze at the current rotation
-                    }
+                    if newValue { startFloating() }
                 }
-                .zIndex(-1) // Ensures the background stays behind other views
         }
-        .ignoresSafeArea() // Ignores safe area insets to cover the entire screen
+        .ignoresSafeArea()
     }
 
-    private func startAnimation() {
+    private func startFloating() {
+        // Mișcare pe X (stânga-dreapta)
         withAnimation(
-            Animation.linear(duration: 72)
-                .repeatForever(autoreverses: false)
+            Animation.easeInOut(duration: 15).repeatForever(autoreverses: true)
         ) {
-            rotation += 360
+            moveX = 20
+        }
+        
+        // Mișcare pe Y (sus-jos) - durată diferită pentru haos natural
+        withAnimation(
+            Animation.easeInOut(duration: 25).repeatForever(autoreverses: true)
+        ) {
+            moveY = 20
         }
     }
 }
