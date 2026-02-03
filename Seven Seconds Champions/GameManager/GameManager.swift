@@ -15,7 +15,7 @@ enum ChallengeOutcome {
 
 class GameManager: ObservableObject {
     @Published var hits: Int = 0
-    @Published var timeLeft: Int = 7
+    @Published var timeLeft: Double = 7
     @Published var currentScore: Int = 0
     @Published var previousScore: Int = 0
     @Published var isGameRunning: Bool = false
@@ -59,22 +59,23 @@ class GameManager: ObservableObject {
                     buttonFrame: buttonFrame
                 )
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             
             // Verificăm dacă mai avem timp rămas
             if self.timeLeft > 0 {
                 // Scădem o secundă la fiecare apel
-                self.timeLeft -= 1
+                self.timeLeft -= 0.1
                 
-                // Acum verificăm valoarea NOUĂ a lui timeLeft
-                if self.timeLeft == 5 || self.timeLeft == 2 {
-                    // Dacă am ajuns la 6 sau 3 secunde, punem sunetul de damage
-                } else if self.timeLeft > 0 {
-                    // Pentru orice altă valoare mai mare ca 0, punem beep-ul normal
+                let isFullSecond = abs(self.timeLeft.truncatingRemainder(dividingBy: 1.0)) < 0.05
+                
+                if isFullSecond && self.timeLeft > 0 {
                     self.timerBeep?.play()
-                } else {
-                    // Dacă timeLeft a ajuns la 0, invalidăm timer-ul și terminăm jocul
+                }
+                
+                // 3. Verificăm finalul de joc (Timp expirat)
+                if self.timeLeft <= 0 {
+                    self.timeLeft = 0 // Ne asigurăm că nu afișăm valori negative
                     self.timer?.invalidate()
                     self.endGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
                 }

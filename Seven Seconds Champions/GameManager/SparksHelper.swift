@@ -16,22 +16,16 @@ struct SparksHelper {
         emitterCell: CAEmitterCell,
         gameManager: GameManager
     ) {
-        // Get the full frame of the button
         let buttonRect = btnGeo.frame(in: .global)
         
-        // Ensure the button dimensions are valid
         guard buttonRect.width > 0, buttonRect.height > 0 else { return }
         
-        // Calculate the bottom-center position of the button
-        let bottomCenterX = buttonRect.minX + (buttonRect.width / 2)
-        let bottomCenterY = buttonRect.minY + buttonRect.height
+        let centerX = buttonRect.midX
+        let centerY = buttonRect.midY
         
-        // Update `buttonFrame` with the new position
-        buttonFrame = CGRect(x: bottomCenterX, y: bottomCenterY, width: 0, height: 0)
+        buttonFrame = CGRect(x: centerX, y: centerY, width: 0, height: 0)
         
-        // Initialize or update the particle emitter
         if emitterLayer == nil {
-            // If `emitterLayer` is nil, create the particles
             Sparks.shared.createSparks(
                 emitterLayer: &emitterLayer,
                 emitterCell: emitterCell,
@@ -39,7 +33,6 @@ struct SparksHelper {
             )
         }
         
-        // Update the particles using `gameManager`
         Sparks.shared.updateSparks(
             emitterLayer: emitterLayer,
             gameManager: gameManager,

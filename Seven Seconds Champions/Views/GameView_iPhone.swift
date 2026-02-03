@@ -30,7 +30,7 @@ struct FloatingPoint: Identifiable {
 
 // MARK: - 3. UI COMPONENTS (Timer & Button)
 struct RadialTimerView: View {
-    var timeLeft: Int
+    var timeLeft: Double
     var totalTime: Double = 7.0
     
     // Animații
@@ -204,14 +204,14 @@ struct GlitchScoreView: View {
         ZStack {
             // 1. Aura de fundal (Glow constant care pulsează)
             Text("\(score)")
-                .font(.system(size: 85, weight: .black, design: .rounded))
+                .font(.system(size: 96, weight: .black, design: .rounded))
                 .foregroundColor(.neonCyan.opacity(isAnimating ? 0.3 : 0.1))
                 .blur(radius: 15)
                 .scaleEffect(isAnimating ? 1.1 : 1.0)
 
             // 2. Stratul "Shadow" (Flicker persistent)
             Text("\(score)")
-                .font(.system(size: 85, weight: .black, design: .rounded))
+                .font(.system(size: 96, weight: .black, design: .rounded))
                 .foregroundColor(.neonBlue)
                 .offset(x: offsetCyan * 0.3)
                 .opacity(isAnimating ? 0.4 : 0)
@@ -219,7 +219,7 @@ struct GlitchScoreView: View {
             // 3. Glitch Slices (Feliile care sar)
             ForEach(0..<3) { i in
                 Text("\(score)")
-                    .font(.system(size: 85, weight: .black, design: .rounded))
+                    .font(.system(size: 96, weight: .black, design: .rounded))
                     .foregroundColor(i % 2 == 0 ? .neonRed : .neonCyan)
                     .offset(x: CGFloat.random(in: -20...20) * opacityGlitch)
                     .mask(
@@ -233,7 +233,7 @@ struct GlitchScoreView: View {
 
             // 4. Scorul PRINCIPAL (Are un tremurat mic permanent)
             Text("\(score)")
-                .font(.system(size: 85, weight: .black, design: .rounded))
+                .font(.system(size: 96, weight: .black, design: .rounded))
                 .foregroundColor(.white)
                 .offset(x: isAnimating ? CGFloat.random(in: -1...1) : 0,
                                         y: isAnimating ? CGFloat.random(in: -1...1) : 0)
@@ -282,101 +282,10 @@ struct GlitchScoreView: View {
     }
 }
 
-struct GlitchScoreView2: View {
-    let score: Int
-    @State private var offsetRed: CGFloat = 0
-    @State private var offsetCyan: CGFloat = 0
-    @State private var opacityGlitch: Double = 0
-    
-    // Timer pentru glitch-ul permanent
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-    
-    var body: some View {
-        ZStack {
-            // 1. Stratul CYAN (Decalat stânga)
-            Text("\(score)")
-                .font(.system(size: 85, weight: .black, design: .rounded))
-                .foregroundColor(.neonCyan)
-                .offset(x: offsetCyan)
-                .mask(
-                    VStack(spacing: 4) {
-                        ForEach(0..<10) { _ in
-                            Rectangle().frame(height: CGFloat.random(in: 2...8))
-                                .opacity(Double.random(in: 0...1))
-                        }
-                    }
-                )
-                .opacity(opacityGlitch)
-
-            // 2. Stratul ROȘU (Decalat dreapta)
-            Text("\(score)")
-                .font(.system(size: 85, weight: .black, design: .rounded))
-                .foregroundColor(.neonRed)
-                .offset(x: offsetRed)
-                .mask(
-                    VStack(spacing: 4) {
-                        ForEach(0..<10) { _ in
-                            Rectangle().frame(height: CGFloat.random(in: 2...8))
-                                .opacity(Double.random(in: 0...1))
-                        }
-                    }
-                )
-                .opacity(opacityGlitch)
-            
-            // 3. Stratul GALBEN (Random sparks)
-            Text("\(score)")
-                .font(.system(size: 85, weight: .black, design: .rounded))
-                .foregroundColor(.yellow)
-                .offset(x: offsetRed * 1.5, y: offsetCyan)
-                .opacity(opacityGlitch * 0.5)
-                .blur(radius: 2)
-
-            // 4. Scorul PRINCIPAL (Alb, stabil)
-            Text("\(score)")
-                .font(.system(size: 85, weight: .black, design: .rounded))
-                .foregroundColor(.white)
-                .shadow(color: .neonCyan.opacity(0.5), radius: 10)
-        }
-        .onReceive(timer) { _ in
-            updateGlitch()
-        }
-    }
-    
-    private func updateGlitch() {
-        // Șansă de 30% să avem un glitch la fiecare 0.1 secunde
-        if Double.random(in: 0...1) > 0.7 {
-            withAnimation(.interactiveSpring()) {
-                offsetRed = CGFloat.random(in: -12...12)
-                offsetCyan = CGFloat.random(in: -12...12)
-                opacityGlitch = Double.random(in: 0.4...1.0)
-            }
-            
-            // Revenire rapidă (după 0.05 secunde) pentru a crea efectul de flicker
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                withAnimation {
-                    if Double.random(in: 0...1) > 0.5 {
-                        offsetRed = 0
-                        offsetCyan = 0
-                        opacityGlitch = 0
-                    }
-                }
-            }
-        } else {
-            // Majoritatea timpului stă cuminte sau cu un flicker mic
-            if opacityGlitch > 0 {
-                withAnimation {
-                    opacityGlitch = 0
-                }
-            }
-        }
-    }
-}
-
 // MARK: - COMPONENTA: VORTEX ELECTRIC
 struct ArcButton: View {
     var isPressed: Bool
     var isDeployed: Bool
-    var isGameRunning: Bool
     
     // --- STATE PENTRU ANIMAȚII ELECTRICE ---
     @State private var rotation1: Double = 0
@@ -385,7 +294,7 @@ struct ArcButton: View {
     @State private var flashOpacity: Double = 0.0
     @State private var arcJitter: CGFloat = 1.0
     @State private var pulseScale: CGFloat = 1.0
-
+    
     var body: some View {
         ZStack {
             // 1. AURA EXTERIOARĂ (Glow-ul care "încălzește" grid-ul)
@@ -409,7 +318,7 @@ struct ArcButton: View {
             }
             .frame(width: 205, height: 205)
             .blendMode(.plusLighter)
-
+            
             // 3. CORPUL REACTORULUI (Miezul 3D din ArcButton)
             ZStack {
                 Circle()
@@ -434,7 +343,7 @@ struct ArcButton: View {
             .frame(width: 180, height: 180)
             .shadow(color: .neonCyan, radius: 20)
             .scaleEffect(pulseScale)
-
+            
             // 4. SIMBOLUL CENTRAL (Fulgerul cu Jitter electric)
             ZStack {
                 Image(systemName: "bolt.fill")
@@ -449,15 +358,15 @@ struct ArcButton: View {
             .scaleEffect(isPressed ? 0.8 : 1.0)
             .scaleEffect(arcJitter) // Vibrația aia mică și tăioasă
             .shadow(color: .white, radius: 10)
-
+            
             // 5. TEXTUL "TAP"
             Text("TAP")
-                .font(.system(size: 14, weight: .black, design: .monospaced))
+                .font(.system(size: 18, weight: .black, design: .monospaced))
                 .foregroundColor(.white)
-                .offset(y: 45)
+                .offset(y: 55)
                 .tracking(3)
                 .opacity(isPressed ? 0.5 : 1.0)
-
+            
             // 6. FLASH-UL DE LANSARE
             Circle()
                 .fill(Color.white)
@@ -465,7 +374,6 @@ struct ArcButton: View {
                 .opacity(flashOpacity)
         }
         // --- LOGICA DE PERSPECTIVĂ ---
-        .id(isGameRunning ? "turbo" : "idle")
         .scaleEffect(isDeployed ? 1.0 : 0.01)
         .opacity(isDeployed ? 1.0 : 0.0)
         .offset(y: isDeployed ? -60 : -120)
@@ -480,27 +388,20 @@ struct ArcButton: View {
             }
         }
     }
-
+    
     // --- LOGICA DE ANIMAȚIE COMBINATĂ ---
     private func startElectricAnimations() {
-        let speed1 = isGameRunning ? 0.8 : 5.0
-        let speed2 = isGameRunning ? 1.5 : 7.0
-        
-        // Rotații asimetrice pentru firișoare
-        withAnimation(.linear(duration: speed1).repeatForever(autoreverses: false)) {
+        withAnimation(.linear(duration: 3.0).repeatForever(autoreverses: false)) {
             rotation1 = 360
         }
-        withAnimation(.linear(duration: speed2).repeatForever(autoreverses: false)) {
+        withAnimation(.linear(duration: 4.5).repeatForever(autoreverses: false)) {
             rotation2 = 360
         }
         
-        // Pulsul de standby al reactorului
-        withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-            pulseScale = 1.05
-        }
+        // Fără puls în joc ca să nu te încurce
+        pulseScale = 1.0
         
-        // Jitter-ul electric (Vibrația tăioasă)
-        withAnimation(.easeInOut(duration: 0.06).repeatForever(autoreverses: true)) {
+        withAnimation(.easeInOut(duration: 0.04).repeatForever(autoreverses: true)) {
             arcJitter = 1.04
         }
     }
@@ -544,39 +445,56 @@ struct GameView_iPhone: View {
             GeometryReader { containerGeo in
                 ZStack {
                     NormalBackground()
-                            .ignoresSafeArea()
+                        .ignoresSafeArea()
                     
                     Color.black.opacity(0.0)
-                            .ignoresSafeArea()
-
+                        .ignoresSafeArea()
+                    
                     // PARTICULE GENERICE (Praf Stelar)
                     ParticleView(isActive: $areParticlesActive)
                         .ignoresSafeArea()
                     
-                    VStack {
-                        // --- ZONA DE SUS: HUD RADIAL ---
+                    VStack(spacing: 0) {
+                        // --- 1. ZONA TIMER DIGITAL (DEASUPRA ARCULUI) ---
+                        VStack(spacing: 5) {
+                            if let target = appState.challengeScoreToBeat {
+                                Text("TARGET: \(target)")
+                                    .font(.system(size: 14, weight: .black, design: .monospaced))
+                                    .foregroundColor(.yellow)
+                                    .shadow(color: .orange, radius: 4)
+                            }
+                            
+                            Group {
+                                if gameManager.isGameRunning {
+                                    // În joc: 6.9 s, 6.8 s...
+                                    Text(String(format: "%.1f s", Double(gameManager.timeLeft)))
+                                } else {
+                                    // Standby: 7 SECONDS (Fix cum ai vrut, boss!)
+                                    Text(String(format: "%.0f SECONDS", Double(gameManager.timeLeft)))
+                                }
+                            }
+                            .font(.system(size: 28, weight: .black, design: .monospaced)) // Mai mare, e titlul acum
+                            .foregroundColor(gameManager.timeLeft <= 3 && gameManager.isGameRunning ? .neonRed : .white)
+                            .shadow(color: gameManager.timeLeft <= 3 && gameManager.isGameRunning ? .neonRed : .neonCyan, radius: 10)
+                        }
+                        .padding(.top, 20)
+                        
+                        // --- 2. ZONA ARCULUI RADIAL CU SCORUL ÎN MIJLOC ---
                         ZStack {
                             RadialTimerView(timeLeft: gameManager.timeLeft)
-                                .padding(.top, 50)
                             
-                            // Scorul
                             VStack(spacing: -5) {
                                 Text("SCORE")
                                     .font(.system(size: 18, weight: .bold, design: .monospaced))
                                     .foregroundColor(.neonCyan.opacity(0.8))
                                     .tracking(8)
                                 
-                                /*Text("\(gameManager.currentScore)")
-                                    .font(.system(size: 72, weight: .black, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .shadow(color: .neonBlue, radius: 15) // Glow puternic*/
-                                
                                 GlitchScoreView(
                                     score: gameManager.currentScore,
                                     isAnimating: gameManager.isGameRunning
                                 )
                             }
-                            .offset(y: 60)
+                            .offset(y: -10)
                         }
                         
                         Spacer()
@@ -586,8 +504,7 @@ struct GameView_iPhone: View {
                             // Butonul Reactor
                             ArcButton(
                                 isPressed: isPressed,
-                                isDeployed: isButtonDeployed,
-                                isGameRunning: gameManager.isGameRunning
+                                isDeployed: isButtonDeployed
                             )
                             // GESTURI: Aici capturăm tap-ul rapid
                             .simultaneousGesture(
@@ -630,18 +547,6 @@ struct GameView_iPhone: View {
                         
                         // --- ZONA DE JOS: TARGET & INFO ---
                         VStack(spacing: 20) {
-                            if let target = appState.challengeScoreToBeat {
-                                Text("TARGET: \(target)")
-                                    .font(.system(size: 28, weight: .heavy, design: .monospaced))
-                                    .foregroundColor(.yellow)
-                                    .shadow(color: .orange, radius: 5)
-                            } else {
-                                // Timer Digital de siguranță
-                                Text(String(format: "%.1f s", Double(gameManager.timeLeft)))
-                                    .font(.system(size: 20, weight: .bold, design: .monospaced))
-                                    .foregroundColor(gameManager.timeLeft <= 3 ? .neonRed : .gray)
-                            }
-                            
                             Button {
                                 showLeaderboard = true
                                 if let rootVC = UIApplication.shared.windows.first?.rootViewController {
@@ -698,8 +603,6 @@ struct GameView_iPhone: View {
         }
         .preferredColorScheme(.dark)
     }
-    
-    // --- LOGICA JOCULUI ---
     
     private func handleTap() {
         if !gameManager.isGameRunning {
@@ -765,14 +668,14 @@ struct GameView_iPhone: View {
     
     private func animateFloatingPoint(_ point: FloatingPoint) {
         if let index = floatingPoints.firstIndex(where: { $0.id == point.id }) {
-            withAnimation(.easeOut(duration: 0.6)) {
-                floatingPoints[index].y = -180 // Zboară în sus
+            withAnimation(.easeOut(duration: 0.8)) {
+                floatingPoints[index].y = -280 // Zboară în sus
                 floatingPoints[index].opacity = 0
                 floatingPoints[index].scale = 1.5
             }
             
             // Curățenie automată
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 if let idx = floatingPoints.firstIndex(where: { $0.id == point.id }) {
                     floatingPoints.remove(at: idx)
                 }

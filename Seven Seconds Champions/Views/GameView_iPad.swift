@@ -1,10 +1,9 @@
 //
-//  GameView.swift
+//  GameView_iPad.swift
 //  Seven Seconds Champions
 //
 //  Created by Ovidiu Muntean on 09.01.2025.
 //
-
 
 import SwiftUI
 import AVFoundation
@@ -15,372 +14,349 @@ struct GameView_iPad: View {
     @EnvironmentObject var appState: AppState
     @StateObject private var gameManager = GameManager()
     
-    // Particles
+    // --- PARTICULE & STATE ---
     @State private var areParticlesActive: Bool = false
     @State private var emitterLayer: CAEmitterLayer?
     @State private var emitterCell = CAEmitterCell()
     
-    @State private var buttonScale: CGFloat = 1.0      // Pentru elasticitate
-    @State private var floatingPoints: [FloatingPoint] = [] // Lista cu "+1"
-    @State private var screenShakeOffset: CGFloat = 0.0 // Tremuratul ecranului
-    
-    // We'll store just the bottom-center of the big button in absolute screen coords.
+    // Stocăm poziția exactă a butonului pentru scântei
     @State private var buttonFrame: CGRect = .zero {
         didSet {
-            // If not running, keep sparks in standby
+            // Dacă butonul s-a mutat sau redimensionat, actualizăm emitter-ul
             if buttonFrame != .zero, !gameManager.isGameRunning {
                 Sparks.shared.updateSparks(
-                                    emitterLayer: emitterLayer,
-                                    gameManager: gameManager,
-                                    buttonFrame: buttonFrame
-                                )
+                    emitterLayer: emitterLayer,
+                    gameManager: gameManager,
+                    buttonFrame: buttonFrame
+                )
             }
         }
     }
     
-    // Leaderboard
-    @State private var showLeaderboard = false
-    
-    // Pressed button effect
+    // --- STATES PENTRU UI & ANIMATII ---
+    @State private var isButtonDeployed = false
+    @State private var floatingPoints: [FloatingPoint] = []
+    @State private var screenShakeOffset: CGFloat = 0.0
     @GestureState private var isPressed: Bool = false
     
-    // Game Center Authentication
-    @State private var showAuthenticationSheet = false
-    @State private var gameCenterAuthViewController: UIViewController? = nil
-    @State private var showAuthErrorAlert = false
-    @State private var authErrorMessage: String = ""
-    
-    @State private var scale: CGFloat = 1.0
-    @State private var rotation: Double = 0
-    
+    // Leaderboard
+    @State private var showLeaderboard = false
     @State private var isAnimationActive: Bool = false
-    @State private var currentImage: String = "button_normal"
     
-    @State private var offsetX: CGFloat = 0.0
-    @State private var offsetY: CGFloat = 0.0
-    @State private var rotationEffect: Double = 0.0
+    // Haptics (Deși iPad-ul nu are Taptic Engine ca iPhone, păstrăm generatorul pentru compatibilitate)
+    let impactGen = UIImpactFeedbackGenerator(style: .heavy)
+    
+    // Game Center
+    @State private var gameCenterAuthViewController: UIViewController? = nil
     
     var body: some View {
         NavigationStack {
             GeometryReader { containerGeo in
                 ZStack {
-                    // Background
-                    RotatingBackground(isAnimating: isAnimationActive)
+                    // 1. FUNDAL & PARTICULE
+                    // Folosim fundalul nou "NormalBackground" definit în fișierul de iPhone
+                    NormalBackground()
+                        .ignoresSafeArea()
+                        .offset(x: screenShakeOffset, y: screenShakeOffset) // Shake pe tot ecranul
+                    
+                    // Stratul de particule cosmice
+                    ParticleView(isActive: $areParticlesActive)
                         .ignoresSafeArea()
                     
-                    ParticleView(isActive: $areParticlesActive)
-                                    .ignoresSafeArea()
-                    
-                    VStack(spacing: 20) {
-                        if let scoreToBeat = appState.challengeScoreToBeat {
-                            VStack(spacing: 0) {
-                                Text("Challenge")
-                                    .font(.system(size: 128, weight: .heavy))
-                                    .foregroundColor(.white)
-                                
-                                Text("Accepted")
-                                    .font(.system(size: 96, weight: .thin))
-                                    .foregroundColor(.white)
-                                
-                                Text("Beat the score: \(scoreToBeat) taps!")
-                                    .font(.system(size: 48, weight: .regular))
-                                    .foregroundColor(.yellow)
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                    .padding(.top, 24)
-                            }
-                            .padding(.top, -12)
-                        } else {
-                            // Title
-                            VStack(spacing: 0) {
-                                HStack {
-                                    Text("7")
-                                        .font(.system(size: 172, weight: .heavy))
-                                        .foregroundColor(.white)
+                    // 2. LAYOUT PRINCIPAL (VStack Mare)
+                    VStack(spacing: 40) {
+                        
+                        // --- A. ZONA DE SUS (HEADER & TIMER DIGITAL) ---
+                        // Aici păstrăm stilul tău vechi cu text mare, dar digitalizat
+                        VStack(spacing: 10) {
+                            if let target = appState.challengeScoreToBeat {
+                                // MODE: CHALLENGE
+                                VStack(spacing: 0) {
+                                    Text("CHALLENGE")
+                                        .font(.system(size: 80, weight: .black, design: .rounded))
+                                        .foregroundColor(.neonRed)
+                                        .shadow(color: .neonRed, radius: 10)
                                     
-                                    Text("seconds")
-                                        .font(.system(size: 128, weight: .light))
-                                        .foregroundColor(.white)
+                                    Text("BEAT: \(target)")
+                                        .font(.system(size: 60, weight: .bold, design: .monospaced))
+                                        .foregroundColor(.yellow)
+                                        .shadow(color: .orange, radius: 5)
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.bottom, -12)
-                                
-                                Text("CHAMPIONS")
-                                    .font(.system(size: 48, weight: .light))
+                            } else {
+                                // MODE: STANDARD
+                                Text("7 SECONDS")
+                                    .font(.system(size: 80, weight: .heavy, design: .rounded))
                                     .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                // Subtitle
-                                Text("Hit that button as fast as you can!")
-                                    .font(.system(size: 36, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.top, 48)
+                                    .shadow(color: .neonBlue, radius: 10)
+                                    .opacity(0.8)
                             }
-                            .padding(.top, -12)
+                            
+                            // TIMERUL DIGITAL URIAȘ (Central)
+                            Group {
+                                if gameManager.isGameRunning {
+                                    Text(String(format: "%.1f s", gameManager.timeLeft))
+                                } else {
+                                    Text("\(Int(gameManager.timeLeft)) s")
+                                }
+                            }
+                            .font(.system(size: 120, weight: .black, design: .monospaced)) // Masiv pe iPad
+                            .foregroundColor(gameManager.timeLeft <= 3 && gameManager.isGameRunning ? .neonRed : .white)
+                            .shadow(color: gameManager.timeLeft <= 3 && gameManager.isGameRunning ? .neonRed : .neonCyan, radius: 20)
+                            .scaleEffect(gameManager.isGameRunning ? 1.05 : 1.0)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.5), value: gameManager.timeLeft)
                         }
+                        .padding(.top, 40)
                         
                         Spacer()
                         
-                        // Timer
-                        Text("Time left: \(gameManager.timeLeft) seconds")
-                            .font(.system(size: 72, weight: .regular))
-                            .foregroundColor(
-                                gameManager.timeLeft > 5 ? Color.white : // Default color
-                                gameManager.timeLeft > 3 ? Color.yellow : // Warning color
-                                gameManager.timeLeft > 1 ? Color.orange : // High attention
-                                Color.red // Critical attention
-                            )
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        // Main game section: HStack with scores on the left and button on the right
-                        HStack(spacing: 20) {
-                            // Left: Scores block
-                            VStack(spacing: 0) {
-                                Text("YOUR SCORE")
-                                    .font(.system(size: 36, weight: .medium))
-                                    .foregroundColor(.white)
-                                
-                                Text("\(gameManager.currentScore)")
-                                    .font(.system(size: 128, weight: .heavy))
-                                    .foregroundColor(.white)
-                                
-                                Text("TAPS")
-                                    .font(.system(size: 36, weight: .medium))
-                                    .foregroundColor(.white)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading) // Left alignment
-                            .padding(.top, -48)
+                        // --- B. ZONA CENTRALĂ (HSTACK: SCOR STÂNGA - BUTON DREAPTA) ---
+                        // Aici e inima layout-ului de iPad, separat stânga-dreapta
+                        HStack(spacing: 120) {
                             
-                            // Right: The Big Button
-                            ZStack {
-                                Button {
-                                    if !gameManager.isGameOver {
-                                        if !gameManager.isGameRunning {
-                                            gameManager.startGame(
-                                                emitterLayer: emitterLayer,
-                                                buttonFrame: buttonFrame,
-                                                challengeTarget: appState.challengeScoreToBeat
-                                            )
-                                        } else {
-                                            gameManager.currentScore += 1
-                                            gameManager.buttonPressed()
-                                            
-                                            GameTapEffects.trigger(
-                                                buttonScale: $buttonScale,
-                                                screenShakeOffset: $screenShakeOffset,
-                                                floatingPoints: $floatingPoints
-                                            )
-                                            
-                                            Sparks.shared.updateSparks(
-                                                emitterLayer: emitterLayer,
-                                                gameManager: gameManager,
-                                                buttonFrame: buttonFrame
-                                            )
-                                        }
-                                    }
-                                } label: {
-                                    Image(ButtonImage.shared.getButtonImage(for: gameManager.timeLeft, isPressed: isPressed))
-                                        .resizable()
-                                        .frame(width: 320, height: 320)
-                                        .scaleEffect(buttonScale)
-                                        .rotationEffect(.degrees(rotationEffect))
-                                        .offset(x: offsetX, y: offsetY)
-                                        .onChange(of: gameManager.timeLeft) { newTimeLeft in
-                                            handleImageChange(timeLeft: newTimeLeft)
-                                        }
-                                        .overlay(
-                                            ZStack {
-                                                // FLOATING POINTS (+1)
-                                                ForEach(floatingPoints) { point in
-                                                    Text("+1")
-                                                        .font(.system(size: 32, weight: .black, design: .rounded))
-                                                        .foregroundColor(.white)
-                                                    // Umbra face textul lizibil pe orice fundal
-                                                        .shadow(color: .black.opacity(0.8), radius: 2, x: 2, y: 2)
-                                                        .scaleEffect(point.scale)
-                                                        .opacity(point.opacity)
-                                                        .offset(x: point.x, y: point.y)
-                                                        .onAppear {
-                                                            // Animația pentru "+1": Zboară în sus și dispare
-                                                            if let index = floatingPoints.firstIndex(where: { $0.id == point.id }) {
-                                                                withAnimation(.easeOut(duration: 1.0)) {
-                                                                    floatingPoints[index].y = -320 // Se duce mult în sus
-                                                                    floatingPoints[index].opacity = 0 // Dispare
-                                                                    floatingPoints[index].scale = 1.5 // Se mărește
-                                                                }
-                                                            }
-                                                        }
-                                                }
-                                            }
-                                        )
+                            // B1. STÂNGA: RADARUL (Scor + Timer Radial)
+                            // Înlocuim lista veche de text cu Radarul Neon
+                            VStack(spacing: 20) {
+                                Text("YOUR SCORE")
+                                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                                    .foregroundColor(.white.opacity(0.7))
+                                    .tracking(5)
+                                
+                                ZStack {
+                                    // Timerul Radial Scalat pentru iPad (1.6x)
+                                    RadialTimerView(timeLeft: gameManager.timeLeft)
+                                        .scaleEffect(1.6)
+                                    
+                                    // Scorul cu Glitch în mijloc
+                                    GlitchScoreView(
+                                        score: gameManager.currentScore,
+                                        isAnimating: gameManager.isGameRunning
+                                    )
+                                    .scaleEffect(1.5)
+                                    .offset(y: 10)
                                 }
-                                .buttonStyle(.plain)
+                                .frame(width: 400, height: 400) // Container fix pentru aliniere
+                                
+                                // Last Score sub radar
+                                Text("LAST: \(gameManager.previousScore)")
+                                    .font(.system(size: 28, weight: .medium, design: .monospaced))
+                                    .foregroundColor(.neonBlue)
+                                    .padding(.top, 40)
+                            }
+                            
+                            // B2. DREAPTA: REACTORUL (ArcButton)
+                            ZStack {
+                                // Butonul Neon (folosim componenta din iPhone)
+                                ArcButton(
+                                    isPressed: isPressed,
+                                    isDeployed: isButtonDeployed
+                                )
+                                .scaleEffect(1.5) // Mult mai mare pe iPad
+                                
+                                // GESTURI & INTERACȚIUNE
                                 .simultaneousGesture(
                                     DragGesture(minimumDistance: 0)
                                         .updating($isPressed) { _, pressed, _ in
                                             pressed = true
                                         }
+                                        .onEnded { _ in
+                                            handleTap()
+                                        }
                                 )
+                                // LOCALIZARE PENTRU PARTICULE
                                 .background(
                                     GeometryReader { btnGeo in
-                                        Color.clear
-                                            .onAppear {
-                                                DispatchQueue.main.async {
-                                                    SparksHelper.calculateEmitterPosition(
-                                                        containerGeo: containerGeo,
-                                                        btnGeo: btnGeo,
-                                                        buttonFrame: &buttonFrame,
-                                                        emitterLayer: &emitterLayer,
-                                                        emitterCell: emitterCell,
-                                                        gameManager: gameManager
-                                                    )
-                                                }
-                                            }
-                                            .onChange(of: btnGeo.size) { _ in
-                                                DispatchQueue.main.async {
-                                                    SparksHelper.calculateEmitterPosition(
-                                                                        containerGeo: containerGeo,
-                                                                        btnGeo: btnGeo,
-                                                                        buttonFrame: &buttonFrame,
-                                                                        emitterLayer: &emitterLayer,
-                                                                        emitterCell: emitterCell,
-                                                                        gameManager: gameManager
-                                                                    )
-                                                }
-                                            }
+                                        Color.clear.onAppear {
+                                            updateSparksPosition(containerGeo: containerGeo, btnGeo: btnGeo)
+                                        }
+                                        .onChange(of: btnGeo.frame(in: .global)) { _ in
+                                            updateSparksPosition(containerGeo: containerGeo, btnGeo: btnGeo)
+                                        }
                                     }
                                 )
-                                .padding(.top, 48)
+                                
+                                // FLOATING POINTS (+1)
+                                // Le afișăm peste buton
+                                ForEach(floatingPoints) { point in
+                                    Text("+1")
+                                        .font(.system(size: 56, weight: .heavy, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .shadow(color: .black, radius: 4)
+                                        .scaleEffect(point.scale)
+                                        .opacity(point.opacity)
+                                        .offset(x: point.x, y: point.y)
+                                        .onAppear {
+                                            animateFloatingPoint(point)
+                                        }
+                                }
                             }
-                            .padding(.trailing, 72)
                         }
+                        .padding(.horizontal, 40)
                         
-                        Text("Last score: \(gameManager.previousScore) taps")
-                            .font(.system(size: 36, weight: .medium))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-
                         Spacer()
                         
-                        // "How other players are doing?" + "VIEW HIGH SCORES"
-                        Text("How other players are doing?")
-                            .font(.system(size: 32))
-                            .foregroundColor(.white)
-                            .opacity(gameManager.isGameRunning ? 0 : 1)
-                            .animation(.easeInOut(duration: 0.5), value: gameManager.isGameRunning)
-                        
-                        Button("View high scores") {
-                            showLeaderboard = true
+                        // --- C. ZONA DE JOS (LEADERBOARD) ---
+                        VStack(spacing: 20) {
+                            Text("How do you stack up?")
+                                .font(.system(size: 24, weight: .medium))
+                                .foregroundColor(.white.opacity(0.6))
+                                .opacity(gameManager.isGameRunning ? 0 : 1)
                             
-                            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                                GameCenterManager.shared.showLeaderboard(from: rootVC)
+                            Button {
+                                showLeaderboard = true
+                                if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                                    GameCenterManager.shared.showLeaderboard(from: rootVC)
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: "trophy.fill")
+                                    Text("GLOBAL LEADERBOARD")
+                                }
+                                .font(.system(size: 20, weight: .black))
+                                .foregroundColor(.deepSpace)
+                                .padding(.horizontal, 60)
+                                .padding(.vertical, 20)
+                                .background(Color.neonCyan)
+                                .cornerRadius(30)
+                                .shadow(color: .neonCyan, radius: 10)
+                                .scaleEffect(showLeaderboard ? 0.95 : 1.0)
                             }
+                            .opacity(gameManager.isGameRunning ? 0 : 1)
+                            .animation(.easeInOut, value: gameManager.isGameRunning)
                         }
-                        .font(.system(size: 24, weight: .medium))
-                        .padding(.horizontal)
-                        .frame(height: 54)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        .opacity(gameManager.isGameRunning ? 0 : 1)
-                        .animation(.easeInOut(duration: 0.5), value: gameManager.isGameRunning)
-                        
-                        Spacer()
+                        .padding(.bottom, 60)
                     }
-                    .padding(.leading, 40)
-                    .padding(.trailing, 40)
-                    .padding(.top, 40)
-                    .padding(.bottom, 40)
                 }
                 .onAppear {
-                    // Authenticate Game Center
+                    // --- INITIALIZĂRI ---
+                    
+                    // Game Center
                     GameCenterManager.shared.authenticateLocalPlayer { success, viewControllerGame in
-                        if success {
-                            print("Game Center authenticated successfully.")
-                        } else {
-                            if let viewControllerGame = viewControllerGame {
-                                // Set the viewController to present
-                                self.gameCenterAuthViewController = viewControllerGame
-                                self.showAuthenticationSheet = true
-                            } else {
-                                print("Failed to authenticate Game Center.")
-                                authErrorMessage = "Game Center is not enabled on your device or authentication failed."
-                                showAuthErrorAlert = true
-                            }
+                        if !success, let vc = viewControllerGame {
+                            self.gameCenterAuthViewController = vc
                         }
                     }
                     
-                    // Create small background sparks
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                    // Activăm particulele cu o mică întârziere
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         areParticlesActive = true
                     }
+                    
+                    impactGen.prepare()
+                    
+                    // Lansăm butonul pe ecran
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation {
+                            isButtonDeployed = true
+                        }
+                    }
                 }
-                .onDisappear {
-                    areParticlesActive = false
-                }
-            }
-            .fullScreenCover(isPresented: $gameManager.isGameOver) {
-                GameOverView_iPad(
-                    gameManager: gameManager,
-                    previousScore: $gameManager.previousScore
-                )
-                .environmentObject(appState)
-                .onAppear {
-                    isAnimationActive = false
-                }
-                .onDisappear {
-                    gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                .fullScreenCover(isPresented: $gameManager.isGameOver) {
+                    // Folosim ecranul de GameOver de iPad (presupunem că există sau folosim varianta generică)
+                    // Dacă nu ai GameOverView_iPad specific, poți folosi GameOverView_iPhone adaptat
+                    GameOverView_iPhone(
+                        gameManager: gameManager,
+                        previousScore: $gameManager.previousScore
+                    )
+                    .onAppear { isAnimationActive = false }
+                    .onDisappear {
+                        gameManager.resetGame(emitterLayer: emitterLayer, buttonFrame: buttonFrame)
+                    }
                 }
             }
         }
-        .fontDesign(.rounded)
+        .preferredColorScheme(.dark)
         .onDisappear {
             appState.challengeScoreToBeat = nil
         }
     }
     
-    private func handleImageChange(timeLeft: Int) {
-        let newImage = ButtonImage.shared.getButtonImage(for: timeLeft, isPressed: isPressed)
-        if newImage != currentImage {
-            // Actualizăm imaginea la noua stare
-            currentImage = newImage
-
-            // Aplicăm vibrația
-            withAnimation(.easeInOut(duration: 0.02)) {
-                rotationEffect = Double.random(in: -7...7) // Rotire subtilă
-                offsetX = CGFloat.random(in: -5...5)      // Deplasare mică pe X
-                offsetY = CGFloat.random(in: -5...5)      // Deplasare mică pe Y
+    // MARK: - GAME LOGIC (Importată din arhitectura nouă)
+    
+    private func handleTap() {
+        if !gameManager.isGameRunning {
+            // START GAME
+            gameManager.startGame(
+                emitterLayer: emitterLayer,
+                buttonFrame: buttonFrame,
+                challengeTarget: appState.challengeScoreToBeat
+            )
+            isAnimationActive = true
+            impactGen.impactOccurred()
+        } else {
+            // TAP IN-GAME
+            gameManager.currentScore += 1
+            gameManager.buttonPressed()
+            
+            // Feedback fizic
+            impactGen.impactOccurred(intensity: 1.0)
+            triggerShake()
+            spawnFloatingPoint()
+            
+            // Actualizăm particulele (viteza crește cu scorul)
+            Sparks.shared.updateSparks(
+                emitterLayer: emitterLayer,
+                gameManager: gameManager,
+                buttonFrame: buttonFrame
+            )
+        }
+    }
+    
+    // Calculăm poziția emitter-ului de particule relativ la butonul mare
+    private func updateSparksPosition(containerGeo: GeometryProxy, btnGeo: GeometryProxy) {
+        DispatchQueue.main.async {
+            SparksHelper.calculateEmitterPosition(
+                containerGeo: containerGeo,
+                btnGeo: btnGeo,
+                buttonFrame: &buttonFrame,
+                emitterLayer: &emitterLayer,
+                emitterCell: emitterCell,
+                gameManager: gameManager
+            )
+        }
+    }
+    
+    // Efectul de cutremur al ecranului
+    private func triggerShake() {
+        let intensity: CGFloat = 12.0 // Mai intens pe iPad
+        withAnimation(.linear(duration: 0.05)) { screenShakeOffset = -intensity }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            withAnimation(.linear(duration: 0.05)) { screenShakeOffset = intensity }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.linear(duration: 0.05)) { screenShakeOffset = 0 }
+        }
+    }
+    
+    // Generăm punctele plutitoare (+1)
+    private func spawnFloatingPoint() {
+        let newPoint = FloatingPoint(
+            x: CGFloat.random(in: -60...60), // Zonă mai largă pe iPad
+            y: 0
+        )
+        floatingPoints.append(newPoint)
+    }
+    
+    // Animăm punctele în sus
+    private func animateFloatingPoint(_ point: FloatingPoint) {
+        if let index = floatingPoints.firstIndex(where: { $0.id == point.id }) {
+            withAnimation(.easeOut(duration: 0.8)) {
+                floatingPoints[index].y = -400 // Zboară mai sus pe ecranul mare
+                floatingPoints[index].opacity = 0
+                floatingPoints[index].scale = 2.0 // Se măresc mai mult
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                withAnimation(.easeInOut(duration: 0.05)) {
-                    rotationEffect = Double.random(in: -8...8) // Rotire mai intensă
-                    offsetX = CGFloat.random(in: -5...5)
-                    offsetY = CGFloat.random(in: -5...5)
-                }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.easeInOut(duration: 0.05)) {
-                    rotationEffect = 0.0
-                    offsetX = 0.0
-                    offsetY = 0.0
+            // Curățăm memoria
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                if let idx = floatingPoints.firstIndex(where: { $0.id == point.id }) {
+                    floatingPoints.remove(at: idx)
                 }
             }
         }
     }
 }
 
-#Preview("Stare Normala") {
+#Preview("iPad Standard") {
     GameView_iPad()
         .environmentObject(AppState())
+        .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
 }
-
-#Preview("Stare de Provocare") {
-    let testAppState = AppState()
-    testAppState.challengeScoreToBeat = 53
-    
-    return GameView_iPad()
-        .environmentObject(testAppState)
-}
-
