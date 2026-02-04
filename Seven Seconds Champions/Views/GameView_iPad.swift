@@ -71,7 +71,7 @@ struct GameView_iPad: View {
                             .foregroundColor(gameManager.timeLeft <= 3 && gameManager.isGameRunning ? .neonRed : .white)
                             .shadow(color: gameManager.timeLeft <= 3 && gameManager.isGameRunning ? .neonRed : .neonCyan, radius: 10 * scale)
                         }
-                        .padding(.top, 40 * scale) // Padding de sus mai mare
+                        .padding(.top, 20 * scale) // Padding de sus mai mare
                         
                         // Spațiu generos între Timer și Arc
                         Spacer().frame(height: 60 * scale)
@@ -87,6 +87,7 @@ struct GameView_iPad: View {
                                     .font(.system(size: 20 * scale, weight: .bold, design: .monospaced))
                                     .foregroundColor(.neonCyan.opacity(0.8))
                                     .tracking(10)
+                                    .padding(.bottom, 20 * scale)
                                 
                                 GlitchScoreView(
                                     score: gameManager.currentScore,
@@ -96,7 +97,7 @@ struct GameView_iPad: View {
                             }
                             .offset(y: -10 * scale)
                         }
-                        .frame(height: 300 * scale) // Rezervăm loc fizic pentru elementul scalat
+                        .frame(height: 260 * scale) // Rezervăm loc fizic pentru elementul scalat
                         
                         Spacer()
                         
@@ -132,7 +133,7 @@ struct GameView_iPad: View {
                                     }
                             }
                         }
-                        .frame(height: 300 * scale) // Rezervăm loc fizic pentru butonul mare
+                        .frame(height: 240 * scale) // Rezervăm loc fizic pentru butonul mare
                         
                         Spacer()
                         
@@ -175,7 +176,7 @@ struct GameView_iPad: View {
                 }
                 .fullScreenCover(isPresented: $gameManager.isGameOver) {
                     // Aici poți face și un GameOverView_iPad dacă vrei
-                    GameOverView_iPhone(
+                    GameOverView_iPad(
                         gameManager: gameManager,
                         previousScore: $gameManager.previousScore
                     )

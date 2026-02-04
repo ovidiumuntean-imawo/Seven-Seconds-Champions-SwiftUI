@@ -98,7 +98,7 @@ struct NormalGameOverView_iPad: View {
                 
                 // --- TITLU MASSIVE ---
                 Text("GAME OVER")
-                    .font(.system(size: 52 * scale, weight: .black, design: .monospaced)) // Font Uriaș
+                    .font(.system(size: 72 * scale, weight: .black, design: .monospaced)) // Font Uriaș
                     .foregroundColor(.white)
                     .shadow(color: .neonRed, radius: 10 * scale, x: 0, y: 0)
                     .shadow(color: .neonRed.opacity(0.5), radius: 20 * scale, x: 0, y: 0)
@@ -110,7 +110,7 @@ struct NormalGameOverView_iPad: View {
                 // --- SCOR ---
                 VStack(spacing: 15 * scale) {
                     Text("YOU SCORED")
-                        .font(.system(size: 16 * scale, weight: .bold, design: .monospaced))
+                        .font(.system(size: 24 * scale, weight: .bold, design: .monospaced))
                         .tracking(4 * scale)
                         .foregroundColor(.neonCyan.opacity(0.7))
                     
@@ -121,14 +121,14 @@ struct NormalGameOverView_iPad: View {
                             .frame(width: 300 * scale, height: 120 * scale)
                         
                         Text("\(gameManager.currentScore)")
-                            .font(.system(size: 90 * scale, weight: .black, design: .rounded)) // Număr GIGANT
+                            .font(.system(size: 120 * scale, weight: .black, design: .rounded)) // Număr GIGANT
                             .foregroundColor(.white)
                             .shadow(color: .neonCyan, radius: 10 * scale)
                             .scaleEffect(scoreScale)
                     }
                     
                     Text("TAPS")
-                        .font(.system(size: 20 * scale, weight: .bold, design: .monospaced))
+                        .font(.system(size: 40 * scale, weight: .bold, design: .monospaced))
                         .foregroundColor(.white.opacity(0.5))
                 }
                 
