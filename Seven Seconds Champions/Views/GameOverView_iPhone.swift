@@ -22,14 +22,13 @@ struct GameOverView_iPhone: View {
     var body: some View {
         Group {
             if let challengeOutcome = gameManager.challengeOutcome, let target = gameManager.challengeTarget {
-                // Dacă a fost o provocare, afișăm ecranul de rezultat
+                // Dacă a fost o provocare
                 ChallengeResultView(challengeOutcome: challengeOutcome, yourScore: gameManager.currentScore, targetScore: target)
             } else {
-                // Altfel, afișăm ecranul normal de Game Over
+                // Game Over Normal
                 NormalGameOverView(gameManager: gameManager, previousScore: $previousScore)
             }
         }
-        .fontDesign(.rounded)
         .onAppear {
             appState.challengeScoreToBeat = nil
         }
@@ -40,6 +39,7 @@ struct GameOverView_iPhone: View {
     }
 }
 
+// MARK: - ECRAN NORMAL GAME OVER
 struct NormalGameOverView: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject var gameManager: GameManager
@@ -48,141 +48,174 @@ struct NormalGameOverView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.requestReview) var requestReview
     
-    @State private var showAchievementAlert = false
     @State private var showNewHighScoreAlert = false
+    @State private var showAchievementAlert = false // Păstrat logic, dar nefolosit vizual momentan
     
     // Particles
     @State private var areParticlesActive: Bool = false
-    @State private var emitterLayer: CAEmitterLayer?
-    @State private var emitterCell = CAEmitterCell()
     
-    @State private var scale: CGFloat = 3.0
-    @State private var scaleScore: CGFloat = 0
-    @State private var rotation: Double = 0
+    // Animations
+    @State private var scaleTitle: CGFloat = 0.5
+    @State private var opacityTitle: Double = 0
+    @State private var scoreScale: CGFloat = 0.8
+    @State private var buttonOffset: CGFloat = 50
+    @State private var buttonOpacity: Double = 0
     
-    @State private var isAnimationActive: Bool = false
-       
     private var challengeText: String {
         let redirectPageURL = "https://ovidiumuntean-imawo.github.io/7seconds-challenge-redirect/redirect.html"
-        
         let finalURL = "\(redirectPageURL)?score=\(gameManager.currentScore)"
-        
         return "I challenge you to 7 Seconds! I scored \(gameManager.currentScore) taps. Can you beat that? \(finalURL)"
     }
     
     var body: some View {
         ZStack {
-            // Background
-            RotatingBackground(isAnimating: isAnimationActive)
+            // 1. FUNDAL (Același ca în GameView)
+            NormalBackground()
                 .ignoresSafeArea()
             
+            // 2. PARTICULE
             ParticleView(isActive: $areParticlesActive)
                 .ignoresSafeArea()
             
-            VStack(spacing: 30) {
-                Text("Game Over")
-                    .font(.system(size: 64, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding(.top, 40)
-                    .scaleEffect(scale)
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 1)) {
-                            scale = 1.0
-                        }
-                    }
+            VStack(spacing: 0) {
+                Spacer()
                 
-                Text("YOU SCORED")
-                    .font(.system(size: 28))
+                // --- TITLU ---
+                Text("GAME OVER")
+                    .font(.system(size: 52, weight: .black, design: .monospaced))
                     .foregroundColor(.white)
+                    .shadow(color: .neonRed, radius: 10, x: 0, y: 0)
+                    .shadow(color: .neonRed.opacity(0.5), radius: 20, x: 0, y: 0)
+                    .scaleEffect(scaleTitle)
+                    .opacity(opacityTitle)
                 
-                Text("\(gameManager.currentScore)")
-                    .font(.system(size: 72, weight: .heavy))
-                    .foregroundColor(.white)
-                    .padding(.top, -24)
-                    .scaleEffect(scaleScore)
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 1)) {
-                            scaleScore = 1.0
-                        }
-                    }
+                Spacer().frame(height: 40)
                 
-                Text("TAPS")
-                    .font(.system(size: 28, weight: .medium))
-                    .foregroundColor(.white)
-                    .padding(.top, -24)
-                
-                Button(action: {
-                    previousScore = gameManager.currentScore
-                    isAnimationActive = false
+                // --- SCOR ---
+                VStack(spacing: 10) {
+                    Text("YOU SCORED")
+                        .font(.system(size: 16, weight: .bold, design: .monospaced))
+                        .tracking(4)
+                        .foregroundColor(.neonCyan.opacity(0.7))
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        dismiss()
+                    ZStack {
+                        // Glow spate
+                        Circle()
+                            .fill(RadialGradient(colors: [.neonBlue.opacity(0.3), .clear], center: .center, startRadius: 0, endRadius: 100))
+                            .frame(width: 200, height: 80)
+                        
+                        Text("\(gameManager.currentScore)")
+                            .font(.system(size: 90, weight: .black, design: .rounded))
+                            .foregroundColor(.white)
+                            .shadow(color: .neonCyan, radius: 10)
+                            .scaleEffect(scoreScale)
                     }
-                }) {
-                    Text("Play again")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.green)
-                        .cornerRadius(8)
+                    
+                    Text("TAPS")
+                        .font(.system(size: 20, weight: .bold, design: .monospaced))
+                        .foregroundColor(.white.opacity(0.5))
                 }
-                .padding(.horizontal, 32)
-                
-                ShareLink(item: challengeText) {
-                    Label("Challenge Your Friends!", systemImage: "gamecontroller.fill")
-                        .frame(maxWidth: .infinity)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.purple)
-                        .cornerRadius(8)
-                }
-                .padding(.horizontal, 32)
                 
                 Spacer()
                 
-                Text("Others tried too!")
-                    .font(.system(size: 26, weight: .medium))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                
-                Button(action: {
-                    previousScore = gameManager.currentScore
-                    isAnimationActive = false
-                    
-                    if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                        GameCenterManager.shared.showLeaderboard(from: rootVC)
-                    }
-                }) {
-                    Text("View high scores")
+                // --- BUTOANE ---
+                VStack(spacing: 20) {
+                    // 1. PLAY AGAIN (Cel mai important)
+                    Button(action: {
+                        restartGame()
+                    }) {
+                        HStack {
+                            Image(systemName: "play.fill")
+                            Text("RETRY MISSION")
+                        }
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
                         .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(Color.neonCyan.opacity(0.2))
                         .foregroundColor(.white)
-                        .padding()
-                        .background(Color.red)
-                        .cornerRadius(8)
+                        .cornerRadius(16)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.neonCyan, lineWidth: 2)
+                                .shadow(color: .neonCyan, radius: 5)
+                        )
+                    }
+                    
+                    // 2. CHALLENGE FRIEND
+                    ShareLink(item: challengeText) {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                            Text("CHALLENGE FRIEND")
+                        }
+                        .font(.system(size: 16, weight: .bold, design: .monospaced))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Color.neonPurple.opacity(0.15))
+                        .foregroundColor(.neonPurple)
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.neonPurple.opacity(0.5), lineWidth: 1)
+                        )
+                    }
+                    
+                    // 3. LEADERBOARD
+                    HStack(spacing: 15) {
+                        Button(action: {
+                            openLeaderboard()
+                        }) {
+                            VStack {
+                                Image(systemName: "trophy.fill")
+                                    .font(.title2)
+                                Text("RANKS")
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color.white.opacity(0.05))
+                            .foregroundColor(.yellow)
+                            .cornerRadius(12)
+                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.yellow.opacity(0.3), lineWidth: 1))
+                        }
+                        
+                        // BUTON DE HOME / EXIT (Opțional, dacă vrei să ieși de tot)
+                         /*Button(action: {
+                             // Dismiss total
+                         }) {
+                             VStack {
+                                 Image(systemName: "house.fill")
+                                     .font(.title2)
+                                 Text("HOME")
+                                     .font(.caption)
+                                     .fontWeight(.bold)
+                             }
+                             .frame(maxWidth: .infinity)
+                             .padding(.vertical, 12)
+                             .background(Color.white.opacity(0.05))
+                             .foregroundColor(.white)
+                             .cornerRadius(12)
+                             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.white.opacity(0.3), lineWidth: 1))
+                         }*/
+                    }
                 }
-                .padding(.horizontal, 32)
-                .padding(.top, -16)
+                .padding(.horizontal, 40)
+                .offset(y: buttonOffset)
+                .opacity(buttonOpacity)
                 
-                Spacer()
+                Spacer().frame(height: 50)
             }
-            .padding()
         }
-        .fontDesign(.rounded)
         .onAppear {
-            // Create small background sparks
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+            animateEntrance()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 areParticlesActive = true
             }
             
             if gameManager.isNewHighScore {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                     showNewHighScoreAlert = true
-                }
-            } else if let achievement = gameManager.achievementMessage, gameManager.currentScore >= 35 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    showAchievementAlert = true
                 }
             }
         }
@@ -191,126 +224,161 @@ struct NormalGameOverView: View {
         }
         .alert(isPresented: $showNewHighScoreAlert) {
             Alert(
-                title: Text("PHENOMENAL! 🚀"),
-                message: Text("Congrats, you’ve just set a new record: \(gameManager.currentScore) taps! \n\nYou're a legend — part human, part lightning! ⚡️"),
-                dismissButton: .default(Text("Thanks!"), action: {
+                title: Text("NEW RECORD! 🚀"),
+                message: Text("UNBELIEVABLE!\nYou hit \(gameManager.currentScore) taps.\nYou are officially a LEGEND."),
+                dismissButton: .default(Text("Let's Go!"), action: {
                     requestReview()
                 })
             )
         }
-        /*.alert(
-            "Achievement Unlocked!",
-            isPresented: $showAchievementAlert,
-            presenting: gameManager.achievementMessage
-        ) { message in
-            Button("Back to game", role: .cancel) {
-                previousScore = gameManager.currentScore
-            }
-            Button("Show My Achievements") {
-                previousScore = gameManager.currentScore
-                isAnimationActive = false
-                
-                if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                    GameCenterManager.shared.showAchievements(from: rootVC)
-                }
-            }
-            Button("View High Scores") {
-                isAnimationActive = false
-                previousScore = gameManager.currentScore
-                
-                if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                    GameCenterManager.shared.showLeaderboard(from: rootVC)
-                }
-            }
-        } message: { message in
-            Text("\n\(message)\n")
-                .multilineTextAlignment(.center)
-                .padding()
-
-        }*/
+    }
+    
+    // --- Helper Functions ---
+    
+    private func restartGame() {
+        previousScore = gameManager.currentScore
+        // Micul delay pentru animație de ieșire dacă vrei, sau direct:
+        dismiss()
+    }
+    
+    private func openLeaderboard() {
+        if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+            GameCenterManager.shared.showLeaderboard(from: rootVC)
+        }
+    }
+    
+    private func animateEntrance() {
+        // 1. Titlul cade greu
+        withAnimation(.spring(response: 0.6, dampingFraction: 0.6)) {
+            scaleTitle = 1.0
+            opacityTitle = 1.0
+        }
+        
+        // 2. Scorul face pop
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.2)) {
+            scoreScale = 1.0
+        }
+        
+        // 3. Butoanele urcă
+        withAnimation(.easeOut(duration: 0.5).delay(0.4)) {
+            buttonOffset = 0
+            buttonOpacity = 1.0
+        }
     }
 }
 
+// MARK: - CHALLENGE RESULT (WIN/LOSS)
 struct ChallengeResultView: View {
     @Environment(\.dismiss) private var dismiss
     var challengeOutcome: ChallengeOutcome
     var yourScore: Int
     var targetScore: Int
     
+    @State private var scaleEffect: CGFloat = 0.5
+    @State private var opacityEffect: Double = 0
+    
+    var isWin: Bool {
+        return challengeOutcome == .win
+    }
+    
     var body: some View {
         ZStack {
-            RotatingBackground(isAnimating: true)
-                .ignoresSafeArea()
+            NormalBackground().ignoresSafeArea()
             
-            VStack(spacing: 20) {
-                Image(systemName: challengeOutcome == .win ? "checkmark.circle.fill" : "xmark.circle.fill")
-                    .font(.system(size: 96))
-                    .foregroundColor(challengeOutcome == .win ? .green : .red)
+            VStack(spacing: 25) {
+                Spacer()
                 
-                Text("Challenge")
-                    .font(.system(size: 64, weight: .heavy))
-                    .foregroundColor(.white)
+                // ICON
+                Image(systemName: isWin ? "trophy.fill" : "exclamationmark.triangle.fill")
+                    .font(.system(size: 80))
+                    .foregroundColor(isWin ? .green : .red)
+                    .shadow(color: isWin ? .green : .red, radius: 20)
+                    .scaleEffect(scaleEffect)
                 
-                Text(challengeOutcome == .win ? "WON!" : "LOST")
-                    .font(.system(size: 48, weight: .thin))
-                    .foregroundColor(.white)
+                // TEXT STATUS
+                Text(isWin ? "MISSION\nACCOMPLISHED" : "MISSION\nFAILED")
+                    .font(.system(size: 40, weight: .black, design: .monospaced))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(isWin ? .green : .red)
+                    .shadow(color: isWin ? .green.opacity(0.5) : .red.opacity(0.5), radius: 10)
                 
-                Text("Your score: \(yourScore)")
-                    .font(.system(size: 36, weight: .medium))
-                    .foregroundColor(.green)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.top, 12)
-                
-                Text("Target: \(targetScore)")
-                    .font(.system(size: 36, weight: .regular))
-                    .foregroundColor(.yellow)
+                // SCORE CARD
+                VStack(spacing: 15) {
+                    HStack {
+                        Text("TARGET:")
+                            .font(.monospaced(.caption)())
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Text("\(targetScore)")
+                            .font(.monospaced(.title3)())
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                    
+                    Divider().background(Color.white.opacity(0.3))
+                    
+                    HStack {
+                        Text("YOU:")
+                            .font(.monospaced(.caption)())
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Text("\(yourScore)")
+                            .font(.monospaced(.title)())
+                            .fontWeight(.heavy)
+                            .foregroundColor(isWin ? .green : .red)
+                    }
+                }
+                .padding(20)
+                .background(Color.black.opacity(0.4))
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(isWin ? Color.green.opacity(0.5) : Color.red.opacity(0.5), lineWidth: 1)
+                )
+                .padding(.horizontal, 40)
+                .opacity(opacityEffect)
                 
                 Spacer()
                 
                 Button(action: { dismiss() }) {
-                    Text("Back to Game")
+                    Text("RETURN TO BASE")
+                        .font(.system(size: 18, weight: .bold, design: .monospaced))
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.white.opacity(0.1))
                         .foregroundColor(.white)
-                        .cornerRadius(8)
+                        .cornerRadius(12)
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.white, lineWidth: 1))
                 }
                 .padding(.horizontal, 40)
-                
-                Spacer()
+                .padding(.bottom, 40)
             }
-            .padding()
         }
-        .fontDesign(.rounded)
+        .onAppear {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.6)) {
+                scaleEffect = 1.0
+            }
+            withAnimation(.easeOut(duration: 0.5).delay(0.3)) {
+                opacityEffect = 1.0
+            }
+        }
     }
 }
 
-#Preview("Game Over Normal") {
+// MARK: - PREVIEWS
+#Preview("Game Over - High Score") {
     let manager = GameManager()
-    manager.currentScore = 75
-    
-    return NormalGameOverView(gameManager: manager, previousScore: .constant(70))
-}
-
-#Preview("Challenge WON") {
-    let manager = GameManager()
-    manager.currentScore = 60
-    
-    return ChallengeResultView(challengeOutcome: .win, yourScore: manager.currentScore, targetScore: 50)
-}
-
-#Preview("Challenge LOST") {
-    let manager = GameManager()
-    manager.currentScore = 45
-    
-    return ChallengeResultView(challengeOutcome: .loss, yourScore: manager.currentScore, targetScore: 50)
-}
-
-#Preview("Game Over with High Score") {
-    let manager = GameManager()
-    manager.currentScore = 90
+    manager.currentScore = 42
     manager.isNewHighScore = true
-    
-    return NormalGameOverView(gameManager: manager, previousScore: .constant(85))
+    return GameOverView_iPhone(gameManager: manager, previousScore: .constant(30))
+        .environmentObject(AppState())
 }
 
+#Preview("Challenge Win") {
+    let manager = GameManager()
+    manager.challengeOutcome = .win
+    manager.challengeTarget = 30
+    manager.currentScore = 35
+    return GameOverView_iPhone(gameManager: manager, previousScore: .constant(30))
+        .environmentObject(AppState())
+}
